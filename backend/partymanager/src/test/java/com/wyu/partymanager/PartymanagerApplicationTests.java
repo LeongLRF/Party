@@ -1,0 +1,60 @@
+package com.wyu.partymanager;
+
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.wyu.partymanager.entity.sys.User;
+import com.wyu.partymanager.mapper.UserMapper;
+import com.wyu.partymanager.service.sys.UserService;
+import com.wyu.partymanager.utils.IFilter;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.test.context.junit4.SpringRunner;
+
+import javax.jws.soap.SOAPBinding;
+import java.util.List;
+
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class PartymanagerApplicationTests {
+
+    @Autowired
+    private RedisTemplate<String,Object> redisTemplate;
+    @Autowired
+    private UserMapper userMapper;
+    @Autowired
+    UserService userService;
+
+    @Test
+    public void get(){
+        redisTemplate.opsForValue().set("456","abc");
+        System.out.println(redisTemplate.opsForValue().get("456"));
+    }
+
+    @Test
+    public void test(){
+        User user = new User();
+        user.setPassword("980159737");
+        user.setUserName("Leong");
+        user.setTrueName("梁荣锋");
+        userMapper.insert(user);
+    }
+    @Test
+    public void test2(){
+        User.Filter filter = new User.Filter();
+        filter.setName("梁荣锋");
+        List<User> users =userService.user_list(filter).data;
+        users.forEach(u -> System.out.println(u.getTrueName()));
+    }
+
+    @Test
+    public void serviceTest(){
+        User user = new User();
+        user.setUserName("123456789");
+        user.setTrueName("leong");
+        user.setPassword("123");
+        System.out.println(userService.add_user(user).data.getTrueName());
+    }
+
+}
