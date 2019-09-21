@@ -12,6 +12,8 @@ import java.sql.Timestamp;
 @Data
 public class Role implements TimestampEntity {
 
+    String name;
     Timestamp insertedAt;
     Timestamp updatedAt;
+    String permission;
 }
