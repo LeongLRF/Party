@@ -1,6 +1,7 @@
 package com.wyu.partymanager.entity;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 public interface TimestampEntity {
 
