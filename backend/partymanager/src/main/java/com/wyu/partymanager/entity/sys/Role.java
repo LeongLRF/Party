@@ -19,6 +19,7 @@ public class Role implements TimestampEntity {
     long id;
     @TableField("name")
     String name;
+    @TableField("permission")
     String permission;
     Timestamp insertedAt;
     Timestamp updatedAt;
