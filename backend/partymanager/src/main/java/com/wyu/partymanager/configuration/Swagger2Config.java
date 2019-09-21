@@ -10,6 +10,9 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+import java.sql.Timestamp;
+import java.util.Date;
+
 /**
  * @author Leong
  * @date 2019/9/20 0:24
@@ -19,8 +22,12 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class Swagger2Config {
     @Bean
     public Docket createRestApi() {
-        return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo()).select()
-                .apis(RequestHandlerSelectors.basePackage("com.api")).paths(PathSelectors.any())
+        return new Docket(DocumentationType.SWAGGER_2)
+                .directModelSubstitute(Timestamp.class,String.class)
+                .directModelSubstitute(Date.class,String.class)
+                .apiInfo(apiInfo()).select()
+                .apis(RequestHandlerSelectors.basePackage("com.wyu.partymanager.controller"))
+                .paths(PathSelectors.any())
                 .build();
     }//PathSelectors.regex("/v1/")
 
