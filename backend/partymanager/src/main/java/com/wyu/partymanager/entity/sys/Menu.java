@@ -6,41 +6,45 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.wyu.partymanager.entity.TimestampEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.wyu.partymanager.utils.IFilter;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 
 /**
  * @author Leong
- * @date 2019/9/21 13:23
+ * @date 2019/9/21 20:05
  */
 @Data
-@TableName("sys_role")
-public class Role implements TimestampEntity , Serializable {
+@TableName("sys_menu")
+public class Menu implements Serializable {
 
     @TableId(value = "id",type = IdType.AUTO)
     long id;
+    @ApiModelProperty("菜单名字")
     @TableField("name")
     String name;
+    @ApiModelProperty("请求路径")
+    @TableField("url")
+    String url;
+    @ApiModelProperty("访问权限")
     @TableField("permission")
     String permission;
-    @TableField("insertedAt")
-    Timestamp insertedAt;
-    @TableField("updatedAt")
-    Timestamp updatedAt;
+
+    @ApiModelProperty("父菜单id,0为一级菜单")
+    @TableField("parentId")
+    long parentId;
 
     @Data
-    public static class Filter implements IFilter<Role>{
-        QueryWrapper<Role> queryWrapper = new QueryWrapper<>();
-
+    public static class Filter implements IFilter<Menu>{
+        @JsonIgnore
+        QueryWrapper<Menu> queryWrapper = new QueryWrapper<>();
 
         @Override
-        public Wrapper<Role> apply() {
+        public Wrapper<Menu> apply() {
             return this.queryWrapper;
         }
     }
-
 }

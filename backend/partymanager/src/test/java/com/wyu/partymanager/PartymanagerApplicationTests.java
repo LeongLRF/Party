@@ -1,7 +1,9 @@
 package com.wyu.partymanager;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.wyu.partymanager.entity.sys.Role;
 import com.wyu.partymanager.entity.sys.User;
+import com.wyu.partymanager.mapper.RoleMapper;
 import com.wyu.partymanager.mapper.UserMapper;
 import com.wyu.partymanager.service.sys.UserService;
 import com.wyu.partymanager.utils.IFilter;
@@ -25,6 +27,8 @@ public class PartymanagerApplicationTests {
     private UserMapper userMapper;
     @Autowired
     UserService userService;
+    @Autowired
+    RoleMapper roleMapper;
 
     @Test
     public void get(){
@@ -55,6 +59,13 @@ public class PartymanagerApplicationTests {
         user.setTrueName("leong");
         user.setPassword("123");
         System.out.println(userService.add_user(user).data.getTrueName());
+    }
+
+    @Test
+    public void roleTest(){
+        Role role = new Role();
+        role.setName("学生");
+        roleMapper.insert(role);
     }
 
 }
