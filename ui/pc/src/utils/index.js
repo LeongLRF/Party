@@ -1,5 +1,7 @@
 import axios from 'axios'
 import QS from 'qs'
+import vue from 'vue'
+import {router} from '../router/index'
 import Message from 'ant-design-vue/lib/message'
 const myUtils = {}
 
@@ -7,11 +9,19 @@ axios.defaults.withCredentials = true
 
 axios.interceptors.response.use(
   response => {
+    if (response.headers.authorization) {
+      vue.prototype.$setCookie('Token', response.headers.authorization, 1000 * 60 * 60 * 24)
+    }
     if (response.data.success) {
       return Promise.resolve(response)
-    } else {
-      Message.error(response.date.message)
+    } else if (response.data.message === '未登录') {
+      Message.error(response.data.message)
+      router.replace({
+        path: '/login'
+      })
       return Promise.reject(response)
+    } else {
+      Message.error(response.data.message)
     }
   },
   error => {
@@ -25,19 +35,19 @@ myUtils.install = (Vue, options) => {
   let host = process.env.NODE_ENV === 'development' ? options.domaintest : window.location.origin
   axios.defaults.baseURL = host
   console.log(host)
-  Vue.$post = (api, params) => {
+  Vue.prototype.$post = (api, params) => {
     return new Promise((resolve, reject) => {
-      axios.post(api, QS.stringify(params)
+      axios.post(api, QS.stringify(params))
         .then(response => {
           resolve(response.data)
         })
         .catch(err => {
           reject(err.data)
-        }))
+        })
     })
   }
   // get请求(Request Payload)
-  Vue.$my_get = (url, params = {}) => {
+  Vue.prototype.$my_get = (url, params = {}) => {
     return new Promise((resolve, reject) => {
       axios.get(url, {
         params: params
@@ -50,5 +60,25 @@ myUtils.install = (Vue, options) => {
         })
     })
   }
+  // 设置cookie
+  Vue.prototype.$setCookie = (name, value, expire) => {
+    var date = new Date()
+    date.setSeconds(date.getSeconds() + expire)
+    document.cookie = name + '=' + escape(value) + '; expires=' + date.toGMTString()
+  }
+  // 获取cookie
+  Vue.prototype.$getCookie = (name) => {
+    if (document.cookie.length > 0) {
+      let start = document.cookie.indexOf(name + '=')
+      if (start !== -1) {
+        start = start + name.length + 1
+        let end = document.cookie.indexOf(';', start)
+        if (end === -1) end = document.cookie.length
+        return unescape(document.cookie.substring(start, end))
+      }
+    }
+    return ''
+  }
+  Vue.prototype.$message = Message
 }
 export default myUtils

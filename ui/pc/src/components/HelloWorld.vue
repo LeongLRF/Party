@@ -90,6 +90,11 @@ export default {
     return {
       msg: 'Welcome to Your Vue.js App'
     }
+  },
+  mounted () {
+    this.$my_get('/sys/user_list').then(res => {
+      console.log(res.data)
+    })
   }
 }
 </script>

@@ -1,15 +1,14 @@
 import Vue from 'vue'
-import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+import VueRouter from 'vue-router'
+import { routes } from './routes'
 
-Vue.use(Router)
+Vue.use(VueRouter)
 
-export default new Router({
-  routes: [
-    {
-      path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
-    }
-  ]
+//  路由配置
+const RouterConfig = {
+  routes: routes
+}
+export const router = new VueRouter(RouterConfig)
+router.beforeEach((to, from, next) => {
+  next()
 })

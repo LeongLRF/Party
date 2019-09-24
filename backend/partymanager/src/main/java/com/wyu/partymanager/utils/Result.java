@@ -63,9 +63,9 @@ public class Result<T> {
         return andThen(p -> maybe(f.apply(p)));
     }
 
-    public Result<T> andThenCheck(T t, Predicate<T> f, String errorMsg) {
-        if (f.test(t))
-            return ok(t);
+    public Result<T> andThenCheck(Predicate<T> f, String errorMsg) {
+        if (f.test(this.data))
+            return ok(data);
         else return error(errorMsg);
     }
 
