@@ -1,6 +1,6 @@
 import axios from 'axios'
 import QS from 'qs'
-import {Message} from 'ant-design-vue'
+import Message from 'ant-design-vue/lib/message'
 const myUtils = {}
 
 axios.defaults.withCredentials = true
