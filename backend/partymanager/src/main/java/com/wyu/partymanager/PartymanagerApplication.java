@@ -26,8 +26,7 @@ public class PartymanagerApplication {
         FastJsonConfig fastJsonConfig=new FastJsonConfig();
         fastJsonConfig.setSerializerFeatures(SerializerFeature.PrettyFormat);
         fastConverter.setFastJsonConfig(fastJsonConfig);
-        HttpMessageConverter converter=fastConverter;
-        return new HttpMessageConverters(converter);
+        return new HttpMessageConverters((HttpMessageConverter) fastConverter);
     }
 
     @Bean

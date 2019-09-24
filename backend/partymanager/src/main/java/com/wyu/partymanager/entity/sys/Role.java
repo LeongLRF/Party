@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.wyu.partymanager.entity.TimestampEntity;
 import com.wyu.partymanager.utils.IFilter;
 import lombok.Data;
@@ -34,6 +35,7 @@ public class Role implements TimestampEntity , Serializable {
 
     @Data
     public static class Filter implements IFilter<Role>{
+        @JsonIgnore
         QueryWrapper<Role> queryWrapper = new QueryWrapper<>();
 
 
