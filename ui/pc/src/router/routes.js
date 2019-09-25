@@ -1,5 +1,6 @@
 import login from '@/views/login'
 import index from '@/views/index'
+import information from '@/views/information'
 
 export const allRouter = [
   {
@@ -11,6 +12,14 @@ export const allRouter = [
     path: '/login',
     name: 'login',
     component: login
+  },
+  {
+    path: '/information',
+    redirect: '/information',
+    component: index,
+    children: [
+      { path: '/information', name: 'information', component: information }
+    ]
   }
 ]
 

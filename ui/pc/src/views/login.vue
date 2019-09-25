@@ -5,7 +5,7 @@
       <a-row><a-input class="input" v-model="username">
         <a-icon slot="prefix" type="user" />
       </a-input></a-row>
-      <a-row><a-input class="input" v-model="password">
+      <a-row><a-input class="input" v-model="password" type="password">
        <a-icon slot="prefix" type="lock" />
      </a-input></a-row>
       <a-row>
@@ -26,6 +26,14 @@ export default {
   },
   methods: {
     login () {
+      if (this.userName === '' || this.userName === null) {
+        this.$message.error('请输入账号')
+        return
+      }
+      if (this.password === '' || this.password === null) {
+        this.$message.error('请输入密码')
+        return
+      }
       this.$post('/sys/login', {userName: this.username, password: this.password}).then(res => {
         if (res.success) {
           this.$message.success('登录成功')
@@ -40,6 +48,7 @@ export default {
 <style>
   .login_form{
     background-color: #DE2910;
+    height: 1007px;
     text-align: center;
   }
   .login_form img{

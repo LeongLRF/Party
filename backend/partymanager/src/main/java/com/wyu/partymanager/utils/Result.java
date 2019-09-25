@@ -64,9 +64,13 @@ public class Result<T> {
     }
 
     public Result<T> andThenCheck(Predicate<T> f, String errorMsg) {
-        if (f.test(this.data))
-            return ok(data);
-        else return error(errorMsg);
+        if (success){
+            if (f.test(this.data))
+                return ok(data);
+            else
+                return error(errorMsg);
+        }
+        else return this;
     }
 
     public <R> Result<T> mapSelf(Function<T, R> f) {

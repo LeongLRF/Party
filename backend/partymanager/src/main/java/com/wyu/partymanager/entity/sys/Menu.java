@@ -12,6 +12,10 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Arrays;
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * @author Leong
@@ -36,6 +40,11 @@ public class Menu implements Serializable {
     @ApiModelProperty("父菜单id,0为一级菜单")
     @TableField("parentId")
     long parentId;
+
+    @ApiModelProperty("权限列表")
+    public Set<Long> getPermissions(){
+            return Arrays.stream(Optional.ofNullable(permission).orElse("").split(",")).map(Long::valueOf).collect(Collectors.toSet());
+    }
 
     @Data
     public static class Filter implements IFilter<Menu>{
