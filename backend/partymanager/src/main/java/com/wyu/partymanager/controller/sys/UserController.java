@@ -1,9 +1,13 @@
 package com.wyu.partymanager.controller.sys;
 
 import com.wyu.partymanager.controller.BaseController;
+import com.wyu.partymanager.entity.dto.MenuDTO;
+import com.wyu.partymanager.entity.sys.Menu;
 import com.wyu.partymanager.entity.sys.User;
+import com.wyu.partymanager.service.sys.MenuService;
 import com.wyu.partymanager.service.sys.UserService;
 import com.wyu.partymanager.utils.Result;
+import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +25,8 @@ public class UserController extends BaseController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private MenuService menuService;
 
     @ApiOperation("登录")
     @PostMapping("/login")
@@ -45,5 +51,11 @@ public class UserController extends BaseController {
     public Result<List<User>> user_list(User.Filter filter) {
         System.out.println(current_user());
         return userService.user_list(filter);
+    }
+
+    @ApiOperation("初始化菜单")
+    @GetMapping("/menu_list")
+    public Result<List<MenuDTO>> menu_list(Menu.Filter filter){
+        return menuService.menu_list(filter,current_user());
     }
 }

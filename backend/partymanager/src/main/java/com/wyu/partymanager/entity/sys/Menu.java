@@ -41,6 +41,10 @@ public class Menu implements Serializable {
     @TableField("parentId")
     long parentId;
 
+    @ApiModelProperty("icon")
+    @TableField("icon")
+    String icon;
+
     @ApiModelProperty("权限列表")
     public Set<Long> getPermissions(){
             return Arrays.stream(Optional.ofNullable(permission).orElse("").split(",")).map(Long::valueOf).collect(Collectors.toSet());

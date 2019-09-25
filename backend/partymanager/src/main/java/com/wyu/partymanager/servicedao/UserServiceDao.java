@@ -9,6 +9,7 @@ import java.util.List;
 public interface UserServiceDao {
 
     Result<User> add_user(User user);
+    Result<User> getById(Object id);
     Result<?> delete_user(User user);
     Result<User> edit_user(User user);
     Result<List<User>> user_list(User.Filter filter);

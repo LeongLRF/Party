@@ -51,6 +51,9 @@ export default {
     this.$my_get('/sys/current_user').then(res => {
       console.log(res.data)
     })
+    this.$my_get('/sys/menu_list').then(res => {
+      console.log(res)
+    })
   }
 }
 </script>
