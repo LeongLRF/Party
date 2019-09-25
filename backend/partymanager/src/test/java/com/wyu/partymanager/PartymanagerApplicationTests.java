@@ -7,6 +7,7 @@ import com.wyu.partymanager.mapper.RoleMapper;
 import com.wyu.partymanager.mapper.UserMapper;
 import com.wyu.partymanager.service.sys.UserService;
 import com.wyu.partymanager.utils.IFilter;
+import com.wyu.partymanager.utils.Preloader;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,8 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.jws.soap.SOAPBinding;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
@@ -66,6 +69,12 @@ public class PartymanagerApplicationTests {
         Role role = new Role();
         role.setName("学生");
         roleMapper.insert(role);
+    }
+    @Test
+    public void preloadTest(){
+        User user = userMapper.selectById(1);
+        new Preloader<>(roleMapper, Collections.singletonList(user)).preload_one(User::getRoleId,"id",User::setRole);
+        System.out.println(user);
     }
 
 }
