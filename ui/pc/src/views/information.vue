@@ -1,5 +1,7 @@
 <template>
-  <div>456</div>
+  <div style="height:100%;background:#fff">
+    <h1>456</h1>
+  </div>
 </template>
 
 <script>

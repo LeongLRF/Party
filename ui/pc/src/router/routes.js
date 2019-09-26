@@ -1,24 +1,17 @@
-import login from '@/views/login'
-import index from '@/views/index'
-import information from '@/views/information'
-
 export const allRouter = [
-  {
-    path: '/',
-    name: 'index',
-    component: index
-  },
   {
     path: '/login',
     name: 'login',
-    component: login
+    component: () => import('@/views/login')
   },
   {
-    path: '/information',
-    redirect: '/information',
-    component: index,
+    path: '/',
+    redirect: '/index',
+    name: 'index',
+    component: () => import('@/views/index'),
     children: [
-      { path: '/information', name: 'information', component: information }
+      {path: '/index', name: 'HelloWorld', component: () => import('@/views/HelloWorld')},
+      {path: '/information', name: 'information', component: () => import('@/views/information')}
     ]
   }
 ]
