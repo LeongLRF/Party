@@ -7,4 +7,5 @@ package com.wyu.partymanager.utils;
 public class Common {
 
     public static final String CURRENT_USER = "user";
+    public static final String CURRENT_DEPT = "dept";
 }

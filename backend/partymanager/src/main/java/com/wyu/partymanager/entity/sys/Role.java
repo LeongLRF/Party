@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.wyu.partymanager.entity.IEntity;
 import com.wyu.partymanager.entity.TimestampEntity;
 import com.wyu.partymanager.utils.IFilter;
 import lombok.Data;
@@ -20,7 +21,7 @@ import java.sql.Timestamp;
  */
 @Data
 @TableName("sys_role")
-public class Role implements TimestampEntity , Serializable {
+public class Role implements TimestampEntity , Serializable , IEntity {
 
     @TableId(value = "id",type = IdType.AUTO)
     long id;

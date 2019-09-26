@@ -6,6 +6,7 @@ import com.wyu.partymanager.servicedao.UserServiceDao;
 import com.wyu.partymanager.utils.Common;
 import com.wyu.partymanager.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
@@ -20,11 +21,25 @@ public class UserService implements UserServiceDao {
 
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private RedisTemplate<String,Object> redisTemplate;
 
     @Override
     public Result<User> add_user(User user) {
         userMapper.insert(user);
         return Result.ok(user);
+    }
+
+    @Override
+    public Result<User> getById(Object id) {
+        String key = User.class.getName() + id;
+        boolean hasKey = redisTemplate.hasKey(key);
+        if (hasKey){
+            User user = (User) redisTemplate.opsForValue().get(key);
+            return Result.ok(user);
+        }
+        User user = userMapper.selectById(id);
+        return Result.maybe(user);
     }
 
     @Override

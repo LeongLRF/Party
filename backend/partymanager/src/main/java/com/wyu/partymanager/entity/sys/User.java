@@ -98,6 +98,7 @@ public class User implements Serializable, IEntity {
     @TableField("phone")
     @ApiModelProperty("联系电话")
     String phone;
+    Role role;
 
     @Data
     public static class Filter implements IFilter<User>{
