@@ -36,7 +36,7 @@ public class UserController extends BaseController {
 
     @ApiOperation("获取当前用户")
     @GetMapping("/current_user")
-    public Result<User> getcurrent_user() {
+    public Result<User> getCurrent_user() {
         return Result.maybe(current_user(),"未登录");
     }
 

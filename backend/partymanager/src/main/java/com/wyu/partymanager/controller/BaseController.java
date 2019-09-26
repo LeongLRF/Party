@@ -1,5 +1,6 @@
 package com.wyu.partymanager.controller;
 
+import com.wyu.partymanager.entity.sys.Dept;
 import com.wyu.partymanager.entity.sys.User;
 import com.wyu.partymanager.utils.Common;
 import lombok.Getter;
@@ -32,5 +33,9 @@ public class BaseController {
             logger.info("session超时");
         }
         return user;
+    }
+
+    public Dept current_dept(){
+        return (Dept) httpSession.getAttribute(Common.CURRENT_DEPT);
     }
 }
