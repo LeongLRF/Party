@@ -4,7 +4,11 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.wyu.partymanager.entity.IEntity;
+import com.wyu.partymanager.utils.IFilter;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.apache.ibatis.type.JdbcType;
@@ -36,8 +40,32 @@ public class Activity implements IEntity {
     String theme;
 
     @ApiModelProperty("参加人员")
-    @TableField(value = "details",jdbcType = JdbcType.ARRAY)
+    @TableField(value = "details")
     List<Details> details;
+
+    @ApiModelProperty("活动内容")
+    @TableField("content")
+    String content;
+
+    @ApiModelProperty("地点")
+    @TableField("place")
+    String place;
+
+    @ApiModelProperty("holder")
+    @TableField("holder")
+    String holder;
+
+    @ApiModelProperty("speaker")
+    @TableField("speaker")
+    String speaker;
+
+    @ApiModelProperty("备注")
+    @TableField("remark")
+    String remark;
+
+    @ApiModelProperty("学时")
+    @TableField("hours")
+    int hours;
 
     @Data
     public static class Details{
@@ -45,5 +73,16 @@ public class Activity implements IEntity {
         long id;
         @ApiModelProperty("参加人员姓名")
         String name;
+    }
+
+    @Data
+    public static class Filter implements IFilter<Activity>{
+        @JsonIgnore
+        QueryWrapper<Activity> queryWrapper = new QueryWrapper<>();
+
+        @Override
+        public Wrapper<Activity> apply() {
+            return this.queryWrapper;
+        }
     }
 }

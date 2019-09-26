@@ -1,6 +1,8 @@
 package com.wyu.partymanager.entity;
 
-public interface IEntity {
+import java.io.Serializable;
+
+public interface IEntity extends Serializable {
 
      long getId();
      void setId(long id);

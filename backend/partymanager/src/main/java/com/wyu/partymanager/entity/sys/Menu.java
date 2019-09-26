@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.wyu.partymanager.entity.IEntity;
 import com.wyu.partymanager.utils.IFilter;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -23,7 +24,7 @@ import java.util.stream.Collectors;
  */
 @Data
 @TableName("sys_menu")
-public class Menu implements Serializable {
+public class Menu implements IEntity {
 
     @TableId(value = "id",type = IdType.AUTO)
     long id;
@@ -47,7 +48,7 @@ public class Menu implements Serializable {
 
     @ApiModelProperty("权限列表")
     public Set<Long> getPermissions(){
-            return Arrays.stream(Optional.ofNullable(permission).orElse("").split(",")).map(Long::valueOf).collect(Collectors.toSet());
+            return Arrays.stream(Optional.ofNullable(permission).orElse("0").split(",")).map(Long::valueOf).collect(Collectors.toSet());
     }
 
     @Data

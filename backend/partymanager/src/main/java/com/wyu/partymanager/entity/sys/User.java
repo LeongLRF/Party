@@ -23,7 +23,7 @@ import java.sql.Timestamp;
 @Data
 @ApiModel
 @TableName("sys_user")
-public class User implements Serializable, IEntity {
+public class User implements IEntity {
 
     @TableId(value = "id", type = IdType.AUTO)
     long id;

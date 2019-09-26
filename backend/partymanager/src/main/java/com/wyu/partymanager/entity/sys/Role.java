@@ -21,7 +21,7 @@ import java.sql.Timestamp;
  */
 @Data
 @TableName("sys_role")
-public class Role implements TimestampEntity , Serializable , IEntity {
+public class Role implements TimestampEntity, IEntity {
 
     @TableId(value = "id",type = IdType.AUTO)
     long id;

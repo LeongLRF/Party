@@ -41,11 +41,7 @@ public class PartymanagerApplicationTests {
 
     @Test
     public void test(){
-        User user = new User();
-        user.setPassword("980159737");
-        user.setUserName("Leong");
-        user.setTrueName("梁荣锋");
-        userMapper.insert(user);
+       Role role = roleMapper.selectById(1);
     }
     @Test
     public void test2(){
