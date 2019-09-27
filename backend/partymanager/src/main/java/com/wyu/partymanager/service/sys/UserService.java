@@ -26,7 +26,11 @@ public class UserService implements UserServiceDao {
     @Autowired
     private RedisTemplate<String,Object> redisTemplate;
 
-    private RedisUtils<User> redisUtils = new RedisUtils<>(userMapper,redisTemplate);
+    private RedisUtils<User> redisUtils;
+
+    public UserService(){
+        redisUtils = new RedisUtils<>(userMapper,redisTemplate);
+    }
 
     @Override
     public Result<User> add_user(User user) {
@@ -36,14 +40,7 @@ public class UserService implements UserServiceDao {
 
     @Override
     public Result<User> getById(Object id) {
-        String key = User.class.getName() + id;
-        boolean hasKey = redisTemplate.hasKey(key);
-        if (hasKey){
-            User user = (User) redisTemplate.opsForValue().get(key);
-            return Result.ok(user);
-        }
-        User user = userMapper.selectById(id);
-        return Result.maybe(user);
+        return redisUtils.getById(User.class,id);
     }
 
     @Override

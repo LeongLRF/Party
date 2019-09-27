@@ -4,11 +4,11 @@ import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.wyu.partymanager.entity.IEntity;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.lang.Nullable;
 
-import javax.validation.constraints.Null;
 import java.io.Serializable;
+import java.util.List;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 @SuppressWarnings("ConstantConditions")
 public class RedisUtils<T extends IEntity> {
@@ -82,5 +82,10 @@ public class RedisUtils<T extends IEntity> {
         }else {
             return Result.error("数据不存在");
         }
+    }
+
+    public  Result<List<T>> getByIds(Class<T> cls,List<Object> ids){
+        List<T> list = ids.stream().map(id -> getById(cls,id).data).collect(Collectors.toList());
+        return Result.ok(list);
     }
 }
