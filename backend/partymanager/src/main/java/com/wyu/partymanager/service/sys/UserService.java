@@ -4,7 +4,9 @@ import com.wyu.partymanager.entity.sys.User;
 import com.wyu.partymanager.mapper.UserMapper;
 import com.wyu.partymanager.servicedao.UserServiceDao;
 import com.wyu.partymanager.utils.Common;
+import com.wyu.partymanager.utils.RedisUtils;
 import com.wyu.partymanager.utils.Result;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -23,6 +25,8 @@ public class UserService implements UserServiceDao {
     private UserMapper userMapper;
     @Autowired
     private RedisTemplate<String,Object> redisTemplate;
+
+    private RedisUtils<User> redisUtils = new RedisUtils<>(userMapper,redisTemplate);
 
     @Override
     public Result<User> add_user(User user) {

@@ -1,12 +1,10 @@
 package com.wyu.partymanager;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.wyu.partymanager.entity.sys.Role;
 import com.wyu.partymanager.entity.sys.User;
 import com.wyu.partymanager.mapper.RoleMapper;
 import com.wyu.partymanager.mapper.UserMapper;
 import com.wyu.partymanager.service.sys.UserService;
-import com.wyu.partymanager.utils.IFilter;
 import com.wyu.partymanager.utils.Preloader;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,8 +13,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import javax.jws.soap.SOAPBinding;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 

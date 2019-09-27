@@ -7,12 +7,10 @@ import com.wyu.partymanager.entity.sys.User;
 import com.wyu.partymanager.service.sys.MenuService;
 import com.wyu.partymanager.service.sys.UserService;
 import com.wyu.partymanager.utils.Result;
-import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
