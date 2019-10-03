@@ -1,9 +1,10 @@
 <template>
   <div>
     <Menu></Menu>
-    <div class="view"
-         :style="{height: myH+'px'}">
-      <router-view />
+    <div class="view" :style="{height: (myH-60)+'px'}">
+      <keep-alive>
+        <router-view />
+      </keep-alive>
     </div>
   </div>
 </template>
@@ -48,7 +49,10 @@ export default {
 }
 .view {
   margin: 0 0 0 257px;
-  padding: 15px;
+  padding: 10px;
   background: #f0efef;
+}
+.ant-table {
+  clear: none;
 }
 </style>
