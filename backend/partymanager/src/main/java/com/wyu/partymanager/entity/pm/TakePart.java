@@ -1,4 +1,4 @@
-package com.wyu.partymanager.entity.sys;
+package com.wyu.partymanager.entity.pm;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
