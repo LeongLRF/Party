@@ -1,6 +1,7 @@
 package com.wyu.partymanager.servicedao;
 
 import com.wyu.partymanager.entity.sys.User;
+import com.wyu.partymanager.service.sys.UserService;
 import com.wyu.partymanager.utils.Result;
 
 import javax.servlet.http.HttpSession;
@@ -15,4 +16,5 @@ public interface UserServiceDao {
     Result<List<User>> user_list(User.Filter filter);
 
     Result<User> login(String userName, String password, HttpSession httpSession);
+    
 }

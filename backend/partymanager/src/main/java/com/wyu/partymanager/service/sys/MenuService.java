@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
  */
 @Service
 public class MenuService implements MenuServiceDao {
+
     @Autowired
     private MenuMapper menuMapper;
 

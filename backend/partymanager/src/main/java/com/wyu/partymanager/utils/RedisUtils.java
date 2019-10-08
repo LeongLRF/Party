@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 @SuppressWarnings("ConstantConditions")
 public class RedisUtils<T extends IEntity> {
 
+    // 默认过期时间
     private static final long DEFAULT_EXPIRE_TIME = 60 * 60 * 24;
 
     private BaseMapper<T> baseMapper;
