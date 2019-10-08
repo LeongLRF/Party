@@ -26,11 +26,7 @@ public class UserService implements UserServiceDao {
     @Autowired
     private RedisTemplate<String,Object> redisTemplate;
 
-    private RedisUtils<User> redisUtils;
 
-    public UserService(){
-        redisUtils = new RedisUtils<>(userMapper,redisTemplate);
-    }
 
     @Override
     public Result<User> add_user(User user) {
@@ -40,7 +36,7 @@ public class UserService implements UserServiceDao {
 
     @Override
     public Result<User> getById(Object id) {
-        return redisUtils.getById(User.class,id);
+        return Result.ok(userMapper.selectById(id));
     }
 
     @Override

@@ -5,14 +5,15 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.wyu.partymanager.entity.IEntity;
+import com.wyu.partymanager.utils.BaseFilter;
 import com.wyu.partymanager.utils.IFilter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import java.io.Serializable;
 import java.sql.Timestamp;
 
 /**
@@ -101,16 +102,13 @@ public class User implements IEntity {
     Role role;
 
     @Data
-    public static class Filter implements IFilter<User>{
-        @JsonIgnore
-        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+    public static class Filter extends BaseFilter<User> {
         @ApiModelProperty("过滤姓名")
         String name;
 
-
         @Override
         public QueryWrapper<User> apply() {
-            return this.queryWrapper.like(name!=null,"trueName",name);
+            return this.getQueryWrapper().like(name!=null,"trueName",name);
         }
     }
 
