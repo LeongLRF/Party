@@ -5,12 +5,11 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.wyu.partymanager.entity.IEntity;
 import com.wyu.partymanager.utils.IFilter;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
 @TableName("pm_takepart")
@@ -26,14 +25,13 @@ public class TakePart implements IEntity {
     @TableField("activityId")
     long activityId;
 
+    @EqualsAndHashCode(callSuper = true)
     @Data
-    public static class Filter implements IFilter<TakePart>{
-        @JsonIgnore
-        QueryWrapper<TakePart> queryWrapper = new QueryWrapper<>();
+    public static class Filter extends IFilter<TakePart> {
 
         @Override
         public Wrapper<TakePart> apply() {
-            return this.queryWrapper;
+            return this.getQueryWrapper();
         }
     }
 }

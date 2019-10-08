@@ -5,14 +5,12 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.wyu.partymanager.entity.IEntity;
-import com.wyu.partymanager.utils.BaseFilter;
 import com.wyu.partymanager.utils.IFilter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.sql.Timestamp;
 
@@ -101,8 +99,9 @@ public class User implements IEntity {
     String phone;
     Role role;
 
+    @EqualsAndHashCode(callSuper = true)
     @Data
-    public static class Filter extends BaseFilter<User> {
+    public static class Filter extends IFilter<User> {
         @ApiModelProperty("过滤姓名")
         String name;
 

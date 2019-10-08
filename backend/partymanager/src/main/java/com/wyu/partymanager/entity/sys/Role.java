@@ -5,14 +5,12 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.wyu.partymanager.entity.IEntity;
 import com.wyu.partymanager.entity.TimestampEntity;
 import com.wyu.partymanager.utils.IFilter;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
-import java.io.Serializable;
 import java.sql.Timestamp;
 
 /**
@@ -34,15 +32,13 @@ public class Role implements TimestampEntity, IEntity {
     @TableField("updatedAt")
     Timestamp updatedAt;
 
+    @EqualsAndHashCode(callSuper = true)
     @Data
-    public static class Filter implements IFilter<Role>{
-        @JsonIgnore
-        QueryWrapper<Role> queryWrapper = new QueryWrapper<>();
-
+    public static class Filter extends IFilter<Role> {
 
         @Override
         public Wrapper<Role> apply() {
-            return this.queryWrapper;
+            return this.getQueryWrapper();
         }
     }
 

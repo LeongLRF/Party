@@ -2,11 +2,10 @@ package com.wyu.partymanager.utils;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import lombok.Data;
 
-public interface IFilter<T> {
-    QueryWrapper<T> getQueryWrapper();
-
-    void setQueryWrapper(QueryWrapper<T> value);
-
-    Wrapper<T> apply();
+@Data
+public abstract class IFilter<T> {
+    QueryWrapper<T> queryWrapper = new QueryWrapper<>();
+    public abstract Wrapper<T> apply();
 }

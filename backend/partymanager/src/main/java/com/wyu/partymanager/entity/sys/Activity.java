@@ -5,13 +5,11 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.wyu.partymanager.entity.IEntity;
 import com.wyu.partymanager.utils.IFilter;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import org.apache.ibatis.type.JdbcType;
+import lombok.EqualsAndHashCode;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -75,14 +73,13 @@ public class Activity implements IEntity {
         String name;
     }
 
+    @EqualsAndHashCode(callSuper = true)
     @Data
-    public static class Filter implements IFilter<Activity>{
-        @JsonIgnore
-        QueryWrapper<Activity> queryWrapper = new QueryWrapper<>();
+    public static class Filter extends IFilter<Activity> {
 
         @Override
         public Wrapper<Activity> apply() {
-            return this.queryWrapper;
+            return this.getQueryWrapper();
         }
     }
 }

@@ -5,14 +5,12 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.wyu.partymanager.entity.IEntity;
 import com.wyu.partymanager.utils.IFilter;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
-import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.Set;
@@ -51,14 +49,12 @@ public class Menu implements IEntity {
             return Arrays.stream(Optional.ofNullable(permission).orElse("0").split(",")).map(Long::valueOf).collect(Collectors.toSet());
     }
 
+    @EqualsAndHashCode(callSuper = true)
     @Data
-    public static class Filter implements IFilter<Menu>{
-        @JsonIgnore
-        QueryWrapper<Menu> queryWrapper = new QueryWrapper<>();
-
+    public static class Filter extends IFilter<Menu> {
         @Override
         public Wrapper<Menu> apply() {
-            return this.queryWrapper;
+            return this.getQueryWrapper();
         }
     }
 }
