@@ -1,5 +1,6 @@
 package com.wyu.partymanager.service.sys;
 
+import com.alibaba.fastjson.JSON;
 import com.wyu.partymanager.entity.sys.User;
 import com.wyu.partymanager.mapper.UserMapper;
 import com.wyu.partymanager.servicedao.UserServiceDao;
@@ -18,6 +19,7 @@ import java.util.List;
  * @author Leong
  * @date 2019/9/21 13:15
  */
+@SuppressWarnings("ALL")
 @Service
 public class UserService implements UserServiceDao {
 
@@ -26,16 +28,20 @@ public class UserService implements UserServiceDao {
     @Autowired
     private RedisTemplate<String,Object> redisTemplate;
 
-
-
     @Override
     public Result<User> add_user(User user) {
         userMapper.insert(user);
+        String key = User.class.getName() + user.getId();
+        redisTemplate.opsForValue().set(key, JSON.toJSONString(user));
         return Result.ok(user);
     }
 
     @Override
     public Result<User> getById(Object id) {
+        String key = User.class.getName() + id;
+        if (redisTemplate.hasKey(key)){
+            return Result.ok(JSON.parseObject((String) redisTemplate.opsForValue().get(key),User.class));
+        }
         return Result.ok(userMapper.selectById(id));
     }
 
