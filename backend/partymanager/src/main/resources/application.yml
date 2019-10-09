@@ -6,9 +6,9 @@ mapper:
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost/party?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
+    url: jdbc:mysql://59.110.171.118/party?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
     username: root
-    password: 123456
+    password: Liang45623+1628
     druid:
       initial-size: 5
       max-active: 30
