@@ -1,8 +1,4 @@
-mybatis:
-  type-aliases-package: com.wyu.partymanager.entity
-mapper:
-  mappers: com.wyu.partymanager.dao.IBaseDao
-  identity: mysql
+
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
