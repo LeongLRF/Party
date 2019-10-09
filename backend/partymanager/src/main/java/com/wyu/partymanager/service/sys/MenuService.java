@@ -28,6 +28,12 @@ public class MenuService implements MenuServiceDao {
     }
 
     @Override
+    public Result<Menu> add_menu(Menu menu) {
+        menuMapper.insert(menu);
+        return Result.ok(menu);
+    }
+
+    @Override
     public Result<List<MenuDTO>> menu_list(Menu.Filter filter, User user) {
         return Result.maybe(menuMapper.selectList(filter.apply()),"暂无菜单")
                 .andThen(menus -> {

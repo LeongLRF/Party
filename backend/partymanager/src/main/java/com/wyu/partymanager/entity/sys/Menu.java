@@ -44,6 +44,10 @@ public class Menu implements IEntity {
     @TableField("icon")
     String icon;
 
+    @ApiModelProperty("是否启用")
+    @TableField("valid")
+    boolean valid;
+
     @ApiModelProperty("权限列表")
     public Set<Long> getPermissions(){
             return Arrays.stream(Optional.ofNullable(permission).orElse("0").split(",")).map(Long::valueOf).collect(Collectors.toSet());

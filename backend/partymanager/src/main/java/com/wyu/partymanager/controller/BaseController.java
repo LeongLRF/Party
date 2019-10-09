@@ -20,7 +20,7 @@ import javax.servlet.http.HttpSession;
 @RestController
 public class BaseController {
 
-    public static Logger logger = LoggerFactory.getLogger(BaseController.class);
+    private static Logger logger = LoggerFactory.getLogger(BaseController.class);
 
     @Getter
     final HttpSession httpSession;

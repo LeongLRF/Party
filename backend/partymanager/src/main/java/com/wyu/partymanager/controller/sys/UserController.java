@@ -11,6 +11,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -18,24 +19,17 @@ import java.util.List;
  * @date 2019/9/21 14:56
  */
 @RestController
-@RequestMapping("/sys")
+@RequestMapping("/user")
 public class UserController extends BaseController {
 
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private MenuService menuService;
+    private final UserService userService;
+    private final MenuService menuService;
 
-    @ApiOperation("登录")
-    @PostMapping("/login")
-    public Result<User> login(String userName, String password) {
-        return userService.login(userName, password, getHttpSession());
-    }
-
-    @ApiOperation("获取当前用户")
-    @GetMapping("/current_user")
-    public Result<User> getCurrent_user() {
-        return Result.maybe(current_user(),"未登录");
+    @Autowired
+    public UserController(HttpSession httpSession, MenuService menuService, UserService userService) {
+        super(httpSession);
+        this.menuService = menuService;
+        this.userService = userService;
     }
 
     @ApiOperation("添加【用户】")
@@ -51,9 +45,4 @@ public class UserController extends BaseController {
         return userService.user_list(filter);
     }
 
-    @ApiOperation("初始化菜单")
-    @GetMapping("/menu_list")
-    public Result<List<MenuDTO>> menu_list(Menu.Filter filter){
-        return menuService.menu_list(filter,current_user());
-    }
 }

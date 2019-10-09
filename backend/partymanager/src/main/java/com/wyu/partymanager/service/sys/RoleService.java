@@ -11,11 +11,17 @@ import java.util.List;
 
 @Service
 public class RoleService implements RoleServiceDao {
+    private final RoleMapper roleMapper;
+
     @Autowired
-    RoleMapper roleMapper;
+    public RoleService(RoleMapper roleMapper) {
+        this.roleMapper = roleMapper;
+    }
+
     @Override
     public Result<Role> add_role(Role role) {
-        return null;
+        roleMapper.insert(role);
+        return Result.ok(role);
     }
 
     @Override
@@ -30,6 +36,6 @@ public class RoleService implements RoleServiceDao {
 
     @Override
     public Result<List<Role>> role_list(Role.Filter filter) {
-        return null;
+        return Result.ok(roleMapper.selectList(filter.apply()));
     }
 }
