@@ -17,4 +17,4 @@ spring:
   redis:
     host: 59.110.171.118
     port: 6379
-    password: foobared
+    password:

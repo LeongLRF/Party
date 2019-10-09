@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.wyu.partymanager.entity.IEntity;
+import com.wyu.partymanager.entity.JsonEntity;
 import com.wyu.partymanager.utils.IFilter;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -22,7 +23,7 @@ import java.util.stream.Collectors;
  */
 @Data
 @TableName("sys_menu")
-public class Menu implements IEntity {
+public class Menu implements IEntity , JsonEntity {
 
     @TableId(value = "id",type = IdType.AUTO)
     long id;

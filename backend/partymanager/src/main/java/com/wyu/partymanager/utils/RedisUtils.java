@@ -3,6 +3,7 @@ package com.wyu.partymanager.utils;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.wyu.partymanager.entity.IEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 
 import java.io.Serializable;
@@ -17,6 +18,7 @@ public class RedisUtils<T extends IEntity> {
     private static final long DEFAULT_EXPIRE_TIME = 60 * 60 * 24;
 
     private BaseMapper<T> baseMapper;
+    @Autowired
     private RedisTemplate<String, Object> redisTemplate;
 
     public RedisUtils(BaseMapper<T> baseMapper, RedisTemplate<String, Object> redisTemplate) {
@@ -28,7 +30,7 @@ public class RedisUtils<T extends IEntity> {
         String key = cls.getName() + id;
         boolean hasKey = redisTemplate.hasKey(key);
         if (hasKey) {
-            T t = JSON.parseObject((String) redisTemplate.opsForValue().get(key), cls);
+            T t = (T) redisTemplate.opsForValue().get(key);
             return Result.ok(t);
         }
         return Result.ok(baseMapper.selectById((Serializable) id));
@@ -47,7 +49,7 @@ public class RedisUtils<T extends IEntity> {
     public Result<T> insert(Class<T> cls, T t) {
         baseMapper.insert(t);
         String key = cls.getName() + t.getId();
-        redisTemplate.opsForValue().set(key, JSON.toJSONString(t), DEFAULT_EXPIRE_TIME);
+        redisTemplate.opsForValue().set(key, t, DEFAULT_EXPIRE_TIME);
         return Result.ok(t);
     }
 

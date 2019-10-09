@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.wyu.partymanager.entity.IEntity;
+import com.wyu.partymanager.entity.JsonEntity;
 import com.wyu.partymanager.utils.IFilter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -22,7 +23,7 @@ import java.sql.Timestamp;
 @Data
 @ApiModel
 @TableName("sys_user")
-public class User implements IEntity {
+public class User implements IEntity, JsonEntity {
 
     @TableId(value = "id", type = IdType.AUTO)
     long id;

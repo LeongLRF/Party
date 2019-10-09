@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.wyu.partymanager.entity.IEntity;
+import com.wyu.partymanager.entity.JsonEntity;
 import com.wyu.partymanager.entity.TimestampEntity;
 import com.wyu.partymanager.utils.IFilter;
 import lombok.Data;
@@ -19,7 +20,7 @@ import java.sql.Timestamp;
  */
 @Data
 @TableName("sys_role")
-public class Role implements TimestampEntity, IEntity {
+public class Role implements TimestampEntity, IEntity, JsonEntity {
 
     @TableId(value = "id",type = IdType.AUTO)
     long id;
@@ -31,6 +32,8 @@ public class Role implements TimestampEntity, IEntity {
     Timestamp insertedAt;
     @TableField("updatedAt")
     Timestamp updatedAt;
+    @TableField("valid")
+    boolean valid;
 
     @EqualsAndHashCode(callSuper = true)
     @Data
