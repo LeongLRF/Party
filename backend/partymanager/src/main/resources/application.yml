@@ -19,6 +19,6 @@ spring:
       validation-query: select 1 from dual
       test-while-idle: true
   redis:
-    host: 127.0.0.1
+    host: 59.110.171.118
     port: 6379
     password:
