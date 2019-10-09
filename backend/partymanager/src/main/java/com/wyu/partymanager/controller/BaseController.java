@@ -22,10 +22,12 @@ public class BaseController {
 
     public static Logger logger = LoggerFactory.getLogger(BaseController.class);
 
-    @Setter
     @Getter
-    @Autowired
-    HttpSession httpSession;
+    final HttpSession httpSession;
+
+    public BaseController(HttpSession httpSession) {
+        this.httpSession = httpSession;
+    }
 
     public User current_user(){
         User user = (User) httpSession.getAttribute(Common.CURRENT_USER);

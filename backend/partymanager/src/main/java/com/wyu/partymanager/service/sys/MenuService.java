@@ -9,6 +9,7 @@ import com.wyu.partymanager.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -20,8 +21,11 @@ import java.util.stream.Collectors;
 @Service
 public class MenuService implements MenuServiceDao {
 
-    @Autowired
-    private MenuMapper menuMapper;
+    private final MenuMapper menuMapper;
+
+    public MenuService(MenuMapper menuMapper) {
+        this.menuMapper = menuMapper;
+    }
 
     @Override
     public Result<List<MenuDTO>> menu_list(Menu.Filter filter, User user) {
