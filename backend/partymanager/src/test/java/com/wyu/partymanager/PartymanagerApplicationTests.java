@@ -14,6 +14,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.sql.Timestamp;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -67,9 +68,8 @@ public class PartymanagerApplicationTests {
 
     @Test
     public void roleTest() {
-        Role.Filter filter = new Role.Filter();
-        List<Role> roles = roleService.role_list(filter).data;
-        System.out.println(roles);
+       List<Integer> integers = Arrays.asList(1,2,2,3);
+        System.out.println(integers.stream().filter(it->it == 2).count());
     }
 
     @Test

@@ -22,13 +22,13 @@
           <div class="txt">Normal</div>
         </span>
       </div>
-      <a-menu mode="inline" v-for="(item) in MenuList" :key="item.path" style="width: 256px">
+      <a-menu mode="inline" v-for="(item) in menus" :key="item.id" style="width: 256px">
         <a-sub-menu key="item.name">
           <span slot="title">
-            <a-icon :type="item.meta.icon" />
-            <span>{{item.meta.title}}</span>
+            <a-icon :type="item.icon"/>
+            <span>{{item.parent.name}}</span>
           </span>
-          <a-menu-item v-for="(items,index) in item.children" :key="index" @click="go(items.path)">{{items.meta.title}}
+          <a-menu-item v-for="(items,index) in item.children" :key="index" @click="go(items.url)">{{items.name}}
           </a-menu-item>
         </a-sub-menu>
       </a-menu>
@@ -45,6 +45,7 @@ export default {
     return {
       rootSubmenuKeys: ['person', 'TManager', 'ZManager'],
       openKeys: [],
+      menus: [],
       myheight: window.innerHeight,
       mywidth: window.innerWidth,
       MenuList: []
@@ -68,6 +69,10 @@ export default {
   },
   mounted () {
     this.MenuList = this.$router.options.routes.filter(res => res.meta.isView)
+    this.$my_get('/sys/menu_list').then(res => {
+      this.menus = res.data
+    })
+    console.log(this.menus)
     console.log(123, this.$router.options.routes)
   }
 }
