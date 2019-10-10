@@ -5,15 +5,17 @@ import com.wyu.partymanager.entity.sys.User;
 import com.wyu.partymanager.mapper.UserMapper;
 import com.wyu.partymanager.servicedao.UserServiceDao;
 import com.wyu.partymanager.utils.Common;
-import com.wyu.partymanager.utils.RedisUtils;
 import com.wyu.partymanager.utils.Result;
-import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @author Leong
@@ -30,6 +32,11 @@ public class UserService implements UserServiceDao {
 
     @Override
     public Result<User> add_user(User user) {
+        if (validSameUser(user)){
+            return Result.error("用户已存在");
+        }
+        user.setSalt(UUID.randomUUID().toString());
+        user.setPassword(encryptPassword(user.getSalt(),user.getPassword()));
         userMapper.insert(user);
         String key = User.class.getName() + user.getId();
         redisTemplate.opsForValue().set(key, JSON.toJSONString(user));
@@ -63,12 +70,38 @@ public class UserService implements UserServiceDao {
     }
 
     @Override
+    public User findByUserName(String userName) {
+        return userMapper.findByUserName(userName);
+    }
+
+    @Override
     public Result<User> login(String userName, String password, HttpSession httpSession) {
         return Result.maybe(userMapper.findUserByUserName(userName),"用户不存在")
-                .andThenCheck(user -> user.getPassword().equals(password),"密码错误")
+                .andThenCheck(user -> validPassword(password,user),"密码错误")
+                .andThenCheck(user -> user.isValid(),"对不起，该账号已被冻结")
                 .andThen(user -> {
                     httpSession.setAttribute(Common.CURRENT_USER,user);
                     return Result.ok(user);
                 });
+    }
+    // 加密用户密码
+    public String encryptPassword(String salt, String password) {
+        String str = salt + "---" + password;
+        MessageDigest md5;
+        try {
+            md5 = MessageDigest.getInstance("MD5");
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
+        byte[] b = str.getBytes();
+        byte[] digest = md5.digest(b);
+        return Base64.getEncoder().encodeToString(digest);
+    }
+
+    boolean validSameUser(User user){
+        return findByUserName(user.getUserName()) != null;
+    }
+    boolean validPassword(String password,User user){
+        return encryptPassword(user.getSalt(),password).equals(user.getPassword());
     }
 }

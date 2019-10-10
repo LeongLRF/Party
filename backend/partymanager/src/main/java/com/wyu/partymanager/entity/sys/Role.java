@@ -20,7 +20,7 @@ import java.sql.Timestamp;
  */
 @Data
 @TableName("sys_role")
-public class Role implements TimestampEntity, IEntity, JsonEntity {
+public class Role implements TimestampEntity, JsonEntity {
 
     @TableId(value = "id",type = IdType.AUTO)
     long id;

@@ -14,7 +14,7 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @TableName("pm_dept")
-public class Dept implements IEntity, JsonEntity {
+public class Dept implements JsonEntity {
 
     @TableId(value = "id",type = IdType.AUTO)
     long id;

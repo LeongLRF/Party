@@ -14,7 +14,7 @@ public interface UserServiceDao {
     Result<?> delete_user(User user);
     Result<User> edit_user(User user);
     Result<List<User>> user_list(User.Filter filter);
-
+    User findByUserName(String userName);
     Result<User> login(String userName, String password, HttpSession httpSession);
-    
+
 }

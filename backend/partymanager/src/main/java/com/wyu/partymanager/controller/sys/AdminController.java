@@ -31,6 +31,7 @@ public class AdminController extends BaseController {
         this.menuService = menuService;
         this.roleService = roleService;
     }
+
     @ApiOperation("登录")
     @PostMapping("/login")
     public Result<User> login(String userName, String password) {

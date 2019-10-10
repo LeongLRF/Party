@@ -68,14 +68,14 @@ public class PartymanagerApplicationTests {
 
     @Test
     public void roleTest() {
-       List<Integer> integers = Arrays.asList(1,2,2,3);
-        System.out.println(integers.stream().filter(it->it == 2).count());
+        Role role = roleService.getById(7).data;
+        System.out.println(role);
     }
 
     @Test
     public void preloadTest() {
         Role role = new Role() {{
-            setName("admin");
+            setName("maintenance");
             setInsertedAt(new Timestamp(new Date().getTime()));
             setUpdatedAt(new Timestamp(new Date().getTime()));
             setValid(true);

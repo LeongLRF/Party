@@ -25,15 +25,19 @@ public class Swagger2Config {
         return new Docket(DocumentationType.SWAGGER_2)
                 .directModelSubstitute(Timestamp.class,String.class)
                 .directModelSubstitute(Date.class,String.class)
+                .enable(true)
                 .apiInfo(apiInfo()).select()
-                .apis(RequestHandlerSelectors.basePackage("com.wyu.partymanager.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.wyu"))
                 .paths(PathSelectors.any())
                 .build();
     }//PathSelectors.regex("/v1/")
 
     private ApiInfo apiInfo() {
-        return new ApiInfoBuilder().title("Manager Restful API").description("学院项目 API")
-                .version("1.0").build();
+        return new ApiInfoBuilder()
+                .title("Manager Restful API")
+                .description("学院项目 API")
+                .version("1.0")
+                .build();
 
     }
 }

@@ -25,8 +25,7 @@ public class RoleService implements RoleServiceDao {
     @Override
     public Result<Role> add_role(Role role) {
         roleMapper.insert(role);
-        String key = Role.class.getName() + role.getId();
-        redisTemplate.opsForValue().set(key,role.toJson());
+        redisTemplate.opsForValue().set(Role.class.getName()+role.getId(),role.toJson());
         return Result.ok(role);
     }
 
@@ -44,6 +43,7 @@ public class RoleService implements RoleServiceDao {
     public Result<Role> getById(long id) {
         String key = Role.class.getName() + id;
         if (redisTemplate.hasKey(key)){
+            System.out.println("从缓存中读取*******************************");
             return Result.ok(JSON.parseObject((String) redisTemplate.opsForValue().get(key),Role.class));
         }
         return Result.ok(roleMapper.selectById(id));

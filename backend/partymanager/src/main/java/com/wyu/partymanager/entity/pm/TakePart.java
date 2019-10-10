@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.wyu.partymanager.entity.IEntity;
+import com.wyu.partymanager.entity.JsonEntity;
 import com.wyu.partymanager.utils.IFilter;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -13,7 +14,7 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @TableName("pm_takepart")
-public class TakePart implements IEntity {
+public class TakePart implements JsonEntity {
 
     @TableId(value = "id", type = IdType.AUTO)
     long id;

@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.wyu.partymanager.entity.IEntity;
+import com.wyu.partymanager.entity.JsonEntity;
 import com.wyu.partymanager.utils.IFilter;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -16,7 +17,7 @@ import java.util.List;
 
 @Data
 @TableName("pm_activity")
-public class Activity implements IEntity {
+public class Activity implements JsonEntity {
 
     @TableId(value = "id",type = IdType.AUTO)
     long id;

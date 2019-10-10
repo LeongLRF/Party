@@ -23,7 +23,7 @@ import java.sql.Timestamp;
 @Data
 @ApiModel
 @TableName("sys_user")
-public class User implements IEntity, JsonEntity {
+public class User implements JsonEntity {
 
     @TableId(value = "id", type = IdType.AUTO)
     long id;
@@ -98,6 +98,18 @@ public class User implements IEntity, JsonEntity {
     @TableField("phone")
     @ApiModelProperty("联系电话")
     String phone;
+
+    @TableField("salt")
+    @ApiModelProperty("salt")
+    String salt;
+
+    @ApiModelProperty("token")
+    @TableField("token")
+    String token;
+
+    @ApiModelProperty("是否被冻结")
+    @TableField("valid")
+    boolean valid;
     Role role;
 
     @EqualsAndHashCode(callSuper = true)
@@ -108,7 +120,7 @@ public class User implements IEntity, JsonEntity {
 
         @Override
         public QueryWrapper<User> apply() {
-            return this.getQueryWrapper().like(name!=null,"trueName",name);
+            return this.getQueryWrapper().like(name != null, "trueName", name);
         }
     }
 

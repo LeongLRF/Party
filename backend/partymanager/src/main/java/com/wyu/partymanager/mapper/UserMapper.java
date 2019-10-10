@@ -13,4 +13,7 @@ public interface UserMapper extends BaseMapper<User> {
 
     @Select("select * from sys_user where id = #{id}")
     User selectById(Object id);
+
+    @Select("select * from sys_user where userName = #{userName}")
+    User findByUserName(String userName);
 }

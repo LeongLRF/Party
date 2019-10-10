@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
  */
 @Data
 @TableName("sys_menu")
-public class Menu implements IEntity , JsonEntity {
+public class Menu implements JsonEntity {
 
     @TableId(value = "id",type = IdType.AUTO)
     long id;
