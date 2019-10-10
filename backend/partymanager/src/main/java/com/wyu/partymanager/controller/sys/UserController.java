@@ -45,4 +45,16 @@ public class UserController extends BaseController {
         return userService.user_list(filter);
     }
 
+    @ApiOperation("修改【用户】")
+    @PostMapping("/edit_user")
+    public Result<User> edit_user(@RequestBody User user){
+        return userService.edit_user(user);
+    }
+
+    @ApiOperation("删除【用户】")
+    @PostMapping("/delete_user")
+    public Result<?> delete_user(@RequestBody User user){
+        return userService.delete_user(user);
+
+    }
 }

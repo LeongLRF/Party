@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface MenuServiceDao {
 
+    Result<?> delete_menu(long id);
     Result<Menu> add_menu(Menu menu);
     Result<List<MenuDTO>> menu_list(Menu.Filter filter, User user);
 }

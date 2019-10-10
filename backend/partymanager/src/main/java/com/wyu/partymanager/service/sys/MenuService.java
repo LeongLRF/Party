@@ -29,6 +29,12 @@ public class MenuService implements MenuServiceDao {
     }
 
     @Override
+    public Result<?> delete_menu(long id) {
+        menuMapper.deleteById(id);
+        return Result.ok();
+    }
+
+    @Override
     public Result<Menu> add_menu(Menu menu) {
         menuMapper.insert(menu);
         return Result.ok(menu);

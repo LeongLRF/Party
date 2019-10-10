@@ -63,9 +63,15 @@ public class AdminController extends BaseController {
     }
 
     @ApiOperation("添加菜单")
-    @GetMapping("/ass_menu")
+    @GetMapping("/add_menu")
     public Result<Menu> add_menu(@RequestBody Menu menu){
         return menuService.add_menu(menu);
+    }
+
+    @ApiOperation("删除菜单")
+    @PostMapping("/delete_menu")
+    public Result<?> delete_menu(long id){
+        return menuService.delete_menu(id);
     }
 
 }
