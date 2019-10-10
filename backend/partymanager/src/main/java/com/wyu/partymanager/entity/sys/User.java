@@ -5,7 +5,6 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.wyu.partymanager.entity.IEntity;
 import com.wyu.partymanager.entity.JsonEntity;
 import com.wyu.partymanager.utils.IFilter;
 import io.swagger.annotations.ApiModel;
@@ -110,6 +109,8 @@ public class User implements JsonEntity {
     @ApiModelProperty("是否被冻结")
     @TableField("valid")
     boolean valid;
+
+    @TableField(exist = false)
     Role role;
 
     @EqualsAndHashCode(callSuper = true)

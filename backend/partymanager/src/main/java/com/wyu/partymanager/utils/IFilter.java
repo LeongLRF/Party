@@ -10,7 +10,7 @@ public abstract class IFilter<T> {
 
     public abstract Wrapper<T> apply();
 
-    public QueryWrapper<T> queryWrapper(){
+    protected QueryWrapper<T> queryWrapper(){
         return queryWrapper;
     }
 }

@@ -23,6 +23,7 @@ public class MenuService implements MenuServiceDao {
 
     private final MenuMapper menuMapper;
 
+    @Autowired
     public MenuService(MenuMapper menuMapper) {
         this.menuMapper = menuMapper;
     }
