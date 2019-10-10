@@ -78,6 +78,11 @@ export const allRouter = [{
     },
     component: () => import('@/views/mesManage')
   }]
+},
+{
+  path: '/logout',
+  name: 'logout',
+  redirect: '/login'
 }
 ]
 
