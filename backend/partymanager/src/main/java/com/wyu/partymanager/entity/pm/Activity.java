@@ -5,8 +5,8 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.wyu.partymanager.entity.IEntity;
 import com.wyu.partymanager.entity.JsonEntity;
+import com.wyu.partymanager.utils.typeHandler.ArrayJsonHandler;
 import com.wyu.partymanager.utils.IFilter;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -39,7 +39,7 @@ public class Activity implements JsonEntity {
     String theme;
 
     @ApiModelProperty("参加人员")
-    @TableField(value = "details")
+    @TableField(value = "details",typeHandler = ArrayJsonHandler.class)
     List<Details> details;
 
     @ApiModelProperty("活动内容")
