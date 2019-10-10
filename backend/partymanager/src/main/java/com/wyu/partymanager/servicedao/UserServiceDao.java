@@ -1,5 +1,6 @@
 package com.wyu.partymanager.servicedao;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.wyu.partymanager.entity.sys.User;
 import com.wyu.partymanager.service.sys.UserService;
 import com.wyu.partymanager.utils.Result;
