@@ -7,10 +7,12 @@
       </span> -->
       <span class="right">
         <span>
-          <a-icon type="bell" /> </span>
+          <a-icon type="bell" />
+        </span>
         <span>
-          <a-icon type="message" /></span>
-        <span>Logout
+          <a-icon type="message" />
+        </span>
+        <span @click="go('/logout')">Logout
           <a-icon type="logout" /></span>
       </span>
     </div>
@@ -54,7 +56,7 @@ export default {
   components: {
   },
   computed: {
-    ...mapGetters('tab', ['getTabList', 'getselectTab'])
+    ...mapGetters('tab', ['getTabList', 'getSelectTab'])
   },
   methods: {
     ...mapMutations('tab', ['addTabList', 'setSelectTab']),
@@ -68,12 +70,17 @@ export default {
     }
   },
   mounted () {
-    this.MenuList = this.$router.options.routes.filter(res => res.meta.isView)
     this.$my_get('/sys/menu_list').then(res => {
       this.menus = res.data
+      console.log('进来菜单啦')
     })
     console.log(this.menus)
     console.log(123, this.$router.options.routes)
+  },
+  activated () {
+    this.$my_get('/sys/menu_list').then(res => {
+      this.menus = res.data
+    })
   }
 }
 </script>

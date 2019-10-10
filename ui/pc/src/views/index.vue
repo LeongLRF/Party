@@ -16,16 +16,20 @@ export default {
   },
   data () {
     return {
-      myH: window.innerHeight
+      myH: window.innerHeight,
+      user: {}
     }
   },
   mounted () {
     this.$my_get('/sys/current_user').then(res => {
       console.log(res.data)
+      this.user = res.data
     })
-    this.$my_get('/sys/menu_list').then(res => {
-      console.log(res)
-    })
+    // if (this.user) {
+    //   this.$my_get('/sys/menu_list').then(res => {
+    //     console.log(res)
+    //   })
+    // }
   }
 }
 </script>
