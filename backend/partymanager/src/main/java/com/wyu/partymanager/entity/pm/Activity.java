@@ -6,14 +6,12 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.wyu.partymanager.entity.JsonEntity;
-import com.wyu.partymanager.utils.typeHandler.ArrayJsonHandler;
 import com.wyu.partymanager.utils.IFilter;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.sql.Timestamp;
-import java.util.List;
 
 @Data
 @TableName("pm_activity")
@@ -27,8 +25,8 @@ public class Activity implements JsonEntity {
     Timestamp start;
 
     @ApiModelProperty("大类")
-    @TableField("type")
-    String type;
+    @TableField("typeId")
+    long typeId;
 
     @ApiModelProperty("方式")
     @TableField("way")
@@ -37,10 +35,6 @@ public class Activity implements JsonEntity {
     @ApiModelProperty("主题,用‘,’隔开")
     @TableField(value = "theme")
     String theme;
-
-    @ApiModelProperty("参加人员")
-    @TableField(value = "details",typeHandler = ArrayJsonHandler.class)
-    List<Details> details;
 
     @ApiModelProperty("活动内容")
     @TableField("content")
@@ -66,13 +60,6 @@ public class Activity implements JsonEntity {
     @TableField("hours")
     int hours;
 
-    @Data
-    public static class Details{
-        @ApiModelProperty("参加人员Id")
-        long id;
-        @ApiModelProperty("参加人员姓名")
-        String name;
-    }
 
     @EqualsAndHashCode(callSuper = true)
     @Data
