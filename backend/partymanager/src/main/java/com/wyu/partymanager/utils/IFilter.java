@@ -2,10 +2,15 @@ package com.wyu.partymanager.utils;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
-@Data
 public abstract class IFilter<T> {
-    QueryWrapper<T> queryWrapper = new QueryWrapper<>();
+
+    private QueryWrapper<T> queryWrapper = new QueryWrapper<>();
+
     public abstract Wrapper<T> apply();
+
+    public QueryWrapper<T> queryWrapper(){
+        return queryWrapper;
+    }
 }

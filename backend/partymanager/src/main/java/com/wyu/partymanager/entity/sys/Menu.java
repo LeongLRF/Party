@@ -59,7 +59,7 @@ public class Menu implements JsonEntity {
     public static class Filter extends IFilter<Menu> {
         @Override
         public Wrapper<Menu> apply() {
-            return this.getQueryWrapper();
+            return this.queryWrapper();
         }
     }
 }

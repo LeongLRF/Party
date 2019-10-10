@@ -9,6 +9,7 @@ import com.wyu.partymanager.entity.IEntity;
 import com.wyu.partymanager.entity.JsonEntity;
 import com.wyu.partymanager.entity.TimestampEntity;
 import com.wyu.partymanager.utils.IFilter;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -39,9 +40,12 @@ public class Role implements TimestampEntity, JsonEntity {
     @Data
     public static class Filter extends IFilter<Role> {
 
+        @ApiModelProperty("过滤名称")
+        String name;
+
         @Override
         public Wrapper<Role> apply() {
-            return this.getQueryWrapper();
+            return this.queryWrapper();
         }
     }
 

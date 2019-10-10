@@ -29,7 +29,7 @@ public class Dept implements JsonEntity {
 
         @Override
         public Wrapper<Dept> apply() {
-            return this.getQueryWrapper();
+            return this.queryWrapper();
         }
     }
 

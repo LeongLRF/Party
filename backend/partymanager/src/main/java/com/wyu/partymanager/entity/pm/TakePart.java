@@ -32,7 +32,7 @@ public class TakePart implements JsonEntity {
 
         @Override
         public Wrapper<TakePart> apply() {
-            return this.getQueryWrapper();
+            return this.queryWrapper();
         }
     }
 }

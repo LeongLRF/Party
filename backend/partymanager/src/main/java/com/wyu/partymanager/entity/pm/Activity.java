@@ -80,7 +80,7 @@ public class Activity implements JsonEntity {
 
         @Override
         public Wrapper<Activity> apply() {
-            return this.getQueryWrapper();
+            return this.queryWrapper();
         }
     }
 }

@@ -120,7 +120,7 @@ public class User implements JsonEntity {
 
         @Override
         public QueryWrapper<User> apply() {
-            return this.getQueryWrapper().like(name != null, "trueName", name);
+            return this.queryWrapper().like(name != null, "trueName", name);
         }
     }
 
