@@ -16,6 +16,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 import java.util.List;
 import java.util.UUID;
+import java.util.function.Consumer;
 
 /**
  * @author Leong
@@ -62,6 +63,15 @@ public class UserService implements UserServiceDao {
     public Result<User> edit_user(User user) {
         userMapper.updateById(user);
         return Result.ok(user);
+    }
+
+    @Override
+    public Result<User> updateById(long id, Consumer<User> action) {
+        return Result.maybe(getById(id).data,"数据不存在")
+                .andThen(user -> {
+                    action.accept(user);
+                    return Result.ok(user);
+                });
     }
 
     @Override

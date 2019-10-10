@@ -51,10 +51,7 @@ public class PartymanagerApplicationTests {
 
     @Test
     public void test2() {
-        User.Filter filter = new User.Filter();
-        filter.setName("梁荣锋");
-        List<User> users = userService.user_list(filter).data;
-        users.forEach(u -> System.out.println(u.getTrueName()));
+        System.out.println(userService.updateById(1,user -> user.setClassId(3)).data);
     }
 
     @Test
