@@ -25,9 +25,9 @@
         </span>
       </div>
       <a-menu mode="inline" v-for="(item) in menus" :key="item.id" style="width: 256px">
-        <a-sub-menu key="item.name">
+        <a-sub-menu :key="item.name">
           <span slot="title">
-            <a-icon :type="item.icon"/>
+            <a-icon :type="item.parent.icon"/>
             <span>{{item.parent.name}}</span>
           </span>
           <a-menu-item v-for="(items,index) in item.children" :key="index" @click="go(items.url)">{{items.name}}
