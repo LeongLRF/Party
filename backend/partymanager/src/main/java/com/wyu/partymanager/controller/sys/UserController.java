@@ -53,8 +53,8 @@ public class UserController extends BaseController {
 
     @ApiOperation("删除【用户】")
     @PostMapping("/delete_user")
-    public Result<?> delete_user(@RequestBody User user){
-        return userService.delete_user(user);
+    public Result<?> delete_user(long id){
+        return userService.delete_user(id);
 
     }
 }

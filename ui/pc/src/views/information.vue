@@ -1,17 +1,20 @@
 <template>
   <div>
     <div class="nav">
-      <p><span>按姓名：</span>
+      <a-col style="margin-bottom: 10px">
+        <a-button><a-icon type="plus" />党员录入</a-button>
+        <a-button><a-icon type="download" />批量导入</a-button>
+      </a-col>
+      <span>按姓名：</span>
         <a-input-search placeholder="请输入查询名字" style="width:190px;"></a-input-search>
-      </p>
-      <p><span>按日期：</span>
+      <span>按日期：</span>
         <a-date-picker placeholder="请选择查询日期" @change="onChange" />
-      </p>
     </div>
     <div class="bar">
-      <a-table bordered :dataSource="dataSource" rowKey="id" :columns="columns" size="small">
+      <a-table bordered :dataSource="dataSource" rowKey="id" :columns="columns" size="small" :customRow="row">
         <template slot="other" slot-scope="text, record">
-          <a-button type="primary" @click="showDialog(record)" style="margin-right: 10px">编辑</a-button>
+          <a-button type="primary" @click="show(record)" style="background-color:green;">详情</a-button>
+          <a-button type="primary" @click="showDialog(record)">编辑</a-button>
           <a-popconfirm title="确定删除吗?" @confirm="() => onDelete(record)">
             <a-button type="primary" style="background:#F56C6C;border:1px solid #F56C6C">删除</a-button>
           </a-popconfirm>
@@ -70,6 +73,20 @@ export default {
     showDialog (val) {
       console.log('val:', val)
       this.$refs['edit'].showModal()
+    },
+    show (data) {
+      // todo 将弹框方法写在这里
+      alert('123')
+    },
+    // 双击出弹框
+    row: (record) => {
+      return {
+        on: {
+          dblclick: () => {
+            this.a.methods.show(record)
+          }
+        }
+      }
     }
   }
 }

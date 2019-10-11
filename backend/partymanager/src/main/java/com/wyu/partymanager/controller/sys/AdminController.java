@@ -98,4 +98,10 @@ public class AdminController extends BaseController {
        return typeService.delete_type(id);
     }
 
+    @ApiOperation("修改活动类别")
+    @PostMapping("/edit_type")
+    public Result<Type> edit_type(@RequestBody Type type){
+        return typeService.edit_type(type);
+    }
+
 }
