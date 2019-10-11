@@ -1,5 +1,10 @@
 package com.wyu.partymanager.configuration;
 
+import com.wyu.partymanager.entity.sys.User;
+import com.wyu.partymanager.utils.Common;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,6 +16,7 @@ import java.io.IOException;
  */
 public class LoginFilter implements Filter
 {
+    Logger logger = LoggerFactory.getLogger(this.getClass());
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         // TODO Auto-generated method stub
@@ -37,6 +43,14 @@ public class LoginFilter implements Filter
         res.addHeader("Access-Control-Max-Age", "3600");
         // enable cookie
         res.addHeader("Access-Control-Allow-Credentials", "true");
+        // region
+        User user = (User) req.getSession().getAttribute(Common.CURRENT_USER);
+        String str = req.getRequestURI();
+        if (!str.equals("/sys/login") && user == null){
+            res.sendRedirect("");
+        }
+        logger.info("request url:"+str);
+        // endregion
         chain.doFilter(request, response);
     }
 

@@ -67,6 +67,8 @@ export default {
         { title: '职位', dataIndex: 'brief', width: '100px', align: 'center' },
         { title: '操作', dataIndex: 'other', scopedSlots: { customRender: 'other' }, width: '100px', align: 'center' }
       ],
+      page: {
+      },
       data: []
     }
   },
