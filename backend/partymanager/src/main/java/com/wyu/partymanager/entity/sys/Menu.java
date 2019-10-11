@@ -49,6 +49,10 @@ public class Menu implements JsonEntity {
     @TableField("valid")
     boolean valid;
 
+    @ApiModelProperty("编号")
+    @TableField("code")
+    String code;
+
     @ApiModelProperty("权限列表")
     public Set<Long> getPermissions(){
             return Arrays.stream(Optional.ofNullable(permission).orElse("0").split(",")).map(Long::valueOf).collect(Collectors.toSet());
@@ -59,7 +63,7 @@ public class Menu implements JsonEntity {
     public static class Filter extends IFilter<Menu> {
         @Override
         public Wrapper<Menu> apply() {
-            return this.queryWrapper();
+            return this.queryWrapper().orderByAsc("code");
         }
     }
 }

@@ -43,6 +43,7 @@ public class MenuService implements MenuServiceDao {
     @Override
     public Result<List<MenuDTO>> menu_list(Menu.Filter filter, User user) {
         return Result.maybe(menuMapper.selectList(filter.apply()), "暂无菜单")
+                .andThenCheck(user!=null,"请先登录")
                 .andThen(menus -> {
                     if (menus.size() > 0) {
                         menus = menus.stream().filter(m -> m.getPermissions().contains(user.getRoleId()) && m.isValid()).collect(Collectors.toList());

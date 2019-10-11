@@ -72,6 +72,17 @@ public class Result<T> {
         }
         else return this;
     }
+    public Result<T> andThenCheck(boolean test,String errorMsg){
+        if (success){
+            if (test){
+                return ok(data);
+            }else {
+                return error(errorMsg);
+            }
+        } else {
+            return this;
+        }
+    }
 
     public <R> Result<T> mapSelf(Function<T, R> f) {
         if (success) {
