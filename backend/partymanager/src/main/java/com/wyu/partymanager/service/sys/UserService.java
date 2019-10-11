@@ -54,8 +54,8 @@ public class UserService implements UserServiceDao {
     }
 
     @Override
-    public Result<?> delete_user(User user) {
-        userMapper.deleteById(user.getId());
+    public Result<?> delete_user(long id) {
+        userMapper.deleteById(id);
         return Result.ok();
     }
 

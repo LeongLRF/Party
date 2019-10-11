@@ -35,7 +35,7 @@ public class RoleService implements RoleServiceDao {
     }
 
     @Override
-    public Result<?> delete_role(Role role) {
+    public Result<?> delete_role(long id) {
         return null;
     }
 

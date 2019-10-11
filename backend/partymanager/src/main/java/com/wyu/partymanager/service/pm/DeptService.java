@@ -28,7 +28,7 @@ public class DeptService implements DeptServiceDao {
     }
 
     @Override
-    public Result<?> delete_dept(Dept dept) {
+    public Result<?> delete_dept(long id) {
         return null;
     }
 

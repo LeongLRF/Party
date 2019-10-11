@@ -37,8 +37,8 @@ public class TypeService implements TypeServiceDao {
     }
 
     @Override
-    public Result<?> delete_type(Type type) {
-        typeMapper.deleteById(type.getId());
+    public Result<?> delete_type(long id) {
+        typeMapper.deleteById(id);
         return Result.ok();
     }
 

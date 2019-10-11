@@ -13,7 +13,7 @@ public interface UserServiceDao {
 
     Result<User> add_user(User user);
     Result<User> getById(Object id);
-    Result<?> delete_user(User user);
+    Result<?> delete_user(long id);
     Result<User> edit_user(User user);
     Result<User> updateById(long id, Consumer<User> action);
     Result<List<User>> user_list(User.Filter filter);

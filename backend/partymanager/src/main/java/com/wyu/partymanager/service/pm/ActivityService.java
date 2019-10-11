@@ -41,8 +41,8 @@ public class ActivityService implements ActivityServiceDao {
     }
 
     @Override
-    public Result<?> delete_activity(Activity activity) {
-        activityMapper.deleteById(activity.getId());
+    public Result<?> delete_activity(long id) {
+        activityMapper.deleteById(id);
         return Result.ok();
     }
 

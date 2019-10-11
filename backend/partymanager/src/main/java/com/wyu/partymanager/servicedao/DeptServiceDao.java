@@ -9,6 +9,6 @@ public interface DeptServiceDao {
 
     Result<Dept> add_dept(Dept dept);
     Result<Dept> edit_dept(Dept dept);
-    Result<?> delete_dept(Dept dept);
+    Result<?> delete_dept(long id);
     Result<List<Dept>> dept_list(Dept.Filter filter);
 }

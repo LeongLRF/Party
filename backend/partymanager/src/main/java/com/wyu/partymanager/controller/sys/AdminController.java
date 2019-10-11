@@ -4,9 +4,11 @@ import com.wyu.partymanager.controller.BaseController;
 import com.wyu.partymanager.entity.dto.MenuDTO;
 import com.wyu.partymanager.entity.sys.Menu;
 import com.wyu.partymanager.entity.sys.Role;
+import com.wyu.partymanager.entity.sys.Type;
 import com.wyu.partymanager.entity.sys.User;
 import com.wyu.partymanager.service.sys.MenuService;
 import com.wyu.partymanager.service.sys.RoleService;
+import com.wyu.partymanager.service.sys.TypeService;
 import com.wyu.partymanager.service.sys.UserService;
 import com.wyu.partymanager.utils.Common;
 import com.wyu.partymanager.utils.Result;
@@ -24,13 +26,15 @@ public class AdminController extends BaseController {
     private final UserService userService;
     private final MenuService menuService;
     private final RoleService roleService;
+    private final TypeService typeService;
 
     @Autowired
-    public AdminController(HttpSession httpSession, UserService userService, MenuService menuService, RoleService roleService) {
+    public AdminController(HttpSession httpSession, UserService userService, MenuService menuService, RoleService roleService, TypeService typeService) {
         super(httpSession);
         this.userService = userService;
         this.menuService = menuService;
         this.roleService = roleService;
+        this.typeService = typeService;
     }
 
     @ApiOperation("登录")
@@ -80,6 +84,18 @@ public class AdminController extends BaseController {
     public Result<?> logout(){
         getHttpSession().removeAttribute(Common.CURRENT_USER);
         return Result.ok();
+    }
+
+    @ApiOperation("添加活动类别")
+    @PostMapping("/add_type")
+    public Result<Type> add_type(@RequestBody Type type){
+        return typeService.add_type(type);
+    }
+
+    @ApiOperation("删除活动类型")
+    @PostMapping("/delete_type")
+    public Result<?> delete_type(long id){
+       return typeService.delete_type(id);
     }
 
 }

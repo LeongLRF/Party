@@ -28,7 +28,7 @@ public class TakePartService implements TakePartServiceDao {
     }
 
     @Override
-    public Result<?> delete_takePart(TakePart takePart) {
+    public Result<?> delete_takePart(long id) {
         return null;
     }
 

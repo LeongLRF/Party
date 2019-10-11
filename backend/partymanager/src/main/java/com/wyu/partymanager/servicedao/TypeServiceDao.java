@@ -10,6 +10,6 @@ public interface TypeServiceDao {
     Result<Type> getById(long id);
     Result<Type> add_type(Type type);
     Result<Type> edit_type(Type type);
-    Result<?> delete_type(Type type);
+    Result<?> delete_type(long id);
     Result<List<Type>> type_list(Type.Filter filter);
 }

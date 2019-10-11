@@ -8,6 +8,6 @@ import java.util.List;
 public interface TakePartServiceDao {
     Result<TakePart> add_takePart(TakePart takePart);
     Result<TakePart> edit_takePart(TakePart takePart);
-    Result<?> delete_takePart(TakePart takePart);
+    Result<?> delete_takePart(long id);
     Result<List<TakePart>> takePart_list(TakePart.Filter filter);
 }
