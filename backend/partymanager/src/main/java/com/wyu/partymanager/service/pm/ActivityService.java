@@ -7,7 +7,6 @@ import com.wyu.partymanager.mapper.ActivityMapper;
 import com.wyu.partymanager.mapper.TakePartMapper;
 import com.wyu.partymanager.servicedao.ActivityServiceDao;
 import com.wyu.partymanager.utils.Result;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

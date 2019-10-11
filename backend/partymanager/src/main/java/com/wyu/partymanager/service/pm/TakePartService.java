@@ -11,8 +11,12 @@ import java.util.List;
 
 @Service
 public class TakePartService implements TakePartServiceDao {
-    @Autowired
-    private TakePartMapper takePartMapper;
+    private final TakePartMapper takePartMapper;
+
+    public TakePartService(TakePartMapper takePartMapper) {
+        this.takePartMapper = takePartMapper;
+    }
+
     @Override
     public Result<TakePart> add_takePart(TakePart takePart) {
         return null;

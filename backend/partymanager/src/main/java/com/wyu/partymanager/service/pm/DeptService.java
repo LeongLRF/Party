@@ -11,8 +11,12 @@ import java.util.List;
 
 @Service
 public class DeptService implements DeptServiceDao {
-    @Autowired
-    private DeptMapper deptMapper;
+    private final DeptMapper deptMapper;
+
+    public DeptService(DeptMapper deptMapper) {
+        this.deptMapper = deptMapper;
+    }
+
     @Override
     public Result<Dept> add_dept(Dept dept) {
         return null;
