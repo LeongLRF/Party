@@ -95,5 +95,10 @@ public class PartymanagerApplicationTests {
         type.setDetails(details);
         typeMapper.insert(type);
     }
+    @Test
+    public void g(){
+        Type type = typeMapper.selectById(1);
+        System.out.println(type);
+    }
 
 }

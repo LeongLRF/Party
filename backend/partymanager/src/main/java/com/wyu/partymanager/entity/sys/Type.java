@@ -7,7 +7,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.wyu.partymanager.entity.JsonEntity;
 import com.wyu.partymanager.utils.IFilter;
-import com.wyu.partymanager.utils.typeHandler.JsonTypeHandler;
+import com.wyu.partymanager.utils.typeHandler.JsonArrTypeHandler;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -24,7 +24,7 @@ public class Type implements JsonEntity {
     @ApiModelProperty("类型名字")
     String name;
 
-    @TableField(value = "details",typeHandler = JsonTypeHandler.class)
+    @TableField(value = "details",typeHandler = JsonArrTypeHandler.class)
     @ApiModelProperty("主题明细")
     List<Detail> details;
 
