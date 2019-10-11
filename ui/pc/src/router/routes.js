@@ -83,6 +83,16 @@ export const allRouter = [{
   path: '/logout',
   name: 'logout',
   redirect: '/login'
+},
+{
+  path: '/my',
+  name: 'my',
+  component: () => import('@/views/index'),
+  children: [{
+    path: '/info',
+    name: 'info',
+    component: () => import('@/views/info')
+  }]
 }
 ]
 

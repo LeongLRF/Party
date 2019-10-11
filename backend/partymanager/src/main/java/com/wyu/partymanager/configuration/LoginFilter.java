@@ -46,9 +46,6 @@ public class LoginFilter implements Filter
         // region
         User user = (User) req.getSession().getAttribute(Common.CURRENT_USER);
         String str = req.getRequestURI();
-        if (!str.equals("/sys/login") && user == null){
-            res.sendRedirect("");
-        }
         logger.info("request url:"+str);
         // endregion
         chain.doFilter(request, response);
