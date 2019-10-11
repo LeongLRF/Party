@@ -1,8 +1,10 @@
 package com.wyu.partymanager;
 
 import com.wyu.partymanager.entity.sys.Role;
+import com.wyu.partymanager.entity.sys.Type;
 import com.wyu.partymanager.entity.sys.User;
 import com.wyu.partymanager.mapper.RoleMapper;
+import com.wyu.partymanager.mapper.TypeMapper;
 import com.wyu.partymanager.mapper.UserMapper;
 import com.wyu.partymanager.service.sys.RoleService;
 import com.wyu.partymanager.service.sys.UserService;
@@ -33,6 +35,8 @@ public class PartymanagerApplicationTests {
     RoleMapper roleMapper;
     @Autowired
     private RoleService roleService;
+    @Autowired
+    TypeMapper typeMapper;
 
     @Test
     public void get() {
@@ -80,6 +84,16 @@ public class PartymanagerApplicationTests {
         }};
         roleService.add_role(role);
         System.out.println(role.toJson());
+    }
+    @Test
+    public void handlerTest(){
+        Type type = new Type();
+        type.setName("主题班会");
+        List<Type.Detail> details = Collections.singletonList(new Type.Detail() {{
+            setName("1234");
+        }});
+        type.setDetails(details);
+        typeMapper.insert(type);
     }
 
 }
