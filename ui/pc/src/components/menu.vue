@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="top">
-      <span class="left" @click="go('/index')">党员管理系统 </span>
+      <span class="left" @click="go('/index')"><img src="../assets/123.png" alt="" width="60">党员管理系统 </span>
       <!-- <span class="center">
         <my-tab></my-tab>
       </span> -->

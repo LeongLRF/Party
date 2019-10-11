@@ -2,8 +2,8 @@
   <div>
     <div class="nav">
       <a-col style="margin-bottom: 10px">
-        <a-button><a-icon type="plus" />党员录入</a-button>
-        <a-button><a-icon type="download" />批量导入</a-button>
+        <a-button ><a-icon type="plus" />党员录入</a-button>
+        <a-button ><a-icon type="download" />批量导入</a-button>
       </a-col>
       <span>按姓名：</span>
         <a-input-search placeholder="请输入查询名字" style="width:190px;"></a-input-search>
@@ -13,11 +13,15 @@
     <div class="bar">
       <a-table bordered :dataSource="dataSource" rowKey="id" :columns="columns" size="small" :customRow="row">
         <template slot="other" slot-scope="text, record">
-          <a-button type="primary" @click="show(record)" style="background-color:green;">详情</a-button>
-          <a-button type="primary" @click="showDialog(record)">编辑</a-button>
+          <a  @click="show(record)"><a-icon type="search" style="font-weight: bold;font-size: 20px;color: green" /></a>
+          <a-divider type="vertical"></a-divider>
+          <a  @click="showDialog(record)"><a-icon type="edit" style="font-weight: bold;font-size: 20px" /></a>
+          <a-divider type="vertical"></a-divider>
           <a-popconfirm title="确定删除吗?" @confirm="() => onDelete(record)">
-            <a-button type="primary" style="background:#F56C6C;border:1px solid #F56C6C">删除</a-button>
+            <a ><a-icon type="close-circle" style="font-weight: bold;font-size: 20px;color: red"/></a>
           </a-popconfirm>
+          <a-divider type="vertical"></a-divider>
+          <a-switch defaultChecked />
         </template>
       </a-table>
     </div>
