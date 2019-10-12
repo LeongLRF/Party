@@ -18,16 +18,16 @@
     </div>
     <div class="menu" :style="{height:(myheight-60) + 'px'}">
       <a-collapse :bordered="false">
-        <div class="Mtop" style="margin:10px 30px 0 20px">
-          <a-avatar size="large" icon="user" />
-          <span style="float:right">
+        <a-collapse-panel key="1" :showArrow="false" style="border-bottom: 0; margin-top: 0">
+          <div class="Mtop" style="margin:10px 30px 0 20px" slot="header">
+            <a-avatar size="large" icon="user" />
+            <span style="float:right">
           <div class="name">liang</div>
           <div class="txt">Normal</div>
           </span>
-        </div>
-        <a-collapse-panel key="1" :showArrow="false" style="border-bottom: 0; margin-top: 0">
+          </div>
           <a-menu>
-            <a-menu-item>退出</a-menu-item>
+            <a-menu-item @click="go('/logout')"><a-icon type="logout" />退出</a-menu-item>
           </a-menu>
         </a-collapse-panel>
       </a-collapse>
