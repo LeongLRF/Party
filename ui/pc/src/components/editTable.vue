@@ -1,62 +1,66 @@
 <template>
   <div>
     <a-modal title="党员基本情况登记表" :visible="visible" @ok="handleOk" @cancel="handleCancel" :width=750>
-      <a-form :form="form">
-        <div style="display:flex">
-          <div style="flex:20;">
-            <div style="display:flex">
-              <a-form-item :label-col="{span: 7,offset:3}" :wrapperCol="{span:12}" style="flex:6" label="姓名">
-                <a-input style="width:100px" v-decorator="['name', {rules: [{ required: true, message: '请输入名字' }]}]" />
-              </a-form-item>
-              <a-form-item :label-col="{span: 7,offset:5}" :wrapperCol="{span: 12}" style="flex:6" label="性别">
-                <a-input style="width:100px;margin-left:3px"
-                  v-decorator="['sex', {rules: [{ required: true, message: '请输入性别' }]}]" />
-              </a-form-item>
-              <a-form-item :label-col="{span: 8,offset:4}" :wrapperCol="{span: 12}" style="flex:9" label="出生年月">
-                <a-input style="width:100px"
-                  v-decorator="['birthday', {rules: [{ required: true, message: '请输入出生年月' }]}]" />
-              </a-form-item>
-            </div>
-            <div style="display:flex">
-              <a-form-item :label-col="{span: 7,offset:3}" :wrapperCol="{span: 12}" style="flex:6" label="民族">
-                <a-input style="width:100px"
-                  v-decorator="['nation', {rules: [{ required: true, message: '请输入民族' }]}]" />
-              </a-form-item>
-              <a-form-item :label-col="{span: 7,offset:5}" :wrapperCol="{span: 12}" style="flex:6" label="籍贯">
-                <a-input style="width:100px;margin-left:3px"
-                  v-decorator="['source', {rules: [{ required: true, message: '请输入籍贯' }]}]" />
-              </a-form-item>
-              <a-form-item :label-col="{span: 7,offset:5}" :wrapperCol="{span: 12}" style="flex:9" label="婚姻状况">
-                <a-input style="width:100px" />
-              </a-form-item>
-            </div>
-            <div style="display:flex">
-              <a-form-item :label-col="{span: 9}" style="flex:6;padding-left:5px" label="入党时间">
-                <a-input style="width:100px" />
-              </a-form-item>
-              <a-form-item :label-col="{span: 8}" style="flex:7;padding-left:2px" label="转正时间">
-                <a-input style="width:100px;" />
-              </a-form-item>
-              <a-form-item :label-col="{span: 8}" style="flex:6.5" label="转正时间">
-                <a-input style="width:100px;margin-left:3px" />
-              </a-form-item>
-            </div>
-          </div>
-          <div style="flex:4;height:150px">
-            <a-upload-dragger v-decorator="[{
-                valuePropName: 'fileList',
-                getValueFromEvent: normFile,
-              }]" name="files" action="/upload.do">
-              <p>
-                <a-icon type="plus" />
-              </p>
-              <p>
-                照片
-              </p>
-            </a-upload-dragger>
-          </div>
+        <div >
+          <table class="table" border='1px'>
+          <tr >
+            <td class="name">姓名</td>
+            <td class="text">2</td>
+            <td class="name">性别</td>
+            <td class="text">2</td>
+            <td class="name">出生年月</td>
+            <td class="text">2</td>
+            <td style="width:100px" rowspan="4">
+              <div style="height:160px">
+                <a-upload-dragger v-decorator="[{
+                    valuePropName: 'fileList',
+                    getValueFromEvent: normFile,
+                  }]" name="files" action="/upload.do">
+                  <p>
+                    <a-icon type="plus" />
+                  </p>
+                  <p>
+                    照片
+                  </p>
+                </a-upload-dragger>
+              </div>
+            </td>
+          </tr>
+          <tr >
+            <td class="name">民族</td>
+            <td class="text">2</td>
+            <td class="name">籍贯</td>
+            <td class="text">2</td>
+            <td class="name">婚姻状况</td>
+            <td class="text">2</td>
+          </tr>
+          <tr >
+            <td class="name">入党时间</td>
+            <td class="text">2</td>
+            <td class="name">转正时间</td>
+            <td class="text">2</td>
+            <td class="name">参加工作时间</td>
+            <td class="text">2</td>
+          </tr>
+          <tr >
+            <td class="name">入党时所在支部</td>
+            <td class="text">2</td>
+            <td class="name">转正时所在支部</td>
+            <td class="text">2</td>
+            <td class="name">入党介绍人</td>
+            <td class="text">2</td>
+          </tr>
+          <tr >
+            <td class="name">所在支部</td>
+            <td class="text">2</td>
+            <td class="name">进入党支部日期</td>
+            <td class="text">2</td>
+            <td class="name">现任党内职务</td>
+            <td class="text2" colspan="2">2</td>
+          </tr>
+          </table>
+
         </div>
-      </a-form>
     </a-modal>
   </div>
 </template>
@@ -64,12 +68,10 @@
 export default {
   name: 'editTable',
   props: {
-    data: Array
   },
   data () {
     return {
-      visible: false,
-      form: this.$form.createForm(this)
+      visible: false
     }
   },
   methods: {
@@ -99,3 +101,16 @@ export default {
   }
 }
 </script>
+
+<style  scoped>
+.table {
+  font-size: 16px;
+  text-align: center;
+}
+.name{
+  width:80px;
+}
+.text{
+  width: 100px;
+}
+</style>

@@ -2,7 +2,7 @@
   <div>
     <div class="nav">
       <a-col style="margin-bottom: 10px">
-        <a-button ><a-icon type="plus" />党员录入</a-button>
+        <a-button @click="open" ><a-icon type="plus"/>党员录入</a-button>
         <a-button ><a-icon type="download" />批量导入</a-button>
       </a-col>
       <span>按姓名：</span>
@@ -26,6 +26,7 @@
       </a-table>
     </div>
     <edit-table :data=data ref="edit"></edit-table>
+    <info-table ref="info"></info-table>
   </div>
 </template>
 
@@ -33,7 +34,8 @@
 export default {
   name: 'information',
   components: {
-    editTable: () => import('@/components/editTable')
+    editTable: () => import('@/components/editTable'),
+    infoTable: () => import('@/components/infoTable')
   },
   data () {
     return {
@@ -80,6 +82,11 @@ export default {
     showDialog (val) {
       console.log('val:', val)
       this.$refs['edit'].showModal()
+    },
+    open () {
+      console.log(132)
+      console.log('点了:', this.$refs['info'])
+      this.$refs['info'].open()
     },
     show (data) {
       // todo 将弹框方法写在这里
