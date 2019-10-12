@@ -21,7 +21,7 @@
             <a ><a-icon type="close-circle" style="font-weight: bold;font-size: 20px;color: red"/></a>
           </a-popconfirm>
           <a-divider type="vertical"></a-divider>
-          <a-switch defaultChecked />
+          <a-switch defaultChecked size="small"/>
         </template>
       </a-table>
     </div>
@@ -61,11 +61,12 @@ export default {
       ],
       columns: [
         { title: '序号', dataIndex: 'index', width: '50px', align: 'center' },
+        {title: '学号/教工号', dataIndex: 'userName', key: 'userName', width: '100px', align: 'center'},
         { title: '名字', dataIndex: 'name', width: '100px', align: 'center' },
-        { title: '部门', dataIndex: 'part', width: '100px', align: 'center' },
+        { title: '部门', dataIndex: 'dept', width: '100px', align: 'center' },
         { title: '班级', dataIndex: 'class', width: '100px', align: 'center' },
         { title: '职位', dataIndex: 'brief', width: '100px', align: 'center' },
-        { title: '操作', dataIndex: 'other', scopedSlots: { customRender: 'other' }, width: '100px', align: 'center' }
+        { title: '操作', dataIndex: 'other', scopedSlots: { customRender: 'other' } }
       ],
       page: {
       },
@@ -99,6 +100,9 @@ export default {
 </script>
 
 <style  scoped>
+  *{
+    margin: 0;
+  }
 .nav {
   background-color: #fff;
   padding: 10px;

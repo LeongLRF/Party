@@ -1,7 +1,9 @@
 package com.wyu.partymanager.configuration;
 
+import com.alibaba.fastjson.JSON;
 import com.wyu.partymanager.entity.sys.User;
 import com.wyu.partymanager.utils.Common;
+import com.wyu.partymanager.utils.Result;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -46,9 +48,15 @@ public class LoginFilter implements Filter
         // region
         User user = (User) req.getSession().getAttribute(Common.CURRENT_USER);
         String str = req.getRequestURI();
-        logger.info("request url:"+str);
         // endregion
-        chain.doFilter(request, response);
+//        res.sendError(9999, JSON.toJSONString(Result.error("未登陆")));
+        if (!str.equals("/sys/login")&&user==null){
+            res.setCharacterEncoding("UTF-8");
+            res.getWriter().write(JSON.toJSONString(Result.error("未登陆")));
+        } else {
+            logger.info("request url:"+str);
+            chain.doFilter(request, response);
+        }
     }
 
     @Override
