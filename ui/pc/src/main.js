@@ -4,6 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import Antd from 'ant-design-vue'
 import 'ant-design-vue/dist/antd.css'
+import './assets/main.css'
 import {router} from './router'
 import myUtils from './utils/index'
 Vue.config.productionTip = false

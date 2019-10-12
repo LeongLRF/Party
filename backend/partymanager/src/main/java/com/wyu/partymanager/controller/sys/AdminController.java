@@ -104,4 +104,10 @@ public class AdminController extends BaseController {
         return typeService.edit_type(type);
     }
 
+    @ApiOperation("获取所有菜单")
+    @GetMapping("/all_menu")
+    public Result<List<Menu>> all_menu(Menu.Filter filter){
+        return menuService.menu_list(filter);
+    }
+
 }

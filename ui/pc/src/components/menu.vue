@@ -28,6 +28,7 @@
           </div>
           <a-menu>
             <a-menu-item @click="go('/logout')"><a-icon type="logout" />退出</a-menu-item>
+            <a-menu-item @click="go('/logout')"><a-icon type="setting" />设置</a-menu-item>
           </a-menu>
         </a-collapse-panel>
       </a-collapse>
