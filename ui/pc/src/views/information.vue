@@ -103,6 +103,7 @@ export default {
   background-color: #fff;
   padding: 10px;
   box-shadow: 3px 3px 3px #ccc;
+  border-radius: 5px;
 }
 .bar {
   background-color: #fff;
