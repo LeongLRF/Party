@@ -10,8 +10,8 @@
             <td class="text">2</td>
             <td class="name">出生年月</td>
             <td class="text">2</td>
-            <td style="width:200px" rowspan="4">
-              <div style="height:150px">
+            <td style="width:100px" rowspan="4">
+              <div style="height:160px">
                 <a-upload-dragger v-decorator="[{
                     valuePropName: 'fileList',
                     getValueFromEvent: normFile,
@@ -56,7 +56,7 @@
             <td class="name">进入党支部日期</td>
             <td class="text">2</td>
             <td class="name">现任党内职务</td>
-            <td class="text2">2</td>
+            <td class="text2" colspan="2">2</td>
           </tr>
           </table>
 
