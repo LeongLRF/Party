@@ -93,6 +93,16 @@ export const allRouter = [{
     name: 'info',
     component: () => import('@/views/info')
   }]
+},
+{
+  path: '/system',
+  name: 'system',
+  component: () => import('@/views/index'),
+  children: [{
+    path: '/menuList',
+    name: 'menuList',
+    component: () => import('@/views/menuList')
+  }]
 }
 ]
 

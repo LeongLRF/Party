@@ -55,4 +55,9 @@ public class MenuService implements MenuServiceDao {
                     }
                 });
     }
+
+    @Override
+    public Result<List<Menu>> menu_list(Menu.Filter filter) {
+        return Result.ok(menuMapper.selectList(filter.apply()));
+    }
 }

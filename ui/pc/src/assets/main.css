@@ -1,0 +1,13 @@
+*{
+  margin: 0;
+}
+.bg-danger{
+  background-color: red;
+}
+.font-danger{
+  color: red;
+  font-size: 20px;
+}
+.font-default{
+  font-size: 20px;
+}
