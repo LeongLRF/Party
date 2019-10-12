@@ -13,7 +13,7 @@
     <div class="bar">
       <a-table bordered :dataSource="dataSource" rowKey="id" :columns="columns" size="small" :customRow="row">
         <template slot="other" slot-scope="text, record">
-          <a  @click="show(record)"><a-icon type="search" style="font-weight: bold;font-size: 20px;color: green" /></a>
+          <a  @click="showDialog(record)"><a-icon type="search" style="font-weight: bold;font-size: 20px;color: green" /></a>
           <a-divider type="vertical"></a-divider>
           <a  @click="showDialog(record)"><a-icon type="edit" style="font-weight: bold;font-size: 20px" /></a>
           <a-divider type="vertical"></a-divider>
