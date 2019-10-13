@@ -58,7 +58,7 @@ export const allRouter = [{
     meta: {
       title: '台账'
     },
-    component: () => import('@/views/taiManage')
+    component: () => import('@/views/tai')
   }]
 },
 {

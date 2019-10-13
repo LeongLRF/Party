@@ -2,26 +2,31 @@
   <div>
     <div class="nav">
       <a-col style="margin-bottom: 10px">
-        <a-button @click="open" ><a-icon type="plus"/>党员录入</a-button>
-        <a-button ><a-icon type="download" />批量导入</a-button>
+        <a-button @click="open">
+          <a-icon type="plus" />党员录入</a-button>
+        <a-button>
+          <a-icon type="download" />批量导入</a-button>
       </a-col>
       <span>按姓名：</span>
-        <a-input-search placeholder="请输入查询名字" style="width:190px;"></a-input-search>
+      <a-input-search placeholder="请输入查询名字" style="width:190px;"></a-input-search>
       <span>按日期：</span>
-        <a-date-picker placeholder="请选择查询日期" @change="onChange" />
+      <a-date-picker placeholder="请选择查询日期" @change="onChange" />
     </div>
     <div class="bar">
       <a-table bordered :dataSource="dataSource" rowKey="id" :columns="columns" size="small" :customRow="row">
         <template slot="other" slot-scope="text, record">
-          <a  @click="showDialog(record)"><a-icon type="search" style="font-weight: bold;font-size: 20px;color: green" /></a>
+          <a @click="showDialog(record)">
+            <a-icon type="search" style="font-weight: bold;font-size: 20px;color: green" /></a>
           <a-divider type="vertical"></a-divider>
-          <a  @click="showDialog(record)"><a-icon type="edit" style="font-weight: bold;font-size: 20px" /></a>
+          <a @click="showDialog(record, 'edit')">
+            <a-icon type="edit" style="font-weight: bold;font-size: 20px" /></a>
           <a-divider type="vertical"></a-divider>
           <a-popconfirm title="确定删除吗?" @confirm="() => onDelete(record)">
-            <a ><a-icon type="close-circle" style="font-weight: bold;font-size: 20px;color: red"/></a>
+            <a>
+              <a-icon type="close-circle" style="font-weight: bold;font-size: 20px;color: red" /></a>
           </a-popconfirm>
           <a-divider type="vertical"></a-divider>
-          <a-switch defaultChecked size="small"/>
+          <a-switch defaultChecked size="small" />
         </template>
       </a-table>
     </div>
@@ -63,7 +68,7 @@ export default {
       ],
       columns: [
         { title: '序号', dataIndex: 'index', width: '50px', align: 'center' },
-        {title: '学号/教工号', dataIndex: 'userName', key: 'userName', width: '100px', align: 'center'},
+        { title: '学号/教工号', dataIndex: 'userName', key: 'userName', width: '100px', align: 'center' },
         { title: '名字', dataIndex: 'name', width: '100px', align: 'center' },
         { title: '部门', dataIndex: 'dept', width: '100px', align: 'center' },
         { title: '班级', dataIndex: 'class', width: '100px', align: 'center' },
@@ -79,9 +84,9 @@ export default {
     onChange (date, dateString) {
       console.log(date, dateString)
     },
-    showDialog (val) {
-      console.log('val:', val)
-      this.$refs['edit'].showModal()
+    showDialog (val, val2) {
+      console.log('val:', val, val2)
+      this.$refs['edit'].showModal(val, val2)
     },
     open () {
       console.log(132)
@@ -107,9 +112,9 @@ export default {
 </script>
 
 <style  scoped>
-  *{
-    margin: 0;
-  }
+* {
+  margin: 0;
+}
 .nav {
   background-color: #fff;
   padding: 10px;
@@ -120,5 +125,6 @@ export default {
   background-color: #fff;
   margin-top: 20px;
   padding: 0 5px;
+  text-align: left !important;
 }
 </style>

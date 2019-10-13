@@ -26,4 +26,15 @@ export default {
 .ant-table-small > .ant-table-content > .ant-table-body {
   margin: 0 !important;
 }
+.ant-table-pagination.ant-pagination {
+  margin: 16px 0;
+  float: left;
+}
+.ant-input:focus {
+  border-color: #fff;
+  outline: 0;
+  -webkit-box-shadow: 0 0 0 2px black;
+  box-shadow: 0 0 0 0 rgba(24, 144, 255, 0.2);
+  border-right-width: 0px !important;
+}
 </style>
