@@ -11,6 +11,7 @@ public interface MenuServiceDao {
 
     Result<?> delete_menu(long id);
     Result<Menu> add_menu(Menu menu);
+    Result<Menu> edit_menu(Menu menu);
     Result<List<MenuDTO>> menu_list(Menu.Filter filter, User user);
     Result<List<Menu>> menu_list(Menu.Filter filter);
 }

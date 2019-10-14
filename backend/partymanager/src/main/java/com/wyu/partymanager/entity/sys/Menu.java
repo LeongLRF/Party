@@ -1,10 +1,12 @@
 package com.wyu.partymanager.entity.sys;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.wyu.partymanager.entity.IEntity;
 import com.wyu.partymanager.entity.JsonEntity;
 import com.wyu.partymanager.utils.IFilter;
@@ -54,7 +56,7 @@ public class Menu implements JsonEntity {
     String code;
 
     @ApiModelProperty("权限列表")
-    public Set<Long> getPermissions(){
+    public Set<Long> permissions(){
             return Arrays.stream(Optional.ofNullable(permission).orElse("0").split(",")).map(Long::valueOf).collect(Collectors.toSet());
     }
 

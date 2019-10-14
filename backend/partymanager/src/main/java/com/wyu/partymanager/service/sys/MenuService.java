@@ -40,12 +40,18 @@ public class MenuService implements MenuServiceDao {
     }
 
     @Override
+    public Result<Menu> edit_menu(Menu menu) {
+        menuMapper.updateById(menu);
+        return Result.ok(menu);
+    }
+
+    @Override
     public Result<List<MenuDTO>> menu_list(Menu.Filter filter, User user) {
         return Result.maybe(menuMapper.selectList(filter.apply()), "暂无菜单")
                 .andThenCheck(user!=null,"请先登录")
                 .andThen(menus -> {
                     if (menus.size() > 0) {
-                        menus = menus.stream().filter(m -> m.getPermissions().contains(user.getRoleId()) && m.isValid()).collect(Collectors.toList());
+                        menus = menus.stream().filter(m -> m.permissions().contains(user.getRoleId()) && m.isValid()).collect(Collectors.toList());
                         Map<Long, List<Menu>> menuMap = menus.stream().collect(Collectors.groupingBy(Menu::getParentId));
                         List<MenuDTO> menuDTOS = menuMap.get(0L).stream().map(MenuDTO::new).collect(Collectors.toList());
                         menuDTOS.forEach(it -> it.setChildren(menuMap.get(it.getParent().getId())));

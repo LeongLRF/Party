@@ -38,7 +38,7 @@ export default {
         this.$message.error('请输入密码')
         return
       }
-      this.$post('/sys/login', { userName: this.username, password: this.password }).then(res => {
+      this.$post('/sys/login?userName=' + this.username + '&password=' + this.password).then(res => {
         if (res.success) {
           this.$message.success('登录成功')
           this.$router.push('/')

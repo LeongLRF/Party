@@ -1,5 +1,5 @@
 import axios from 'axios'
-import QS from 'qs'
+// import QS from 'qs'
 import vue from 'vue'
 import {router} from '../router/index'
 import Message from 'ant-design-vue/lib/message'
@@ -37,7 +37,7 @@ myUtils.install = (Vue, options) => {
   console.log(host)
   Vue.prototype.$post = (api, params) => {
     return new Promise((resolve, reject) => {
-      axios.post(api, QS.stringify(params))
+      axios.post(api, params)
         .then(response => {
           resolve(response.data)
         })

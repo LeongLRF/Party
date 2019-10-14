@@ -6,6 +6,8 @@ import com.wyu.partymanager.utils.Common;
 import com.wyu.partymanager.utils.Result;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -42,21 +44,26 @@ public class LoginFilter implements Filter
         if (!org.springframework.util.StringUtils.isEmpty(headers)) {
             res.addHeader("Access-Control-Allow-Headers", headers);
         }
-        res.addHeader("Access-Control-Max-Age", "3600");
         // enable cookie
         res.addHeader("Access-Control-Allow-Credentials", "true");
+        if (req.getMethod().equals(RequestMethod.OPTIONS.name())) {
+            //防止乱码，适用于传输JSON数据
+            res.setHeader("Content-Type", "application/json;charset=UTF-8");
+            res.setStatus(HttpStatus.OK.value());
+            return;
+        }
         // region
         User user = (User) req.getSession().getAttribute(Common.CURRENT_USER);
         String str = req.getRequestURI();
         // endregion
 //        res.sendError(9999, JSON.toJSONString(Result.error("未登陆")));
-        if (!str.equals("/sys/login")&&user==null){
-            res.setCharacterEncoding("UTF-8");
-            res.getWriter().write(JSON.toJSONString(Result.error("未登陆")));
-        } else {
+//        if (!str.equals("/sys/login")&&user==null){
+//            res.setCharacterEncoding("UTF-8");
+//            res.getWriter().write(JSON.toJSONString(Result.error("未登陆")));
+//        } else {
             logger.info("request url:"+str);
             chain.doFilter(request, response);
-        }
+//        }
     }
 
     @Override
