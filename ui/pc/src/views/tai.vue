@@ -1,6 +1,10 @@
 <template>
   <div>
     <div class="nav">
+      <a-col style="margin-bottom: 10px">
+        <a-button @click="open()"><a-icon type="plus" />台账录入</a-button>
+        <a-button ><a-icon type="download" />批量导入</a-button>
+      </a-col>
       <div>
         <span>所在支部：</span>
         <a-radio-group defaultValue="a" buttonStyle="solid">
@@ -46,6 +50,7 @@
 
       </a-table>
     </div>
+    <add-record ref="addRecord"></add-record>
   </div>
 </template>
 
@@ -53,7 +58,7 @@
 export default {
   name: 'tai',
   components: {
-
+    addRecord: () => import('@/components/addRecord')
   },
   data () {
     return {
@@ -61,13 +66,19 @@ export default {
 
       ],
       columns: [
-        { title: '序号', dataIndex: 'index', width: '50px', align: 'center' },
-        { title: '学号/教工号', dataIndex: 'userName', key: 'userName', width: '100px', align: 'center' },
-        { title: '名字', dataIndex: 'name', width: '100px', align: 'center' },
-        { title: '部门', dataIndex: 'dept', width: '100px', align: 'center' },
-        { title: '班级', dataIndex: 'class', width: '100px', align: 'center' },
-        { title: '职位', dataIndex: 'brief', width: '100px', align: 'center' },
-        { title: '操作', dataIndex: 'other', scopedSlots: { customRender: 'other' } }
+        { title: '序号', dataIndex: 'index', width: '20px', align: 'center' },
+        { title: '日期', dataIndex: 'start', width: '80px', align: 'center' },
+        { title: '大类', dataIndex: 'type', width: '80px', align: 'center' },
+        { title: '方式', dataIndex: 'way', width: '50px', align: 'center' },
+        { title: '主题分类', dataIndex: 'theme', width: '60px', align: 'center' },
+        { title: '内容', dataIndex: 'content', width: '80px', align: 'center' },
+        { title: '地点', dataIndex: 'place', width: '40px', align: 'center' },
+        { title: '组织单位', dataIndex: 'dept', width: '60px', align: 'center' },
+        { title: '主持人', dataIndex: 'holder', width: '40px', align: 'center' },
+        { title: '讲课人', dataIndex: 'speaker', width: '40px', align: 'center' },
+        { title: '参加人员', dataIndex: 'member', width: '80px', align: 'center' },
+        { title: '参加人员备注', dataIndex: 'remark', width: '80px', align: 'center' },
+        { title: '操作', dataIndex: 'other', scopedSlots: { customRender: 'other' }, width: '80px', align: 'center' }
       ],
       page: {
       },
@@ -75,6 +86,10 @@ export default {
     }
   },
   methods: {
+    open () {
+      console.log('123')
+      this.$refs.addRecord.open()
+    }
   }
 }
 </script>
