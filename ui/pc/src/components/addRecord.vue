@@ -21,6 +21,9 @@ export default {
     },
     open () {
       this.visible = true
+    },
+    addRecord () {
+      this.$post('/sys/add_activity')
     }
   }
 }
