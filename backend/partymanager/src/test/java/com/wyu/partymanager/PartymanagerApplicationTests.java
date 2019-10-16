@@ -104,14 +104,14 @@ public class PartymanagerApplicationTests {
 
     @Test
     public void g(){
-        User user = userService.getById(1).data;
+        User user = userService.getById(1);
         new Preloader<>(takePartService, Collections.singletonList(user))
                 .preload_many(User::getId, TakePart::getUserId,"userId",User::setTakeParts);
         System.out.println(user);
     }
     @Test
     public void p(){
-        User user = userService.getById(1).data;
+        User user = userService.getById(1);
         new Preloader<>(roleService, Collections.singletonList(user))
                 .preload_one(User::getRoleId, Role::getId,"id",User::setRole);
         System.out.println(user);
