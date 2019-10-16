@@ -13,6 +13,7 @@ import com.wyu.partymanager.service.sys.TypeService;
 import com.wyu.partymanager.service.sys.UserService;
 import com.wyu.partymanager.utils.Common;
 import com.wyu.partymanager.utils.Result;
+import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -115,5 +116,11 @@ public class AdminController extends BaseController {
     @PostMapping("/edit_type")
     public Result<Type> edit_type(@RequestBody Type type) {
         return typeService.edit_type(type);
+    }
+
+    @ApiOperation("类别列表")
+    @GetMapping("/type_list")
+    public Result<List<Type>> type_list(Type.Filter filter){
+        return Result.ok(typeService.list(filter.apply()));
     }
 }
