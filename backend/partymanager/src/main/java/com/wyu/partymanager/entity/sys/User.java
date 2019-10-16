@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.wyu.partymanager.entity.JsonEntity;
+import com.wyu.partymanager.entity.pm.TakePart;
 import com.wyu.partymanager.utils.IFilter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -13,6 +14,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 /**
  * @author Leong
@@ -112,6 +114,9 @@ public class User implements JsonEntity {
 
     @TableField(exist = false)
     Role role;
+
+    @TableField(exist = false)
+    List<TakePart> takeParts;
 
     @EqualsAndHashCode(callSuper = true)
     @Data

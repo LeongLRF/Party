@@ -1,13 +1,17 @@
 package com.wyu.partymanager;
 
+import com.wyu.partymanager.entity.pm.TakePart;
 import com.wyu.partymanager.entity.sys.Role;
 import com.wyu.partymanager.entity.sys.Type;
 import com.wyu.partymanager.entity.sys.User;
 import com.wyu.partymanager.mapper.RoleMapper;
+import com.wyu.partymanager.mapper.TakePartMapper;
 import com.wyu.partymanager.mapper.TypeMapper;
 import com.wyu.partymanager.mapper.UserMapper;
+import com.wyu.partymanager.service.pm.TakePartService;
 import com.wyu.partymanager.service.sys.RoleService;
 import com.wyu.partymanager.service.sys.UserService;
+import com.wyu.partymanager.utils.Preloader;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +41,8 @@ public class PartymanagerApplicationTests {
     private RoleService roleService;
     @Autowired
     TypeMapper typeMapper;
+    @Autowired
+    TakePartService takePartService;
 
     @Test
     public void get() {
@@ -95,10 +101,19 @@ public class PartymanagerApplicationTests {
         type.setDetails(details);
         typeMapper.insert(type);
     }
+
     @Test
     public void g(){
-        Type type = typeMapper.selectById(1);
-        System.out.println(type);
+        User user = userService.getById(1).data;
+        new Preloader<>(takePartService, Collections.singletonList(user))
+                .preload_many(User::getId, TakePart::getUserId,"userId",User::setTakeParts);
+        System.out.println(user);
     }
-
+    @Test
+    public void p(){
+        User user = userService.getById(1).data;
+        new Preloader<>(roleService, Collections.singletonList(user))
+                .preload_one(User::getRoleId, Role::getId,"id",User::setRole);
+        System.out.println(user);
+    }
 }

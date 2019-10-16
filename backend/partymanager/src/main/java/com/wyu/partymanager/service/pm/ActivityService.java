@@ -1,5 +1,6 @@
 package com.wyu.partymanager.service.pm;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wyu.partymanager.entity.dto.AddActivityReq;
 import com.wyu.partymanager.entity.pm.Activity;
 import com.wyu.partymanager.entity.pm.TakePart;
@@ -12,7 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ActivityService implements ActivityServiceDao {
+public class ActivityService extends ServiceImpl<ActivityMapper,Activity> implements ActivityServiceDao {
     private final ActivityMapper activityMapper;
     private final TakePartMapper takePartMapper;
 

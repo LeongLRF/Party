@@ -1,5 +1,6 @@
 package com.wyu.partymanager.service.pm;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wyu.partymanager.entity.sys.Dept;
 import com.wyu.partymanager.mapper.DeptMapper;
 import com.wyu.partymanager.servicedao.DeptServiceDao;
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class DeptService implements DeptServiceDao {
+public class DeptService extends ServiceImpl<DeptMapper,Dept> implements DeptServiceDao {
     private final DeptMapper deptMapper;
 
     public DeptService(DeptMapper deptMapper) {

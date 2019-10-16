@@ -1,5 +1,6 @@
 package com.wyu.partymanager.service.sys;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wyu.partymanager.entity.sys.Type;
 import com.wyu.partymanager.mapper.TypeMapper;
 import com.wyu.partymanager.servicedao.TypeServiceDao;
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class TypeService implements TypeServiceDao {
+public class TypeService extends ServiceImpl<TypeMapper,Type> implements TypeServiceDao {
 
     private final TypeMapper typeMapper;
 

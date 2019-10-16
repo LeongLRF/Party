@@ -63,6 +63,7 @@ public class Menu implements JsonEntity {
     @EqualsAndHashCode(callSuper = true)
     @Data
     public static class Filter extends IFilter<Menu> {
+        String name;
         @Override
         public Wrapper<Menu> apply() {
             return this.queryWrapper().orderByAsc("code");

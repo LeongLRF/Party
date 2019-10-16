@@ -1,11 +1,12 @@
 package com.wyu.partymanager.servicedao;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.wyu.partymanager.entity.sys.Dept;
 import com.wyu.partymanager.utils.Result;
 
 import java.util.List;
 
-public interface DeptServiceDao {
+public interface DeptServiceDao extends IService<Dept> {
 
     Result<Dept> add_dept(Dept dept);
     Result<Dept> edit_dept(Dept dept);

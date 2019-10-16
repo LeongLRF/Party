@@ -1,11 +1,12 @@
 package com.wyu.partymanager.servicedao;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.wyu.partymanager.entity.pm.TakePart;
 import com.wyu.partymanager.utils.Result;
 
 import java.util.List;
 
-public interface TakePartServiceDao {
+public interface TakePartServiceDao extends IService<TakePart> {
     Result<TakePart> add_takePart(TakePart takePart);
     Result<TakePart> edit_takePart(TakePart takePart);
     Result<?> delete_takePart(long id);

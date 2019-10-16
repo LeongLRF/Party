@@ -1,6 +1,7 @@
 package com.wyu.partymanager.service.sys;
 
 import com.alibaba.fastjson.JSON;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wyu.partymanager.entity.sys.User;
 import com.wyu.partymanager.mapper.UserMapper;
 import com.wyu.partymanager.servicedao.UserServiceDao;
@@ -24,10 +25,8 @@ import java.util.function.Consumer;
  */
 @SuppressWarnings("ALL")
 @Service
-public class UserService implements UserServiceDao {
+public class UserService extends ServiceImpl<UserMapper,User> implements UserServiceDao {
 
-    @Autowired
-    private UserMapper userMapper;
     @Autowired
     private RedisTemplate<String,Object> redisTemplate;
 
@@ -38,7 +37,7 @@ public class UserService implements UserServiceDao {
         }
         user.setSalt(UUID.randomUUID().toString());
         user.setPassword(encryptPassword(user.getSalt(),user.getPassword()));
-        userMapper.insert(user);
+        this.getBaseMapper().insert(user);
         String key = User.class.getName() + user.getId();
         redisTemplate.opsForValue().set(key, JSON.toJSONString(user));
         return Result.ok(user);
@@ -47,27 +46,27 @@ public class UserService implements UserServiceDao {
     @Override
     public Result<User> getById(Object id) {
         String key = User.class.getName() + id;
-        if (redisTemplate.hasKey(key)){
-            return Result.ok(JSON.parseObject((String) redisTemplate.opsForValue().get(key),User.class));
-        }
-        return Result.ok(userMapper.selectById(id));
+//        if (redisTemplate.hasKey(key)){
+//            return Result.ok(JSON.parseObject((String) redisTemplate.opsForValue().get(key),User.class));
+//        }
+        return Result.ok(this.getBaseMapper().selectById(id));
     }
 
     @Override
     public Result<?> delete_user(long id) {
-        userMapper.deleteById(id);
+        this.getBaseMapper().deleteById(id);
         return Result.ok();
     }
 
     @Override
     public Result<User> edit_user(User user) {
-        userMapper.updateById(user);
+        this.getBaseMapper().updateById(user);
         return Result.ok(user);
     }
 
     @Override
     public Result<User> updateById(long id, Consumer<User> action) {
-        return Result.maybe(getById(id).data,"数据不存在")
+        return Result.maybe(getById(id),"数据不存在")
                 .andThen(user -> {
                     action.accept(user);
                     return Result.ok(user);
@@ -76,17 +75,17 @@ public class UserService implements UserServiceDao {
 
     @Override
     public Result<List<User>> user_list(User.Filter filter) {
-        return Result.ok(userMapper.selectList(filter.apply()));
+        return Result.ok(this.getBaseMapper().selectList(filter.apply()));
     }
 
     @Override
     public User findByUserName(String userName) {
-        return userMapper.findByUserName(userName);
+        return this.getBaseMapper().findByUserName(userName);
     }
 
     @Override
     public Result<User> login(String userName, String password, HttpSession httpSession) {
-        return Result.maybe(userMapper.findUserByUserName(userName),"用户不存在")
+        return Result.maybe(this.getBaseMapper().findUserByUserName(userName),"用户不存在")
                 .andThenCheck(user -> validPassword(password,user),"密码错误")
                 .andThenCheck(user -> user.isValid(),"对不起，该账号已被冻结")
                 .andThen(user -> {

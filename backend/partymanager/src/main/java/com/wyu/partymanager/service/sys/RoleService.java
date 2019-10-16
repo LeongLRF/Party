@@ -1,6 +1,7 @@
 package com.wyu.partymanager.service.sys;
 
 import com.alibaba.fastjson.JSON;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wyu.partymanager.entity.sys.Role;
 import com.wyu.partymanager.mapper.RoleMapper;
 import com.wyu.partymanager.servicedao.RoleServiceDao;
@@ -12,7 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class RoleService implements RoleServiceDao {
+public class RoleService extends ServiceImpl<RoleMapper,Role> implements RoleServiceDao {
     private final RoleMapper roleMapper;
     private final RedisTemplate<String,Object> redisTemplate;
 

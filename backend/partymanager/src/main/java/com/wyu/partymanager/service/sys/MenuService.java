@@ -1,5 +1,6 @@
 package com.wyu.partymanager.service.sys;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wyu.partymanager.entity.dto.MenuDTO;
 import com.wyu.partymanager.entity.sys.Menu;
 import com.wyu.partymanager.entity.sys.User;
@@ -18,7 +19,7 @@ import java.util.stream.Collectors;
  * @date 2019/9/25 15:35
  */
 @Service
-public class MenuService implements MenuServiceDao {
+public class MenuService extends ServiceImpl<MenuMapper,Menu> implements MenuServiceDao {
 
     private final MenuMapper menuMapper;
 
