@@ -6,19 +6,19 @@
           <tr>
             <td class="name">姓名</td>
             <td class="text" @click="edit">
-              <a-input type=text class="input" v-if="isEdit" @blur="save" :value=name v-model=name>{{name}}</a-input>
-              <div v-else>{{name}}</div>
+              <a-input type=text class="input" v-if="isEdit" @blur="save" v-model="user.trueName"></a-input>
+              <div v-else>{{user.trueName}}</div>
             </td>
             <td class="name">性别</td>
             <td class="text" @click="edit">
-              <a-input type=text class="input" v-if="isEdit" @blur="save" :value=sex v-model=sex>{{sex}}</a-input>
-              <div v-else>{{sex}}</div>
+              <a-input type=text class="input" v-if="isEdit" @blur="save" v-model="user.sex"></a-input>
+              <div v-else>{{user.sex}}</div>
             </td>
             <td class="name">出生年月</td>
             <td class="text" @click="edit">
-              <a-input type=text class="input" v-if="isEdit" @blur="save" :value=birthday v-model=birthday>{{birthday}}
+              <a-input type=text class="input" v-if="isEdit" @blur="save" v-model="user.birthday">
               </a-input>
-              <div v-else>{{birthday}}</div>
+              <div v-else>{{user.birthday}}</div>
             </td>
             <td style="width:120px" rowspan="4">
               <div style="height:160px">
@@ -39,35 +39,35 @@
           <tr>
             <td class="name">民族</td>
             <td class="text" @click="edit">
-              <a-input type=text class="input" v-if="isEdit" @blur="save" :value=sex v-model=sex>{{sex}}</a-input>
-              <div v-else>{{sex}}</div>
+              <a-input type=text class="input" v-if="isEdit" @blur="save" v-model="user.nation"></a-input>
+              <div v-else>{{user.nation}}</div>
             </td>
             <td class="name">籍贯</td>
             <td class="text" @click="edit">
-              <a-input type=text class="input" v-if="isEdit" @blur="save" :value=sex v-model=sex>{{sex}}</a-input>
-              <div v-else>{{sex}}</div>
+              <a-input type=text class="input" v-if="isEdit" @blur="save"></a-input>
+              <div v-else></div>
             </td>
             <td class="name">婚姻状况</td>
             <td class="text" @click="edit">
-              <a-input type=text class="input" v-if="isEdit" @blur="save" :value=sex v-model=sex>{{sex}}</a-input>
-              <div v-else>{{sex}}</div>
+              <a-input type=text class="input" v-if="isEdit" @blur="save"></a-input>
+              <div v-else></div>
             </td>
           </tr>
           <tr>
             <td class="name">入党时间</td>
             <td class="text" @click="edit">
-              <a-input type=text class="input" v-if="isEdit" @blur="save" :value=sex v-model=sex>{{sex}}</a-input>
-              <div v-else>{{sex}}</div>
+              <a-input type=text class="input" v-if="isEdit" @blur="save" v-model="user.joinTime"></a-input>
+              <div v-else></div>
             </td>
             <td class="name">转正时间</td>
             <td class="text" @click="edit">
-              <a-input type=text class="input" v-if="isEdit" @blur="save" :value=sex v-model=sex>{{sex}}</a-input>
-              <div v-else>{{sex}}</div>
+              <a-input type=text class="input" v-if="isEdit" @blur="save" v-model="user.formalTime"></a-input>
+              <div v-else></div>
             </td>
             <td class="name">参加工作时间</td>
             <td class="text" @click="edit">
-              <a-input type=text class="input" v-if="isEdit" @blur="save" :value=sex v-model=sex>{{sex}}</a-input>
-              <div v-else>{{sex}}</div>
+              <a-input type=text class="input" v-if="isEdit" @blur="save" v-model="user.workTime"></a-input>
+              <div v-else></div>
             </td>
           </tr>
           <tr>
@@ -197,11 +197,7 @@ export default {
       visible: false,
       isEdit: false,
       flag: false,
-      name: '',
-      sex: '',
-      birthday: '',
-      job: '',
-      className: ''
+      user: {}
     }
   },
   methods: {
@@ -210,19 +206,19 @@ export default {
         this.flag = true
       }
       this.visible = true
-      this.name = data.name
-      this.job = data.brief
-      this.className = data.class
-      console.log(111, this.name)
+      this.user = data
+      // console.log(111, this.name)
     },
     handleOk (e) {
-      this.form.validateFields((err, values) => {
-        if (!err) {
-          console.log('dddd', values)
-          console.log('aaa')
-          this.visible = false
-        }
-      })
+      // this.form.validateFields((err, values) => {
+      //   if (!err) {
+      //     console.log('dddd', values)
+      //     console.log('aaa')
+      //     this.visible = false
+      //   }
+      // })
+      this.saveUser()
+      this.visible = false
     },
     handleCancel (e) {
       console.log('Clicked cancel button')
@@ -242,6 +238,15 @@ export default {
     },
     save () {
       this.isEdit = false
+    },
+    saveUser () {
+      this.$post('/user/edit_user', this.user).then(res => {
+        if (res.success) {
+          this.$message.success('修改成功')
+        } else {
+          this.$message.error(res.message)
+        }
+      })
     }
   }
 }

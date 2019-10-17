@@ -69,7 +69,7 @@ export default {
       columns: [
         { title: '序号', dataIndex: 'index', width: '50px', align: 'center' },
         { title: '学号/教工号', dataIndex: 'userName', key: 'userName', width: '100px', align: 'center' },
-        { title: '名字', dataIndex: 'name', width: '100px', align: 'center' },
+        { title: '名字', dataIndex: 'trueName', width: '100px', align: 'center' },
         { title: '部门', dataIndex: 'dept', width: '100px', align: 'center' },
         { title: '班级', dataIndex: 'class', width: '100px', align: 'center' },
         { title: '职位', dataIndex: 'brief', width: '100px', align: 'center' },
@@ -106,7 +106,15 @@ export default {
           }
         }
       }
+    },
+    getAllUsers () {
+      this.$my_get('/user/user_list').then(res => {
+        this.dataSource = res.data
+      })
     }
+  },
+  mounted () {
+    this.getAllUsers()
   }
 }
 </script>

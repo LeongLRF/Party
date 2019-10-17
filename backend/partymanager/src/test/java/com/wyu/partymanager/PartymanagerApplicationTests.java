@@ -5,7 +5,6 @@ import com.wyu.partymanager.entity.sys.Role;
 import com.wyu.partymanager.entity.sys.Type;
 import com.wyu.partymanager.entity.sys.User;
 import com.wyu.partymanager.mapper.RoleMapper;
-import com.wyu.partymanager.mapper.TakePartMapper;
 import com.wyu.partymanager.mapper.TypeMapper;
 import com.wyu.partymanager.mapper.UserMapper;
 import com.wyu.partymanager.service.pm.TakePartService;
@@ -20,7 +19,6 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.sql.Timestamp;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;

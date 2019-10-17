@@ -22,3 +22,4 @@ server:
   port: 8080
 mybatis-plus:
   type-handlers-package: com.wyu.partymanager.utils.typeHandler
+debug: true

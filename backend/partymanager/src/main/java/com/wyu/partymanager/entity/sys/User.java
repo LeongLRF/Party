@@ -36,6 +36,10 @@ public class User implements JsonEntity {
     @ApiModelProperty("密码")
     String password;
 
+    @ApiModelProperty("性别")
+    @TableField("sex")
+    String sex;
+
     @TableField("roleId")
     @ApiModelProperty("角色id")
     long roleId;
@@ -114,6 +118,12 @@ public class User implements JsonEntity {
 
     @TableField(exist = false)
     Role role;
+
+    @TableField(exist = false)
+    Dept dept;
+
+    @TableField(exist = false)
+    Clazz clazz;
 
     @TableField(exist = false)
     List<TakePart> takeParts;
