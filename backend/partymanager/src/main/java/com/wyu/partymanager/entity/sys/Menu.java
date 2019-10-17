@@ -15,6 +15,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -54,6 +55,9 @@ public class Menu implements JsonEntity {
     @ApiModelProperty("编号")
     @TableField("code")
     String code;
+
+    @TableField(exist = false)
+    List<Role> roles;
 
     @ApiModelProperty("权限列表")
     public Set<Long> permissions(){

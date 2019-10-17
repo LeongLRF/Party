@@ -30,6 +30,11 @@
         <span slot="valid" slot-scope="text,record">
           {{record.valid ? '是' : '否'}}
         </span>
+        <span slot="permission" slot-scope="text,record">
+          <span v-for="(role, index) in record.roles" :key="index">
+            {{role.name}}
+          </span>
+        </span>
       </a-table>
     </div>
   </div>
