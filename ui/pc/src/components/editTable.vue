@@ -39,25 +39,25 @@
           <tr>
             <td class="name">民族</td>
             <td class="text" @click="edit">
-              <a-input type=text class="input" v-if="isEdit" @blur="save" v-model="user.nation"></a-input>
+              <a-input type=text class="input" v-if="isEdit" v-model="user.nation"></a-input>
               <div v-else>{{user.nation}}</div>
             </td>
             <td class="name">籍贯</td>
             <td class="text" @click="edit">
-              <a-input type=text class="input" v-if="isEdit" @blur="save"></a-input>
-              <div v-else></div>
+              <a-input type=text class="input" v-if="isEdit" v-model="user.homeTown"></a-input>
+              <div v-else>{{user.homeTown}}</div>
             </td>
             <td class="name">婚姻状况</td>
             <td class="text" @click="edit">
-              <a-input type=text class="input" v-if="isEdit" @blur="save"></a-input>
-              <div v-else></div>
+              <a-input type=text class="input" v-if="isEdit" v-model="user.marry"></a-input>
+              <div v-else>{{user.marry}}</div>
             </td>
           </tr>
           <tr>
             <td class="name">入党时间</td>
             <td class="text" @click="edit">
               <a-input type=text class="input" v-if="isEdit" @blur="save" v-model="user.joinTime"></a-input>
-              <div v-else></div>
+              <div v-else>{{user.joinTime}}</div>
             </td>
             <td class="name">转正时间</td>
             <td class="text" @click="edit">
@@ -73,18 +73,18 @@
           <tr>
             <td class="name">入党时所在支部</td>
             <td class="text" @click="edit">
-              <a-input type=text class="input" v-if="isEdit" @blur="save" :value=sex v-model=sex>{{sex}}</a-input>
-              <div v-else>{{sex}}</div>
+              <a-input type=text class="input" v-if="isEdit" v-model="user.takePartDept"></a-input>
+              <div v-else>{{user.takePartDept}}</div>
             </td>
             <td class="name">转正时所在支部</td>
             <td class="text" @click="edit">
-              <a-input type=text class="input" v-if="isEdit" @blur="save" :value=sex v-model=sex>{{sex}}</a-input>
-              <div v-else>{{sex}}</div>
+              <a-input type=text class="input" v-if="isEdit" v-model="user.formalDept"></a-input>
+              <div v-else>{{user.formalDept}}</div>
             </td>
             <td class="name">入党介绍人</td>
             <td class="text" @click="edit">
-              <a-input type=text class="input" v-if="isEdit" @blur="save" :value=sex v-model=sex>{{sex}}</a-input>
-              <div v-else>{{sex}}</div>
+              <a-input type=text class="input" v-if="isEdit" v-model="user.joinPeople"></a-input>
+              <div v-else>{{user.joinPeople}}</div>
             </td>
           </tr>
           <tr>
@@ -95,24 +95,24 @@
             </td>
             <td class="name">进入党支部日期</td>
             <td class="text" @click="edit">
-              <a-input type=text class="input" v-if="isEdit" @blur="save" :value=sex v-model=sex>{{sex}}</a-input>
-              <div v-else>{{sex}}</div>
+              <a-input type=text class="input" v-if="isEdit" v-model="user.joinDeptTime"></a-input>
+              <div v-else>{{user.joinDeptTime}}</div>
             </td>
             <td class="name">现任党内职务</td>
             <td class="text" colspan="2" @click="edit">
-              <a-input type=text class="input" v-if="isEdit" @blur="save" :value=job v-model=job>{{job}}</a-input>
-              <div v-else>{{job}}</div>
+              <a-input type=text class="input" v-if="isEdit" v-model="user.currentPosition"></a-input>
+              <div v-else>{{user.currentPosition}}</div>
             </td>
           </tr>
           <tr>
             <td class="name">学历学位</td>
             <td class="text" colspan="3" @click="edit">
-              <a-input type=text class="input" v-if="isEdit" @blur="save" :value=sex v-model=sex>{{sex}}</a-input>
-              <div v-else>{{sex}}</div>
+              <a-input type=text class="input" v-if="isEdit" v-model="user.degree"></a-input>
+              <div v-else>{{user.degree}}</div>
             </td>
             <td class="name">毕业院校系及专业</td>
             <td class="text" colspan="2" @click="edit">
-              <a-input type=text class="input" v-if="isEdit" @blur="save" :value=sex v-model=sex>{{sex}}</a-input>
+              <a-input type=text class="input" v-if="isEdit" v-model=sex>{{sex}}</a-input>
               <div v-else>{{sex}}</div>
             </td>
           </tr>
@@ -134,34 +134,34 @@
           <tr>
             <td class="name" colspan="2">户籍所在地</td>
             <td class="text" colspan="5" @click="edit">
-              <a-input type=text class="input" v-if="isEdit" @blur="save" :value=sex v-model=sex>{{sex}}</a-input>
-              <div v-else>{{sex}}</div>
+              <a-input type=text class="input" v-if="isEdit" v-model="user.home"></a-input>
+              <div v-else>{{user.home}}</div>
             </td>
           </tr>
           <tr>
             <td class="name" colspan="2">现居住地</td>
             <td class="text" colspan="5" @click="edit">
-              <a-input type=text class="input" v-if="isEdit" @blur="save" :value=sex v-model=sex>{{sex}}</a-input>
-              <div v-else>{{sex}}</div>
+              <a-input type=text class="input" v-if="isEdit" v-model="user.currentHome"></a-input>
+              <div v-else>{{user.currentHome}}</div>
             </td>
           </tr>
           <tr>
             <td class="name" colspan="2">身份证号码</td>
             <td class="text" colspan="5" @click="edit">
-              <a-input type=text class="input" v-if="isEdit" @blur="save" :value=sex v-model=sex>{{sex}}</a-input>
-              <div v-else>{{sex}}</div>
+              <a-input type=text class="input" v-if="isEdit"  v-model="user.idCard"></a-input>
+              <div v-else>{{user.idCard}}</div>
             </td>
           </tr>
           <tr>
             <td class="name" colspan="1">联系电话</td>
             <td class="text" colspan="3" @click="edit">
-              <a-input type=text class="input" v-if="isEdit" @blur="save" :value=sex v-model=sex>{{sex}}</a-input>
-              <div v-else>{{sex}}</div>
+              <a-input type=text class="input" v-if="isEdit" v-model="user.phone"></a-input>
+              <div v-else>{{user.phone}}</div>
             </td>
             <td class="name" colspan="1">QQ号码或微信号</td>
             <td class="text" colspan="3" @click="edit">
-              <a-input type=text class="input" v-if="isEdit" @blur="save" :value=sex v-model=sex>{{sex}}</a-input>
-              <div v-else>{{sex}}</div>
+              <a-input type=text class="input" v-if="isEdit" v-model="user.account"></a-input>
+              <div v-else>{{user.account}}</div>
             </td>
           </tr>
           <!-- <tr>

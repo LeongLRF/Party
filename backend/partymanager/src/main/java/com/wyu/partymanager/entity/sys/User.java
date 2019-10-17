@@ -116,6 +116,47 @@ public class User implements JsonEntity {
     @TableField("valid")
     boolean valid;
 
+    @ApiModelProperty("'籍贯")
+    @TableField("homeTown")
+    String homeTown;
+
+    @ApiModelProperty("婚姻状况")
+    @TableField("marry")
+    String marry;
+
+    @ApiModelProperty("入党时所在支部")
+    @TableField("takePartDept")
+    String takePartDept;
+
+    @ApiModelProperty("转正时所在支部")
+    @TableField("formalDept")
+    String formalDept;
+
+    @ApiModelProperty("毕业院校系及专业")
+    @TableField("schoolMajor")
+    String schoolMajor;
+
+    @ApiModelProperty("工作单位及职位")
+    @TableField("workPlace")
+    String workPlace;
+
+    @ApiModelProperty("组织关系所在单位")
+    @TableField("relationship")
+    String relationship;
+
+    @ApiModelProperty("户籍所在地")
+    @TableField("home")
+    String home;
+
+    @ApiModelProperty("qq或微信号")
+    @TableField("account")
+    String account;
+
+    @ApiModelProperty("现居地")
+    @TableField("currentHome")
+    String currentHome;
+
+
     @TableField(exist = false)
     Role role;
 

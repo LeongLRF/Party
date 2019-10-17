@@ -1,6 +1,7 @@
 <template>
   <div>
-    <a-modal title="台账录入" :visible="visible" @ok="handelOk" @cancel="handelCancel" :width="700"></a-modal>
+    <a-modal title="台账录入" :visible="visible" @ok="handelOk" @cancel="handelCancel" :width="700">
+    </a-modal>
   </div>
 </template>
 
@@ -9,11 +10,25 @@ export default {
   name: 'addRecord',
   data () {
     return {
-      visible: false
+      visible: false,
+      activity: {
+        start: '2019-10-15 00:00:00',
+        typeId: 0,
+        way: '',
+        theme: '',
+        content: '',
+        place: '',
+        holder: '',
+        speaker: '',
+        remark: '',
+        hours: 0,
+        ids: [1, 2]
+      }
     }
   },
   methods: {
     handelOk () {
+      this.addRecord()
       this.visible = false
     },
     handelCancel () {
@@ -23,7 +38,13 @@ export default {
       this.visible = true
     },
     addRecord () {
-      this.$post('/sys/add_activity')
+      this.$post('/activity/add_activity', this.activity).then(res => {
+        if (res.success) {
+          this.$message.success('添加成功')
+        } else {
+          this.$message.error(res.message)
+        }
+      })
     }
   }
 }
