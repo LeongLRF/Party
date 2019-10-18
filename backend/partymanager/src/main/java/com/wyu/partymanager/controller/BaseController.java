@@ -1,8 +1,11 @@
 package com.wyu.partymanager.controller;
 
 import com.wyu.partymanager.entity.sys.Dept;
+import com.wyu.partymanager.entity.sys.Role;
 import com.wyu.partymanager.entity.sys.User;
+import com.wyu.partymanager.servicedao.RoleService;
 import com.wyu.partymanager.utils.Common;
+import com.wyu.partymanager.utils.Preloader;
 import com.wyu.partymanager.utils.Result;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
+import java.util.Arrays;
+import java.util.Collections;
 
 /**
  * @author Leong
@@ -26,9 +31,11 @@ public class BaseController {
 
     @Getter
     final HttpSession httpSession;
+    private final RoleService roleService;
 
-    public BaseController(HttpSession httpSession) {
+    public BaseController(HttpSession httpSession, RoleService roleService) {
         this.httpSession = httpSession;
+        this.roleService = roleService;
     }
 
     protected User current_user(){
@@ -36,6 +43,8 @@ public class BaseController {
         if (user == null){
             logger.info("session超时");
         }
+        new Preloader<>(roleService, Collections.singletonList(user))
+                .preload_one(User::getRoleId, Role::getId,"id",User::setRole);
         return user;
     }
 

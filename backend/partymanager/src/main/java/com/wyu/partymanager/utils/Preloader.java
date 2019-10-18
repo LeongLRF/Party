@@ -38,7 +38,7 @@ public class Preloader<T extends IEntity, R extends IEntity> {
 
     public <F,Q> void preload_one(Function<T, F> getId,Function<R,Q> f, String realKey, BiConsumer<T, R> setter) {
         preload_many(getId,f, realKey,(t, list) -> {
-            if (!list.isEmpty()) {
+            if (list!=null&&!list.isEmpty()) {
                 R r = list.get(0);
                 setter.accept(t, r);
             }

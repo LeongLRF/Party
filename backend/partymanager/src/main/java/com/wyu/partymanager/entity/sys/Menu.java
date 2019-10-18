@@ -59,6 +59,9 @@ public class Menu implements JsonEntity {
     @TableField(exist = false)
     List<Role> roles;
 
+    @TableField(exist = false)
+    Menu parent;
+
     @ApiModelProperty("权限列表")
     public Set<Long> permissions(){
             return Arrays.stream(Optional.ofNullable(permission).orElse("0").split(",")).map(Long::valueOf).collect(Collectors.toSet());

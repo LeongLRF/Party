@@ -7,8 +7,7 @@ import com.wyu.partymanager.entity.sys.Role;
 import com.wyu.partymanager.entity.sys.User;
 import com.wyu.partymanager.mapper.MenuMapper;
 import com.wyu.partymanager.servicedao.MenuServiceDao;
-import com.wyu.partymanager.servicedao.RoleServiceDao;
-import com.wyu.partymanager.utils.Preloader;
+import com.wyu.partymanager.servicedao.RoleService;
 import com.wyu.partymanager.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,12 +24,12 @@ import java.util.stream.Collectors;
 public class MenuService extends ServiceImpl<MenuMapper,Menu> implements MenuServiceDao {
 
     private final MenuMapper menuMapper;
-    private final RoleServiceDao roleServiceDao;
+    private final RoleService roleService;
 
     @Autowired
-    public MenuService(MenuMapper menuMapper, RoleServiceDao roleServiceDao) {
+    public MenuService(MenuMapper menuMapper, RoleService roleService) {
         this.menuMapper = menuMapper;
-        this.roleServiceDao = roleServiceDao;
+        this.roleService = roleService;
     }
 
     @Override
@@ -72,8 +71,10 @@ public class MenuService extends ServiceImpl<MenuMapper,Menu> implements MenuSer
     public Result<List<Menu>> menu_list(Menu.Filter filter) {
         List<Menu> list = this.baseMapper.selectList(filter.apply());
         list.forEach(menu -> {
-            List<Role> roles = (List<Role>) roleServiceDao.listByIds(menu.permissions());
+            List<Role> roles = (List<Role>) roleService.listByIds(menu.permissions());
+            Menu parent = this.baseMapper.selectById(menu.getParentId());
             menu.setRoles(roles);
+            menu.setParent(parent);
         });
         return Result.ok(list);
     }

@@ -6,7 +6,7 @@ import com.wyu.partymanager.utils.Result;
 
 import java.util.List;
 
-public interface RoleServiceDao extends IService<Role> {
+public interface RoleService extends IService<Role> {
     Result<Role> add_role(Role role);
     Result<Role> edit_role(Role role);
     Result<?> delete_role(long id);

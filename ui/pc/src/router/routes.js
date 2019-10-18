@@ -102,6 +102,10 @@ export const allRouter = [{
     path: '/menuList',
     name: 'menuList',
     component: () => import('@/views/menuList')
+  }, {
+    path: '/class',
+    name: 'class',
+    component: () => import('@/views/class')
   }]
 }
 ]

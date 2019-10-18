@@ -35,6 +35,9 @@
             {{role.name}}
           </span>
         </span>
+        <span slot="parent" slot-scope="text,record">
+          {{record.parent ? record.parent.name : ''}}
+        </span>
       </a-table>
     </div>
   </div>
