@@ -68,7 +68,7 @@ public class PartymanagerApplicationTests {
         user.setUserName("123456789");
         user.setTrueName("leong");
         user.setPassword("123");
-        System.out.println(userService.add_user(user).data.getTrueName());
+//        System.out.println(userService.add_user(user).data.getTrueName());
     }
 
     @Test

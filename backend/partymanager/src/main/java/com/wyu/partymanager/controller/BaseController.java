@@ -15,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.UnsatisfiedServletRequestParameterException;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpSession;
 import java.util.Arrays;
@@ -30,21 +32,13 @@ public class BaseController {
     private static Logger logger = LoggerFactory.getLogger(BaseController.class);
 
     @Getter
-    final HttpSession httpSession;
-    private final RoleService roleService;
-
-    public BaseController(HttpSession httpSession, RoleService roleService) {
-        this.httpSession = httpSession;
-        this.roleService = roleService;
-    }
+    final HttpSession httpSession = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest().getSession();
 
     protected User current_user(){
         User user = (User) httpSession.getAttribute(Common.CURRENT_USER);
         if (user == null){
             logger.info("session超时");
         }
-        new Preloader<>(roleService, Collections.singletonList(user))
-                .preload_one(User::getRoleId, Role::getId,"id",User::setRole);
         return user;
     }
 

@@ -31,8 +31,7 @@ public class AdminController extends BaseController {
     private final TypeService typeService;
 
     @Autowired
-    public AdminController(HttpSession httpSession, UserService userService, MenuService menuService, RoleService roleService, TypeService typeService) {
-        super(httpSession);
+    public AdminController(UserService userService, MenuService menuService, RoleService roleService, TypeService typeService) {
         this.userService = userService;
         this.menuService = menuService;
         this.roleService = roleService;

@@ -26,8 +26,7 @@ public class UserController extends BaseController {
     private final MenuService menuService;
 
     @Autowired
-    public UserController(HttpSession httpSession, MenuService menuService, UserService userService) {
-        super(httpSession);
+    public UserController(MenuService menuService, UserService userService) {
         this.menuService = menuService;
         this.userService = userService;
     }
