@@ -30,11 +30,27 @@ export default {
   margin: 16px 0;
   float: left;
 }
-.ant-input:focus {
+.ant-tabs-bar {
+  border-bottom: none !important;
+}
+.ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab {
+  color: #ffff;
+  background: #eb4048;
+  /* background: blue; */
+  border: none;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-left: 2px;
+  border-radius: 7px 7px 0px 0px;
+}
+.ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab-active {
+  color: rgb(12, 12, 12) !important;
+  background: #fff !important;
+}
+.table .ant-input:focus {
   border-color: #fff;
   outline: 0;
-  -webkit-box-shadow: 0 0 0 2px black;
-  box-shadow: 0 0 0 0 rgba(24, 144, 255, 0.2);
+  box-shadow: 0 0 0 0 rgba(11, 12, 12, 0.2);
   border-right-width: 0px !important;
 }
 </style>

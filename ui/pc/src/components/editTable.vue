@@ -2,7 +2,7 @@
   <div>
     <a-modal title="党员基本情况登记表" :visible="visible" @ok="handleOk" @cancel="handleCancel" :width=700>
       <div style="text-algin:center">
-        <table class="table" border='1px'>
+        <table class="table" border='1px' id="empty">
           <tr>
             <td class="name">姓名</td>
             <td class="text" @click="edit">
@@ -90,8 +90,8 @@
           <tr>
             <td class="name">所在支部</td>
             <td class="text" @click="edit">
-              <a-input type=text class="input" v-if="isEdit" @blur="save" :value=sex v-model=sex>{{sex}}</a-input>
-              <div v-else>{{sex}}</div>
+              <a-input type=text class="input" v-if="isEdit" @blur="save"></a-input>
+              <div v-else></div>
             </td>
             <td class="name">进入党支部日期</td>
             <td class="text" @click="edit">
@@ -112,23 +112,22 @@
             </td>
             <td class="name">毕业院校系及专业</td>
             <td class="text" colspan="2" @click="edit">
-              <a-input type=text class="input" v-if="isEdit" v-model=sex>{{sex}}</a-input>
-              <div v-else>{{sex}}</div>
+              <a-input type=text class="input" v-if="isEdit"></a-input>
+              <div v-else></div>
             </td>
           </tr>
           <tr>
             <td class="name" colspan="2">工作单位及职务</td>
             <td class="text" colspan="5" @click="edit">
-              <a-input type=text class="input" v-if="isEdit" @blur="save" :value=sex v-model=sex>{{sex}}</a-input>
-              <div v-else>{{sex}}</div>
+              <a-input type=text class="input" v-if="isEdit" @blur="save"></a-input>
+              <div v-else></div>
             </td>
           </tr>
           <tr>
             <td class="name" colspan="2">组织关系所在单位</td>
             <td class="text" colspan="5" @click="edit">
-              <a-input type=text class="input" v-if="isEdit" @blur="save" :value=className v-model=className>
-                {{className}}</a-input>
-              <div v-else>{{className}}</div>
+              <a-input type=text class="input" v-if="isEdit" @blur="save"></a-input>
+              <div v-else></div>
             </td>
           </tr>
           <tr>
@@ -148,7 +147,7 @@
           <tr>
             <td class="name" colspan="2">身份证号码</td>
             <td class="text" colspan="5" @click="edit">
-              <a-input type=text class="input" v-if="isEdit"  v-model="user.idCard"></a-input>
+              <a-input type=text class="input" v-if="isEdit" v-model="user.idCard"></a-input>
               <div v-else>{{user.idCard}}</div>
             </td>
           </tr>
@@ -201,13 +200,14 @@ export default {
     }
   },
   methods: {
-    showModal (data, isEdit) {
-      if (isEdit === 'edit') {
+    showModal (data, val) {
+      console.log(111, val)
+      if (val === 'edit') {
         this.flag = true
       }
       this.visible = true
       this.user = data
-      // console.log(111, this.name)
+      console.log(111, this.flag)
     },
     handleOk (e) {
       // this.form.validateFields((err, values) => {
@@ -219,10 +219,12 @@ export default {
       // })
       this.saveUser()
       this.visible = false
+      this.flag = false
     },
     handleCancel (e) {
       console.log('Clicked cancel button')
       this.visible = false
+      this.flag = false
     },
     normFile (e) {
       console.log('Upload event:', e)

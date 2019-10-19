@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import tab from '@/store/modules/tab'
 import VuexPersistence from 'vuex-persist'
 const vuexLocal = new VuexPersistence({
   storage: window.localStprage
@@ -7,7 +8,7 @@ const vuexLocal = new VuexPersistence({
 Vue.use(Vuex)
 export default new Vuex.Store({
   modules: {
-    tab: () => import('@/store/tab')
+    tab
   },
   plugins: [vuexLocal.plugin]
 })

@@ -1,10 +1,11 @@
 <template>
   <div id="app">
     <div class="top">
-      <span class="left" @click="go('/index')" style="font-family: FangSong,sans-serif"><img src="../assets/123.png" alt="" width="60"/>党员管理系统 </span>
-      <!-- <span class="center">
-        <my-tab></my-tab>
-      </span> -->
+      <span class="left" @click="go('/index')" style="font-family: FangSong,sans-serif"><img src="../assets/123.png"
+          alt="" width="60" />党员管理系统 </span>
+      <span class="center">
+        <top-tab></top-tab>
+      </span>
       <span class="right">
         <span>
           <a-icon type="bell" />
@@ -34,14 +35,15 @@
           </a-menu>
         </a-collapse-panel>
       </a-collapse>
-      <a-menu mode="inline" v-for="(item) in menus" :key="item.id" style="width: 256px"
-         @openChange="onOpenChange" :openKeys="openKeys">
+      <a-menu mode="inline" v-model="selectMenu" v-for="(item) in menus" :key="item.id" style="width: 256px"
+        @openChange="onOpenChange" :openKeys="openKeys">
         <a-sub-menu :key="item.parent.name">
           <span slot="title">
             <a-icon :type="item.parent.icon" />
             <span>{{item.parent.name}}</span>
           </span>
-          <a-menu-item v-for="(items,index) in item.children" :key="index" @click="go(items.url)">{{items.name}}
+          <a-menu-item v-for="(items,index) in item.children" :key="index" @click="add(items)">
+            {{items.name}}
           </a-menu-item>
         </a-sub-menu>
       </a-menu>
@@ -53,7 +55,7 @@
 <script>
 import { mapGetters, mapMutations } from 'vuex'
 export default {
-  name: 'App',
+  name: 'menu',
   data () {
     return {
       rootSubmenuKeys: [],
@@ -61,25 +63,43 @@ export default {
       menus: [],
       myheight: window.innerHeight,
       mywidth: window.innerWidth,
-      MenuList: []
+      selectMenu: []
     }
   },
   components: {
+    topTab: () => import('@/components/topTab')
   },
   computed: {
-    ...mapGetters('tab', ['getTabList', 'getSelectTab'])
+    ...mapGetters('tab', ['getselectTab'])
+  },
+  watch: {
+    getselectTab: {
+      handler (Val) {
+        this.selectMenu = [Val.content]
+        this.$router.push(Val.content)
+        this.Menu = ['/' + Val.content.split('/')[1]]
+      },
+      deep: true
+    },
+    '$route.path': {
+      handler (Val) {
+        console.log('val', Val)
+        if (Val === '/index') {
+          this.MenuList2 = []
+        }
+      }
+    }
   },
   methods: {
     ...mapMutations('tab', ['addTabList', 'setSelectTab']),
-    handleMenuList (e) {
-      console.log(666, e)
-      this.addTabList(this.MenuList2.filter(res => res.path === e.key)[0])
-    },
-    go (path) {
-      console.log(666, path)
-      this.$router.push(path)
+    add (e) {
+      console.log(666, '我添加了', e)
+      console.log('this.MenuList', this.menus)
+      console.log('e.url', this.menus.filter(res => res.children[0].url === e.url))
+      this.addTabList(this.menus.filter(res => res.children[0].url === e.url)[0])
     },
     onOpenChange (openKeys) {
+      console.log(123, openKeys)
       const latestOpenKey = openKeys.find(key => this.openKeys.indexOf(key) === -1)
       console.log(latestOpenKey)
       if (this.rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
@@ -119,9 +139,15 @@ export default {
   line-height: 36px;
   position: absolute;
 }
+.center {
+  position: absolute;
+  left: 255px;
+  bottom: -16px;
+  width: 720px;
+}
 .right {
   position: absolute;
-  right: 100px;
+  right: 8%;
   top: 15px;
   font-size: 16px;
 }

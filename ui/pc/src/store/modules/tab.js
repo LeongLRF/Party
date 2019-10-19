@@ -1,5 +1,5 @@
 const tab = {
-  namespaced: false,
+  namespaced: true,
   state: {
     tabList: [],
     selectTab: {
@@ -26,22 +26,22 @@ const tab = {
       } else {
         if (!state.tabList.length) {
           state.selectTab = {
-            title: list.meta.title,
-            content: list.path
+            title: list.children[0].name,
+            content: list.children[0].url
           }
           state.tabList.push({
-            title: list.meta.title,
-            content: list.path
+            title: list.children[0].name,
+            content: list.children[0].url
           })
         } else {
           state.selectTab = {
-            title: list.meta.title,
-            content: list.path
+            title: list.children[0].name,
+            content: list.children[0].url
           }
-          if (state.tabList.every(res => res.content !== list.path)) {
+          if (state.tabList.every(res => res.content !== list.children[0].url)) {
             state.tabList.push({
-              title: list.meta.title,
-              content: list.path
+              title: list.children[0].name,
+              content: list.children[0].url
             })
           }
         }

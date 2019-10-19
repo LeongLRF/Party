@@ -5,15 +5,23 @@ import App from './App'
 import Antd from 'ant-design-vue'
 import 'ant-design-vue/dist/antd.css'
 import './assets/main.css'
-import {router} from './router'
+import {
+  router
+} from './router'
 import myUtils from './utils/index'
+import store from './store/index'
 Vue.config.productionTip = false
 Vue.use(Antd)
-Vue.use(myUtils, {domaintest: 'http://127.0.0.1:8080'})
+Vue.use(myUtils, {
+  domaintest: 'http://127.0.0.1:8080'
+})
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
-  components: { App },
+  store,
+  components: {
+    App
+  },
   template: '<App/>'
 })

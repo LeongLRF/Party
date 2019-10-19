@@ -1,16 +1,20 @@
 <template>
   <div style="background-color:#eee;">
     <a-row>
-      <a-col span="7" style="background-color:#fff;margin-right: 35px;padding-left: 20px;padding-right: 20px;box-shadow: 3px 3px 3px #ccc;">
+      <a-col span="7"
+        style="background-color:#fff;margin-right: 35px;padding-left: 20px;padding-right: 20px;box-shadow: 3px 3px 3px #ccc;">
         <div class="header">
-          <a-avatar :size="100" icon="user"/>
+          <a-avatar :size="100" icon="user" />
           <p class="position" style="font-weight: bold;margin-top: 20px;">PROFESSOR</p>
           <p class="name">Mr`Leong</p>
         </div>
         <a-divider type="horizontal" :dashed="true" style="margin-bottom: 20px; "></a-divider>
         <div class="info">
-          <p><a-icon type="user" />&nbsp;123456</p>
-          <p><a-icon type="key" />&nbsp; ******* <a href=""><a-icon type="edit" /></a></p>
+          <p>
+            <a-icon type="user" />&nbsp;123456</p>
+          <p>
+            <a-icon type="key" />&nbsp; ******* <a href="">
+              <a-icon type="edit" /></a></p>
         </div>
       </a-col>
       <a-col span="16" style="background-color:#fff;padding: 20px;box-shadow: 3px 3px 3px #ccc;">
@@ -30,26 +34,29 @@ export default {
   data () {
     return {
     }
+  },
+  methods: {
+    callback () { }
   }
 }
 </script>
 
 <style scoped>
-  *{
-    margin: 0;
-    padding: 0;
-  }
-  .header{
-    text-align: center;
-    padding-top: 20px;
-    padding-bottom: 20px;
-  }
-  .position{
-    font-weight: bold;
-    font-size: 20px;
-  }
-  .info{
-    font-size: 18px;
-    margin-bottom: 20px;
-  }
+* {
+  margin: 0;
+  padding: 0;
+}
+.header {
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.position {
+  font-weight: bold;
+  font-size: 20px;
+}
+.info {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
 </style>
