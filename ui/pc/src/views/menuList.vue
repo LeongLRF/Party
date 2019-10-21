@@ -4,8 +4,8 @@
       <a-button><a-icon type="plus"/>添加菜单</a-button>
     </div>
     <div style="background-color:#fff;margin-top: 20px">
-      <a-table bordered :columns="columns" :dataSource="dataSource" :pagination="pagination" size="small" :loading="loading">
-        <template v-for="(col,key) in ['code', 'name', 'url', 'permission', 'parent', 'icon']" :slot="col" slot-scope="text, record, index">
+      <a-table bordered :columns="columns" :dataSource="dataSource"  size="small" :loading="loading">
+        <template v-for="(col,key) in ['code', 'name', 'url', 'permission', 'parent', 'icon']" :slot="col" slot-scope="text, record">
           <a-input
           v-if="record.editable"
           :value="text"
@@ -24,7 +24,7 @@
            <a-divider type="vertical"></a-divider>
           <a-switch size="small" :checked="record.valid" @change="change(record)"></a-switch>
       </span>
-      <span slot="icon" slot-scope="text,record">
+      <span slot="icon" slot-scope="text">
         <a-icon :type="text" class="font-default"></a-icon>
       </span>
         <span slot="valid" slot-scope="text,record">

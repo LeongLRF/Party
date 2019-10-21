@@ -46,7 +46,7 @@
       </div>
     </div>
     <div class="bar">
-      <a-table bordered :dataSource="dataSource" rowKey="id" :columns="columns" size="small" :customRow="row">
+      <a-table bordered :dataSource="dataSource" rowKey="id" :columns="columns" size="small" >
 
       </a-table>
     </div>
@@ -89,6 +89,9 @@ export default {
     open () {
       console.log('123')
       this.$refs.addRecord.open()
+    },
+    handleChange () {
+
     }
   }
 }
