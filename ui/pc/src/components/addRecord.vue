@@ -1,6 +1,20 @@
 <template>
   <div>
     <a-modal title="台账录入" :visible="visible" @ok="handelOk" @cancel="handelCancel" :width="700">
+      <a-row type="flex" justify="right">
+        <a-col :sapn="11">
+          <a-row>
+            <span>时间：</span>
+            <a-date-picker @change="change"></a-date-picker>
+          </a-row>
+         <a-row>
+           <span>活动类别：</span>
+           <a-input-search placeholder="input search text" @search="onSearch" style="width: 50%">
+             <a-button slot="enterButton">Custom</a-button>
+           </a-input-search>
+         </a-row>
+        </a-col>
+      </a-row>
     </a-modal>
   </div>
 </template>
@@ -46,7 +60,8 @@ export default {
         }
       })
     }
-  }
+  },
+  change () {}
 }
 </script>
 

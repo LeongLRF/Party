@@ -31,8 +31,9 @@ public class BaseController {
 
     private static Logger logger = LoggerFactory.getLogger(BaseController.class);
 
+    @Autowired
     @Getter
-    final HttpSession httpSession = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest().getSession();
+    HttpSession httpSession;
 
     protected User current_user(){
         User user = (User) httpSession.getAttribute(Common.CURRENT_USER);
