@@ -93,10 +93,7 @@ export default {
   methods: {
     ...mapMutations('tab', ['addTabList', 'setSelectTab']),
     add (e) {
-      console.log(666, '我添加了', e)
-      console.log('this.MenuList', this.menus)
-      console.log('e.url', this.menus.filter(res => res.children[0].url === e.url))
-      this.addTabList(this.menus.filter(res => res.children[0].url === e.url)[0])
+      this.addTabList(e)
     },
     onOpenChange (openKeys) {
       console.log(123, openKeys)

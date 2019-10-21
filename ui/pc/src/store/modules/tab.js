@@ -26,22 +26,22 @@ const tab = {
       } else {
         if (!state.tabList.length) {
           state.selectTab = {
-            title: list.children[0].name,
-            content: list.children[0].url
+            title: list.name,
+            content: list.url
           }
           state.tabList.push({
-            title: list.children[0].name,
-            content: list.children[0].url
+            title: list.name,
+            content: list.url
           })
         } else {
           state.selectTab = {
-            title: list.children[0].name,
-            content: list.children[0].url
+            title: list.name,
+            content: list.url
           }
-          if (state.tabList.every(res => res.content !== list.children[0].url)) {
+          if (state.tabList.every(res => res.content !== list.url)) {
             state.tabList.push({
-              title: list.children[0].name,
-              content: list.children[0].url
+              title: list.name,
+              content: list.url
             })
           }
         }
