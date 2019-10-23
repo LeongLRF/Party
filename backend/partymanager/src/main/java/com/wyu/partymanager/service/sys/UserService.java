@@ -2,6 +2,7 @@ package com.wyu.partymanager.service.sys;
 
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.wyu.partymanager.entity.sys.Token;
 import com.wyu.partymanager.entity.sys.User;
 import com.wyu.partymanager.mapper.UserMapper;
 import com.wyu.partymanager.servicedao.UserServiceDao;
@@ -11,6 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -29,6 +33,8 @@ public class UserService extends ServiceImpl<UserMapper,User> implements UserSer
 
     @Autowired
     private RedisTemplate<String,Object> redisTemplate;
+    @Autowired
+    private TokenService tokenService;
 
     @Override
     public Result<User> add_user(User user) {
@@ -84,12 +90,22 @@ public class UserService extends ServiceImpl<UserMapper,User> implements UserSer
     }
 
     @Override
-    public Result<User> login(String userName, String password, HttpSession httpSession) {
+    public Result<User> login(String userName, String password, HttpServletResponse response) {
         return Result.maybe(this.getBaseMapper().findUserByUserName(userName),"用户不存在")
                 .andThenCheck(user -> validPassword(password,user),"密码错误")
                 .andThenCheck(user -> user.isValid(),"对不起，该账号已被冻结")
                 .andThen(user -> {
-                    httpSession.setAttribute(Common.CURRENT_USER,user);
+                    Token token = tokenService.lambdaQuery().eq(Token::getUserId,user.getId()).one();
+                    if (token!=null) tokenService.removeById(token.getToken());
+                    String newToken =UUID.randomUUID().toString().replace("-","");
+                    Token token1 = new Token();
+                    token1.setToken(newToken);
+                    token1.setUserId(user.getId());
+                    tokenService.save(token1);
+                    Cookie cookie = new Cookie("token",newToken);
+                    cookie.setPath("/");
+                    cookie.setMaxAge(30*24*3600);
+                    response.addCookie(cookie);
                     return Result.ok(user);
                 });
     }

@@ -13,7 +13,7 @@ import store from './store/index'
 Vue.config.productionTip = false
 Vue.use(Antd)
 Vue.use(myUtils, {
-  domaintest: 'http://127.0.0.1:8080'
+  domaintest: 'http://127.0.0.1:8089'
 })
 /* eslint-disable no-new */
 new Vue({

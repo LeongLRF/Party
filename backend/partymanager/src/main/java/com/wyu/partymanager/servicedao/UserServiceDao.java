@@ -6,6 +6,8 @@ import com.wyu.partymanager.entity.sys.User;
 import com.wyu.partymanager.service.sys.UserService;
 import com.wyu.partymanager.utils.Result;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.function.Consumer;
@@ -19,6 +21,6 @@ public interface UserServiceDao extends IService<User> {
     Result<User> updateById(long id, Consumer<User> action);
     Result<List<User>> user_list(User.Filter filter);
     User findByUserName(String userName);
-    Result<User> login(String userName, String password, HttpSession httpSession);
+    Result<User> login(String userName, String password, HttpServletResponse response);
 
 }

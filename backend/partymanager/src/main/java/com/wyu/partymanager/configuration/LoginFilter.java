@@ -1,9 +1,13 @@
 package com.wyu.partymanager.configuration;
 
 import com.alibaba.fastjson.JSON;
+import com.wyu.partymanager.entity.sys.Token;
 import com.wyu.partymanager.entity.sys.User;
+import com.wyu.partymanager.service.sys.TokenService;
+import com.wyu.partymanager.service.sys.UserService;
 import com.wyu.partymanager.utils.Common;
 import com.wyu.partymanager.utils.Result;
+import com.wyu.partymanager.utils.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -13,6 +17,8 @@ import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Optional;
 
 /**
  * @author Leong
@@ -20,10 +26,17 @@ import java.io.IOException;
  */
 public class LoginFilter implements Filter
 {
+    private UserService userService;
+    private TokenService tokenService;
     Logger logger = LoggerFactory.getLogger(this.getClass());
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         // TODO Auto-generated method stub
+    }
+
+    public LoginFilter(UserService userService,TokenService tokenService){
+        this.userService = userService;
+        this.tokenService = tokenService;
     }
 
     @Override
@@ -52,22 +65,31 @@ public class LoginFilter implements Filter
             res.setStatus(HttpStatus.OK.value());
             return;
         }
-        // region
-        User user = (User) req.getSession().getAttribute(Common.CURRENT_USER);
-        String str = req.getRequestURI();
-        // endregion
-//        res.sendError(9999, JSON.toJSONString(Result.error("未登陆")));
-//        if (!str.equals("/sys/login")&&user==null){
-//            res.setCharacterEncoding("UTF-8");
-//            res.getWriter().write(JSON.toJSONString(Result.error("未登陆")));
-//        } else {
-            logger.info("request url:"+str);
+        logger.info("请求API: "+req.getRequestURI());
+        if (req.getRequestURI().equals("/sys/login")){
             chain.doFilter(request, response);
-//        }
+        } else {
+            String token = getCookie("token",req).orElse("");
+            Token userToken = tokenService.getById(token);
+            if (userToken==null){
+//                chain.doFilter(request,response);
+                res.getWriter().print(JSON.toJSONString(Result.error("no login")));
+            } else {
+                User user = userService.getById(userToken.getUserId());
+                req.getSession().setAttribute(Common.CURRENT_USER,user);
+                chain.doFilter(request,response);
+            }
+        }
     }
 
     @Override
     public void destroy() {
         // TODO Auto-generated method stub
+    }
+
+    private Optional<String> getCookie(String name, HttpServletRequest request){
+        return Optional.ofNullable(request.getCookies())
+                .flatMap(p -> Arrays.stream(p).filter(it -> it.getName().equals(name)).findFirst())
+                .flatMap(p -> StringUtil.maybe(p.getValue()));
     }
 }
