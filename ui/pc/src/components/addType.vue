@@ -2,7 +2,7 @@
   <div>
     <a-modal :title="edit ? '修改活动类型' : '添加活动类型'" :visible="visible" @ok="handleOk" @cancel="handleCancel">
       <span>活动类别:</span>
-      <a-input style="width: 20%"></a-input>
+      <a-input style="width: 20%" v-model="type.name"></a-input>
       <span>活动主题:</span>
       <a-select
         mode="tags"
@@ -10,7 +10,6 @@
         v-model="defaultValue"
         style="width: 160px"
         :open="false"
-        @popupScroll="popupScroll"
       >
       </a-select>
       <a-button @click="add">添加</a-button>
@@ -29,10 +28,10 @@ export default {
     return {
       visible: false,
       edit: false,
-      type: [{
+      type: {
         name: '',
         details: []
-      }],
+      },
       visible2: false,
       defaultValue: [],
       name: ''
@@ -40,6 +39,18 @@ export default {
   },
   methods: {
     handleOk () {
+      this.defaultValue.forEach(it => {
+        this.type.details.push({
+          name: it
+        })
+      })
+      this.$post('/sys/add_type', this.type).then(res => {
+        if (res.success) {
+          this.$message.success('添加成功')
+        } else {
+          this.$message.error(res.message)
+        }
+      })
       this.visible = false
     },
     handleCancel () {
