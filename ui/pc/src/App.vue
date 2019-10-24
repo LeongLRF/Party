@@ -53,4 +53,10 @@ export default {
   box-shadow: 0 0 0 0 rgba(11, 12, 12, 0.2);
   border-right-width: 0px !important;
 }
+.ant-form-item {
+  margin: 0 !important;
+}
+.ant-form-explain {
+  display: none !important;
+}
 </style>

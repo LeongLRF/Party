@@ -107,6 +107,9 @@ export default {
       } else {
         this.openKeys = latestOpenKey ? [latestOpenKey] : []
       }
+    },
+    go (path) {
+      this.$router.push(path)
     }
   },
   mounted () {
