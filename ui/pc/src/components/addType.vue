@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a-modal :title="edit ? '修改活动类型' : '添加活动类型'" :visible="visible" @ok="handleOk" @cancel="handleCancel">
+    <a-modal :title="edit ? '修改活动类型' : '添加活动类型'" :visible="visible" @ok="handleOk" @cancel="handleCancel" :destroyOnClose="true">
       <span>活动类别:</span>
       <a-input style="width: 20%" v-model="type.name"></a-input>
       <span>活动主题:</span>
@@ -14,7 +14,7 @@
       </a-select>
       <a-button @click="add">添加</a-button>
     </a-modal>
-    <a-modal title="请输入主题" @ok="handleAdd" @cancel="handleCan" :visible="visible2">
+    <a-modal title="请输入主题" @ok="handleAdd" @cancel="handleCan" :visible="visible2" :destroyOnClose="true">
       <span>主题名称:</span>
       <a-input style="width: 30%" v-model="name"></a-input>
     </a-modal>
@@ -47,6 +47,7 @@ export default {
       this.$post('/sys/add_type', this.type).then(res => {
         if (res.success) {
           this.$message.success('添加成功')
+          this.$emit('refresh')
         } else {
           this.$message.error(res.message)
         }

@@ -5,7 +5,7 @@
         <a-icon type="plus" />新增</a-button>
     </div>
     <div class="bar">
-      <a-table :dataSource="dataSource"  :columns="columns" style="width: 30%;background-color:#fff;" size="small">
+      <a-table :dataSource="dataSource"  :columns="columns" style="width: 30%;background-color:#fff;" size="small" :loading="loading">
       <span slot="details" slot-scope="text,record">
         <span v-for="(item, index) in record.details" :key="index">
           {{item.name &nbsp;}}
@@ -22,7 +22,7 @@
         </span>
       </a-table>
     </div>
-    <add-type ref="addType"></add-type>
+    <add-type ref="addType" @refresh="getType"></add-type>
   </div>
 </template>
 
@@ -39,7 +39,8 @@ export default {
         {title: '主题', dataIndex: 'details', key: 'details', align: 'center', width: '250px', scopedSlots: {customRender: 'details'}},
         {title: '操作', key: 'operation', scopedSlots: {customRender: 'operation'}}
       ],
-      dataSource: []
+      dataSource: [],
+      loading: false
     }
   },
   methods: {
@@ -47,8 +48,10 @@ export default {
       this.$refs.addType.open()
     },
     getType () {
+      this.loading = true
       this.$my_get('/sys/type_list').then(res => {
         this.dataSource = res.data
+        this.loading = false
       })
     }
   },
