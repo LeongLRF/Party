@@ -7,18 +7,21 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.wyu.partymanager.entity.JsonEntity;
 import com.wyu.partymanager.entity.sys.Type;
+import com.wyu.partymanager.entity.sys.User;
 import com.wyu.partymanager.utils.IFilter;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.hibernate.validator.constraints.URL;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 @Data
 @TableName("pm_activity")
 public class Activity implements JsonEntity {
 
-    @TableId(value = "id",type = IdType.AUTO)
+    @TableId(value = "id", type = IdType.AUTO)
     long id;
 
     @ApiModelProperty("日期")
@@ -57,10 +60,16 @@ public class Activity implements JsonEntity {
     @TableField("hours")
     int hours;
 
+    @ApiModelProperty("组织单位")
+    @TableField("deptId")
+    long deptId;
+
     @ApiModelProperty("活动类别")
     @TableField(exist = false)
     Type type;
 
+    @TableField(exist = false)
+    List<TakePart> takeParts;
 
     @EqualsAndHashCode(callSuper = true)
     @Data

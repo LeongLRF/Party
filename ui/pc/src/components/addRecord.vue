@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a-modal title="台账录入" :visible="visible" @ok="handelOk" @cancel="handelCancel" :width="700">
+    <a-modal title="台账录入" :visible="visible" @ok="handelOk" @cancel="handelCancel" :width="700" :destroyOnClose="true">
       <div>
         <div style="display:flex">
           <a-row class="form_item">
@@ -18,13 +18,28 @@
         <div style="display:flex">
           <a-row class="form_item">
             <span style="margin-left:8px">活动类别：</span>
-            <a-select v-model="activity.typeId" style="width:220px" @change="selectItem">
+            <a-select v-model="activity.typeId" style="width:220px" @change="selectItem" placeholder="请选择活动类别">
               <a-select-option v-for="item in types" :key="item.id" :value="item.id">{{item.name}}</a-select-option>
             </a-select>
             <div style="margin-left:80px">
               <a-select v-model="theme" :open="false" mode="tags" style="width: 130px" disabled></a-select>
             </div>
             <a-button>添加主题</a-button>
+          </a-row>
+        </div>
+        <div style="display: flex">
+          <a-row class="form_item">
+            <span style="margin-left:8px">组织单位：</span>
+            <div style="flex:15">
+              <a-select v-model="activity.deptId" style="width:220px" @change="handleChange" placeholder="请选择组织单位">
+                 <a-select-option value="0" key="上课">上课</a-select-option>
+                <a-select-option value="1" key="观看影片">观看影片</a-select-option>
+              </a-select>
+            </div>
+            <span style="margin-left:10px">参加人员：</span>
+            <a-select style="width: 220px" placeholder="请选择参加人员" mode="tags" @change="handleChange" v-model="name">
+              <a-select-option v-for="(user) in takePart" :key="user.id" :value="user.trueName">{{user.trueName}}</a-select-option>
+            </a-select>
           </a-row>
         </div>
         <a-row class="form_item">
@@ -58,7 +73,7 @@
           </div>
         </a-row>
         <a-row class="form_item">
-          <span class="name">备注：</span>
+          <span class="name">学时：</span>
           <div style="flex:15">
             <a-input-number :min="1" :max="10" v-model="activity.hours" />
           </div>
@@ -83,16 +98,23 @@ export default {
         holder: '',
         speaker: '',
         remark: '',
+        deptId: 0,
         hours: 0,
         ids: [1, 2]
       },
+      takePart: [],
       types: [],
-      theme: []
+      theme: [],
+      name: []
     }
   },
   methods: {
     handelOk () {
+      this.name.forEach(res => {
+        this.activity.ids.push(this.takePart.filter(it => it.trueName === res)[0].id)
+      })
       this.addRecord()
+      this.activity = {}
       this.visible = false
     },
     handelCancel () {
@@ -105,6 +127,7 @@ export default {
       this.$post('/activity/add_activity', this.activity).then(res => {
         if (res.success) {
           this.$message.success('添加成功')
+          this.activity = {}
           this.$emit('refresh')
         } else {
           this.$message.error(res.message)
@@ -125,13 +148,18 @@ export default {
       })
     },
     handleChange () {
+    },
+    getUsers () {
+      this.$my_get('/user/user_list').then(res => {
+        console.log('before', this.takePart)
+        this.takePart = res.data
+        console.log('after', this.takePart)
+      })
     }
   },
   mounted () {
     this.getTypes()
-  },
-  activated () {
-    this.getTypes()
+    this.getUsers()
   }
 }
 </script>

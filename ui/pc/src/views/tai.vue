@@ -55,6 +55,11 @@
             {{item.name ? item.name : ''}}
           </span>
         </template>
+        <template slot="takePart" slot-scope="text,record">
+          <span v-for="(item, index) in record.takeParts" :key="index">
+            {{item.users.trueName &nbsp;}}
+          </span>
+        </template>
       </a-table>
     </div>
     <add-record ref="addRecord" @refresh="getActivity"></add-record>
@@ -83,7 +88,7 @@ export default {
         { title: '组织单位', dataIndex: 'dept', width: '60px', align: 'center' },
         { title: '主持人', dataIndex: 'holder', width: '40px', align: 'center' },
         { title: '讲课人', dataIndex: 'speaker', width: '40px', align: 'center' },
-        { title: '参加人员', dataIndex: 'member', width: '80px', align: 'center' },
+        { title: '参加人员', dataIndex: 'member', width: '80px', align: 'center', scopedSlots: {customRender: 'takePart'} },
         { title: '参加人员备注', dataIndex: 'remark', width: '80px', align: 'center' },
         { title: '操作', dataIndex: 'other', scopedSlots: { customRender: 'other' }, width: '80px', align: 'center' }
       ],
