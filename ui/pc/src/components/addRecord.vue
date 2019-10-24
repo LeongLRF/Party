@@ -1,55 +1,69 @@
 <template>
   <div>
     <a-modal title="台账录入" :visible="visible" @ok="handelOk" @cancel="handelCancel" :width="700">
-      <a-row type="flex">
-        <a-col :sapn="11">
+      <div>
+        <div style="display:flex">
           <a-row class="form_item">
-            <span>时间：</span>
-            <a-date-picker></a-date-picker>
+            <span style="margin-left:36px">时间：</span>
+            <a-date-picker style="width:220px"></a-date-picker>
           </a-row>
-           <a-row class="form_item">
-             <span>活动类别：</span>
-             <a-select v-model="activity.typeId" style="width: 150px" @change="selectItem">
-               <a-select-option v-for="item in types" :key="item.id" :value="item.id">{{item.name}}</a-select-option>
-             </a-select>
-           </a-row>
-           <a-row class="form_item">
-             <a-select v-model="theme" :open="false" mode="tags" style="width: 120px" disabled></a-select>
-             <a-button>添加主题</a-button>
-           </a-row>
-           <a-row class="form_item">
-             <span>方式:</span>
-             <a-select v-model="activity.way" style="width: 120px;" @change="handleChange">
-               <a-select-option value="上课" key="上课">上课</a-select-option>
-               <a-select-option value="观看影片" key="观看影片">观看影片</a-select-option>
-             </a-select>
-           </a-row>
-           <a-row class="form_item">
-             <span>活动内容:</span>
-             <a-textarea v-model="activity.content" placeholder="Basic usage" :rows="4" />
-           </a-row>
-           <a-row class="form_item">
-             <span>地点:</span>
-             <a-input placeholder="Basic usage" v-model="activity.place" />
-           </a-row>
-           <a-row class="form_item">
-             <span>主持人:</span>
-             <a-input placeholder="Basic usage" v-model="activity.holder" />
-           </a-row>
-           <a-row class="form_item">
-             <span>讲课人:</span>
-             <a-input placeholder="Basic usage" v-model="activity.speaker" />
-           </a-row>
           <a-row class="form_item">
-            <span>备注:</span>
+            <span style="margin-left:36px">方式：</span>
+            <a-select v-model="activity.way" style="width:220px" @change="handleChange">
+              <a-select-option value="上课" key="上课">上课</a-select-option>
+              <a-select-option value="观看影片" key="观看影片">观看影片</a-select-option>
+            </a-select>
+          </a-row>
+        </div>
+        <div style="display:flex">
+          <a-row class="form_item">
+            <span style="margin-left:8px">活动类别：</span>
+            <a-select v-model="activity.typeId" style="width:220px" @change="selectItem">
+              <a-select-option v-for="item in types" :key="item.id" :value="item.id">{{item.name}}</a-select-option>
+            </a-select>
+            <div style="margin-left:80px">
+              <a-select v-model="theme" :open="false" mode="tags" style="width: 130px" disabled></a-select>
+            </div>
+            <a-button>添加主题</a-button>
+          </a-row>
+        </div>
+        <a-row class="form_item">
+          <span class="name">活动内容：</span>
+          <div style="flex:15">
+            <a-textarea v-model="activity.content" placeholder="Basic usage" :rows="4" />
+          </div>
+        </a-row>
+        <a-row class="form_item">
+          <span class="name">地点：</span>
+          <div style="flex:15">
+            <a-input placeholder="Basic usage" v-model="activity.place" />
+          </div>
+        </a-row>
+        <a-row class="form_item">
+          <span class="name">主持人：</span>
+          <div style="flex:15">
+            <a-input placeholder="Basic usage" v-model="activity.holder" />
+          </div>
+        </a-row>
+        <a-row class="form_item">
+          <span class="name">讲课人：</span>
+          <div style="flex:15">
+            <a-input placeholder="Basic usage" v-model="activity.speaker" />
+          </div>
+        </a-row>
+        <a-row class="form_item">
+          <span class="name">备注：</span>
+          <div style="flex:15">
             <a-textarea v-model="activity.remark" placeholder="Basic usage" :rows="4" />
-          </a-row>
-          <a-row class="form_item">
-            <span>备注:</span>
+          </div>
+        </a-row>
+        <a-row class="form_item">
+          <span class="name">备注：</span>
+          <div style="flex:15">
             <a-input-number :min="1" :max="10" v-model="activity.hours" />
-          </a-row>
-        </a-col>
-      </a-row>
+          </div>
+        </a-row>
+      </div>
     </a-modal>
   </div>
 </template>
@@ -123,7 +137,12 @@ export default {
 </script>
 
 <style scoped>
-  .form_item{
-    margin-bottom: 10px;
-  }
+.form_item {
+  margin-bottom: 10px;
+  display: flex;
+}
+.name {
+  flex: 2;
+  text-align: right;
+}
 </style>

@@ -84,28 +84,28 @@
         </div>
       </div>
       <div style="text-align:right">
-        <div style="height:45px;display:flex">
+        <div style="margin:10px 0;display:flex">
           <span style="flex:1">入党所在支部：</span>
           <a-input style="flex:2;"></a-input>
           <span style="flex:1">转正所在支部：</span>
           <a-input style="flex:2">
           </a-input>
         </div>
-        <div style="height:45px;display:flex">
+        <div style="margin:10px 0;display:flex">
           <span style="flex:1">入党介绍人：</span>
           <a-input style="flex:2;"></a-input>
           <span style="flex:1">所在支部：</span>
           <a-input style="flex:2">
           </a-input>
         </div>
-        <div style="height:45px;display:flex">
+        <div style="margin:10px 0;display:flex">
           <span style="flex:1">入党支部日期：</span>
           <a-input style="flex:2;"></a-input>
           <span style="flex:1">现任党内职务：</span>
           <a-input style="flex:2">
           </a-input>
         </div>
-        <div style="height:45px;display:flex">
+        <div style="margin:10px 0;display:flex">
           <div style="flex:12;display:flex">
             <span style="flex:1">学历/学位：</span>
             <a-input style="flex:2;"></a-input>
@@ -116,7 +116,7 @@
             </a-input>
           </div>
         </div>
-        <div style="height:45px;display:flex">
+        <div style="margin:10px 0;display:flex">
           <div style="flex:12;display:flex">
             <span style="flex:1">联系电话：</span>
             <a-input style="flex:2;"></a-input>
@@ -127,19 +127,19 @@
             </a-input>
           </div>
         </div>
-        <div style="height:45px;display:flex">
+        <div style="margin:10px 0;display:flex">
           <span style="flex:4">工作单位及职务：</span>
           <a-input style="flex:15"></a-input>
         </div>
-        <div style="height:45px;display:flex">
+        <div style="margin:10px 0;display:flex">
           <span style="flex:4">组织关系所在单位：</span>
           <a-input style="flex:15"></a-input>
         </div>
-        <div style="height:45px;display:flex">
+        <div style="margin:10px 0;display:flex">
           <span style="flex:4">现居住地：</span>
           <a-input style="flex:15"></a-input>
         </div>
-        <div style="height:45px;display:flex">
+        <div style="margin:10px 0;display:flex">
           <span style="flex:4">身份证号码：</span>
           <a-input style="flex:15"></a-input>
         </div>
