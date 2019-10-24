@@ -70,6 +70,7 @@ export default {
       this.$post('/activity/add_activity', this.activity).then(res => {
         if (res.success) {
           this.$message.success('添加成功')
+          this.$emit('refresh')
         } else {
           this.$message.error(res.message)
         }

@@ -46,11 +46,10 @@
       </div>
     </div>
     <div class="bar">
-      <a-table bordered :dataSource="dataSource" rowKey="id" :columns="columns" size="small" >
-
+      <a-table bordered :dataSource="dataSource" rowKey="id" :columns="columns" size="small" :loading="loading">
       </a-table>
     </div>
-    <add-record ref="addRecord"></add-record>
+    <add-record ref="addRecord" @refresh="getActivity"></add-record>
   </div>
 </template>
 
@@ -82,7 +81,8 @@ export default {
       ],
       page: {
       },
-      data: []
+      data: [],
+      loading: false
     }
   },
   methods: {
@@ -92,7 +92,21 @@ export default {
     },
     handleChange () {
 
+    },
+    getActivity () {
+      this.loading = true
+      this.$my_get('/activity/activity_list').then(res => {
+        this.dataSource = res.data
+        this.loading = false
+      })
+      console.log('获取台账')
     }
+  },
+  mounted () {
+    this.getActivity()
+  },
+  activated () {
+    this.getActivity()
   }
 }
 </script>
