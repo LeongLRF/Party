@@ -118,6 +118,9 @@ export default {
     })
     console.log(this.menus)
     console.log(123, this.$router.options.routes)
+    // 刷新清空Tab,回到主页
+    this.addTabList()
+    this.$router.push('/index')
   },
   activated () {
     this.$my_get('/sys/menu_list').then(res => {
