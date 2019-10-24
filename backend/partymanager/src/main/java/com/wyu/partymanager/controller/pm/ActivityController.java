@@ -29,6 +29,6 @@ public class ActivityController {
     @ApiOperation("获取台账列表")
     @GetMapping("/activity_list")
     public Result<List<Activity>> activity_list(Activity.Filter filter){
-        return Result.ok(activityService.list(filter.apply()));
+        return activityService.activity_list(filter);
     }
 }

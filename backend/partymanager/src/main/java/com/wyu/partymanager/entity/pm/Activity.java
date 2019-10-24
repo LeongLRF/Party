@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.wyu.partymanager.entity.JsonEntity;
+import com.wyu.partymanager.entity.sys.Type;
 import com.wyu.partymanager.utils.IFilter;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -32,10 +33,6 @@ public class Activity implements JsonEntity {
     @TableField("way")
     String way;
 
-    @ApiModelProperty("主题,用‘,’隔开")
-    @TableField(value = "theme")
-    String theme;
-
     @ApiModelProperty("活动内容")
     @TableField("content")
     String content;
@@ -59,6 +56,10 @@ public class Activity implements JsonEntity {
     @ApiModelProperty("学时")
     @TableField("hours")
     int hours;
+
+    @ApiModelProperty("活动类别")
+    @TableField(exist = false)
+    Type type;
 
 
     @EqualsAndHashCode(callSuper = true)

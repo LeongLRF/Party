@@ -7,7 +7,6 @@
             <span>时间：</span>
             <a-date-picker></a-date-picker>
           </a-row>
-         <a-row>
            <a-row class="form_item">
              <span>活动类别：</span>
              <a-select v-model="activity.typeId" style="width: 150px" @change="selectItem">
@@ -25,7 +24,30 @@
                <a-select-option value="观看影片" key="观看影片">观看影片</a-select-option>
              </a-select>
            </a-row>
-         </a-row>
+           <a-row class="form_item">
+             <span>活动内容:</span>
+             <a-textarea v-model="activity.content" placeholder="Basic usage" :rows="4" />
+           </a-row>
+           <a-row class="form_item">
+             <span>地点:</span>
+             <a-input placeholder="Basic usage" v-model="activity.place" />
+           </a-row>
+           <a-row class="form_item">
+             <span>主持人:</span>
+             <a-input placeholder="Basic usage" v-model="activity.holder" />
+           </a-row>
+           <a-row class="form_item">
+             <span>讲课人:</span>
+             <a-input placeholder="Basic usage" v-model="activity.speaker" />
+           </a-row>
+          <a-row class="form_item">
+            <span>备注:</span>
+            <a-textarea v-model="activity.remark" placeholder="Basic usage" :rows="4" />
+          </a-row>
+          <a-row class="form_item">
+            <span>备注:</span>
+            <a-input-number :min="1" :max="10" v-model="activity.hours" />
+          </a-row>
         </a-col>
       </a-row>
     </a-modal>
@@ -42,7 +64,6 @@ export default {
         start: '2019-10-15 00:00:00',
         typeId: 0,
         way: '',
-        type: '',
         content: '',
         place: '',
         holder: '',

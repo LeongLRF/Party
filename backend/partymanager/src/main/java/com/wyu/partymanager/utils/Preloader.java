@@ -31,7 +31,7 @@ public class Preloader<T extends IEntity, R extends IEntity> {
         linkedEntity = service.list(queryWrapper);
         Map<Object, List<R>> map = linkedEntity.stream().collect(Collectors.groupingBy(f));
         for (T entity : data) {
-            List<R> r = map.get(entity.getId());
+            List<R> r = map.get(getId.apply(entity));
             setter.accept(entity, r);
         }
     }
