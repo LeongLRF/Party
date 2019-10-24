@@ -9,7 +9,7 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
-      time: ''
+      time: 'new Date().toLocal'
     }
   },
   methods: {
@@ -30,15 +30,18 @@ export default {
     },
     nowTimes () {
       this.getTime(new Date())
-      setInterval(this.nowTimes, 1000)
+      this.timer = setInterval(this.nowTimes, 1000)
     }
 
   },
-  created () {
-    this.nowTimes()
-  },
   mounted () {
     this.nowTimes()
+  },
+  beforeDestroy () {
+    if (this.timer) {
+      console.log('123执行l')
+      clearInterval(this.timer) // 清除我们的定时器
+    }
   }
 
 }
