@@ -10,6 +10,7 @@ import com.wyu.partymanager.utils.IFilter;
 import com.wyu.partymanager.utils.typeHandler.JsonArrTypeHandler;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.List;
 
@@ -33,6 +34,8 @@ public class Type implements JsonEntity {
         String name;
     }
 
+    @EqualsAndHashCode(callSuper = true)
+    @Data
     public static class Filter extends IFilter<Type>{
 
         @Override

@@ -106,6 +106,10 @@ export const allRouter = [{
     path: '/class',
     name: 'class',
     component: () => import('@/views/class')
+  }, {
+    path: '/type',
+    name: 'type',
+    component: () => import('@/views/activityType')
   }]
 }
 ]

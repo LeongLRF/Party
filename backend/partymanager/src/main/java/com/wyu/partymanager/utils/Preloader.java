@@ -26,12 +26,13 @@ public class Preloader<T extends IEntity, R extends IEntity> {
     public <F,Q> void preload_many(Function<T, F> getId,Function<R,Q> f, String realKey, BiConsumer<T, List<R>> setter) {
         QueryWrapper<R> queryWrapper = new QueryWrapper<>();
         List<Object> ids = data.stream().map(getId).distinct().collect(Collectors.toList());
+        if (ids.isEmpty()) ids.add(0);
         queryWrapper.in(realKey, ids);
         List<R> linkedEntity;
         linkedEntity = service.list(queryWrapper);
         Map<Object, List<R>> map = linkedEntity.stream().collect(Collectors.groupingBy(f));
         for (T entity : data) {
-            List<R> r = map.get(entity.getId());
+            List<R> r = map.get(getId.apply(entity));
             setter.accept(entity, r);
         }
     }

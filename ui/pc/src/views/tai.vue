@@ -46,11 +46,18 @@
       </div>
     </div>
     <div class="bar">
-      <a-table bordered :dataSource="dataSource" rowKey="id" :columns="columns" size="small" :customRow="row">
-
+      <a-table bordered :dataSource="dataSource" rowKey="id" :columns="columns" size="small" :loading="loading">
+        <template slot="type" slot-scope="text,record">
+          <span>{{record.type.name ? record.type.name : '' }}</span>
+        </template>
+        <template slot="theme" slot-scope="text,record">
+          <span v-for="(item, index) in record.type.details" :key="index">
+            {{item.name ? item.name : ''}}
+          </span>
+        </template>
       </a-table>
     </div>
-    <add-record ref="addRecord"></add-record>
+    <add-record ref="addRecord" @refresh="getActivity"></add-record>
   </div>
 </template>
 
@@ -68,9 +75,9 @@ export default {
       columns: [
         { title: '序号', dataIndex: 'index', width: '20px', align: 'center' },
         { title: '日期', dataIndex: 'start', width: '80px', align: 'center' },
-        { title: '大类', dataIndex: 'type', width: '80px', align: 'center' },
+        { title: '大类', dataIndex: 'type', width: '80px', align: 'center', scopedSlots: {customRender: 'type'} },
         { title: '方式', dataIndex: 'way', width: '50px', align: 'center' },
-        { title: '主题分类', dataIndex: 'theme', width: '60px', align: 'center' },
+        { title: '主题分类', dataIndex: 'theme', width: '60px', align: 'center', scopedSlots: {customRender: 'theme'} },
         { title: '内容', dataIndex: 'content', width: '80px', align: 'center' },
         { title: '地点', dataIndex: 'place', width: '40px', align: 'center' },
         { title: '组织单位', dataIndex: 'dept', width: '60px', align: 'center' },
@@ -82,14 +89,32 @@ export default {
       ],
       page: {
       },
-      data: []
+      data: [],
+      loading: false
     }
   },
   methods: {
     open () {
       console.log('123')
       this.$refs.addRecord.open()
+    },
+    handleChange () {
+
+    },
+    getActivity () {
+      this.loading = true
+      this.$my_get('/activity/activity_list').then(res => {
+        this.dataSource = res.data
+        this.loading = false
+      })
+      console.log('获取台账')
     }
+  },
+  mounted () {
+    this.getActivity()
+  },
+  activated () {
+    this.getActivity()
   }
 }
 </script>

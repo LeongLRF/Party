@@ -18,6 +18,8 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -40,8 +42,8 @@ public class AdminController extends BaseController {
 
     @ApiOperation("登录")
     @PostMapping("/login")
-    public Result<User> login(String userName, String password) {
-        return userService.login(userName, password, getHttpSession());
+    public Result<User> login(String userName, String password, HttpServletResponse response) {
+        return userService.login(userName, password, response);
     }
 
     @ApiOperation("获取当前用户")
