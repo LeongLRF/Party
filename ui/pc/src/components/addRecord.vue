@@ -37,7 +37,7 @@
               </a-select>
             </div>
             <span style="margin-left:10px">参加人员：</span>
-            <a-select style="width: 220px" placeholder="请选择参加人员" mode="tags" @change="handleChange" v-model="name">
+            <a-select style="width: 220px" placeholder="请选择参加人员" mode="tags" v-model="name">
               <a-select-option v-for="(user) in takePart" :key="user.id" :value="user.trueName">{{user.trueName}}</a-select-option>
             </a-select>
           </a-row>
@@ -110,11 +110,11 @@ export default {
   },
   methods: {
     handelOk () {
-      this.name.forEach(res => {
-        this.activity.ids.push(this.takePart.filter(it => it.trueName === res)[0].id)
-      })
+      console.log('参加人员', this.name)
       this.addRecord()
       this.activity = {}
+      this.name = []
+      this.theme = []
       this.visible = false
     },
     handelCancel () {
@@ -127,7 +127,6 @@ export default {
       this.$post('/activity/add_activity', this.activity).then(res => {
         if (res.success) {
           this.$message.success('添加成功')
-          this.activity = {}
           this.$emit('refresh')
         } else {
           this.$message.error(res.message)

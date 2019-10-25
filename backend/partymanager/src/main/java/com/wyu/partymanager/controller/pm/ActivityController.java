@@ -31,4 +31,10 @@ public class ActivityController {
     public Result<List<Activity>> activity_list(Activity.Filter filter){
         return activityService.activity_list(filter);
     }
+
+    @ApiOperation("删除活动")
+    @PostMapping("/delete_activity")
+    public Result<?> delete_activity(long activityId){
+        return activityService.delete_activity(activityId);
+    }
 }

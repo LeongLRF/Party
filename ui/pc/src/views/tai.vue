@@ -55,6 +55,11 @@
             {{item.name ? item.name : ''}}
           </span>
         </template>
+        <template slot="other" slot-scope="text,record">
+          <a-popconfirm title="确定删除吗?" @confirm="() => onDelete(record)">
+            <a><a-icon type="close-circle" style="font-weight: bold;font-size: 20px;color: red" /></a>
+          </a-popconfirm>
+        </template>
         <template slot="takePart" slot-scope="text,record">
           <span v-for="(item, index) in record.takeParts" :key="index">
             {{item.users.trueName &nbsp;}}
@@ -113,12 +118,19 @@ export default {
         this.loading = false
       })
       console.log('获取台账')
+    },
+    onDelete (data) {
+      this.$post('/activity/delete_activity?activityId=' + data.id).then(res => {
+        if (res.success) {
+          this.getActivity()
+          this.$message.success('删除成功')
+        } else {
+          this.$message.error(res.message)
+        }
+      })
     }
   },
   mounted () {
-    this.getActivity()
-  },
-  activated () {
     this.getActivity()
   }
 }

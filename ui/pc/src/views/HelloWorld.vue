@@ -35,13 +35,13 @@ export default {
 
   },
   mounted () {
-    this.nowTimes()
+    // this.nowTimes()
   },
   beforeDestroy () {
-    if (this.timer) {
-      console.log('123执行l')
-      clearInterval(this.timer) // 清除我们的定时器
-    }
+    // if (this.timer) {
+    //   console.log('123执行l')
+    //   clearInterval(this.timer) // 清除我们的定时器
+    // }
   }
 
 }

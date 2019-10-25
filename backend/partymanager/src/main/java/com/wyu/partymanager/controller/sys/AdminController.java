@@ -41,7 +41,7 @@ public class AdminController extends BaseController {
     }
 
     @ApiOperation("登录")
-    @PostMapping("/login")
+    @RequestMapping(value = "/login",method = {RequestMethod.GET, RequestMethod.POST})
     public Result<User> login(String userName, String password, HttpServletResponse response) {
         return userService.login(userName, password, response);
     }
