@@ -111,6 +111,16 @@ export default {
       this.$my_get('/user/user_list').then(res => {
         this.dataSource = res.data
       })
+    },
+    onDelete (data) {
+      this.$post('/user/delete_user?id=' + data.id).then(res => {
+        if (res.success) {
+          this.$message.success('删除成功')
+          this.getAllUsers()
+        } else {
+          this.$message.error(res.message)
+        }
+      })
     }
   },
   mounted () {

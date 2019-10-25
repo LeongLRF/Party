@@ -12,12 +12,10 @@
         </span>
       </span>
         <span slot="operation" slot-scope="text,record">
-          <a>
-            <a-icon type="edit" style="font-weight: bold;font-size: 20px" /></a>
+          <a><a-icon type="edit" style="font-weight: bold;font-size: 20px" /></a>
           <a-divider type="vertical"></a-divider>
-          <a-popconfirm title="确定删除吗?">
-            <a>
-              <a-icon type="close-circle" style="font-weight: bold;font-size: 20px;color: red" /></a>
+          <a-popconfirm title="确定删除吗?" @confirm="() => onDelete(record)">
+            <a><a-icon type="close-circle" style="font-weight: bold;font-size: 20px;color: red" /></a>
           </a-popconfirm>
         </span>
       </a-table>
@@ -52,6 +50,12 @@ export default {
       this.$my_get('/sys/type_list').then(res => {
         this.dataSource = res.data
         this.loading = false
+      })
+    },
+    onDelete (data) {
+      this.$post('/sys/delete_type?id=' + data.id).then(res => {
+        this.$message.success('删除成功')
+        this.getType()
       })
     }
   },
