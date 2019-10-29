@@ -28,6 +28,7 @@ public class User implements JsonEntity {
 
     @TableId(value = "id", type = IdType.AUTO)
     long id;
+
     @TableField("userName")
     @ApiModelProperty("学号或教工号")
     String userName;

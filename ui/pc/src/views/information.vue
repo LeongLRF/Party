@@ -13,7 +13,7 @@
       <a-date-picker placeholder="请选择查询日期" @change="onChange" />
     </div>
     <div class="bar">
-      <a-table bordered :dataSource="dataSource" rowKey="id" :columns="columns" size="small" :customRow="row">
+      <a-table bordered :dataSource="dataSource" rowKey="id" :columns="columns" size="small" :customRow="row" :loading="loading">
         <template slot="other" slot-scope="text, record">
           <a @click="showDialog(record)">
             <a-icon type="search" style="font-weight: bold;font-size: 20px;color: green" /></a>
@@ -31,7 +31,7 @@
       </a-table>
     </div>
     <edit-table :data=data ref="edit"></edit-table>
-    <info-table ref="info"></info-table>
+    <info-table ref="info" @refresh="getAllUsers"></info-table>
   </div>
 </template>
 
@@ -77,7 +77,8 @@ export default {
       ],
       page: {
       },
-      data: []
+      data: [],
+      loading: false
     }
   },
   methods: {
@@ -108,9 +109,11 @@ export default {
       }
     },
     getAllUsers () {
+      this.loading = true
       this.$my_get('/user/user_list').then(res => {
         this.dataSource = res.data
       })
+      this.loading = false
     },
     onDelete (data) {
       this.$post('/user/delete_user?id=' + data.id).then(res => {
