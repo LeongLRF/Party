@@ -24,13 +24,17 @@ public class Clazz implements JsonEntity {
     @TableField("code")
     String code;
 
-    @ApiModelProperty("编辑名称")
+    @ApiModelProperty("班级名称")
     @TableField("name")
     String name;
 
     @ApiModelProperty("班级专业")
     @TableField("major")
     String major;
+
+    @ApiModelProperty("总人数")
+    @TableField("total")
+    int total;
 
     @ApiModelProperty("班导师")
     @TableField("teacher")

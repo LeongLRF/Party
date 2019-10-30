@@ -76,6 +76,15 @@
                     <a-input style="width: 100%" v-model="user.userName"/>
                   </a-col>
                 </a-col>
+                <a-col :span="8">
+                  <a-col :span="13">班级：</a-col>
+                  <a-col :span="11">
+                    <a-select style="width: 100%">
+                      <a-select-option value="1">160502</a-select-option>
+                      <a-select-option value="2">160503</a-select-option>
+                    </a-select>
+                  </a-col>
+                </a-col>
               </a-row>
             </div>
           </div>

@@ -65,6 +65,9 @@
             {{item.users.trueName &nbsp;}}
           </span>
         </template>
+        <template slot="start" slot-scope="text">
+          {{$getyyyyMMdd(new Date(text),0,false)}}
+        </template>
       </a-table>
     </div>
     <add-record ref="addRecord" @refresh="getActivity"></add-record>
@@ -84,7 +87,7 @@ export default {
       ],
       columns: [
         { title: '序号', dataIndex: 'index', width: '20px', align: 'center' },
-        { title: '日期', dataIndex: 'start', width: '80px', align: 'center' },
+        { title: '日期', dataIndex: 'start', width: '80px', align: 'center', scopedSlots: {customRender: 'start'} },
         { title: '大类', dataIndex: 'type', width: '80px', align: 'center', scopedSlots: {customRender: 'type'} },
         { title: '方式', dataIndex: 'way', width: '50px', align: 'center' },
         { title: '主题分类', dataIndex: 'theme', width: '60px', align: 'center', scopedSlots: {customRender: 'theme'} },

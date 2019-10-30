@@ -79,6 +79,30 @@ myUtils.install = (Vue, options) => {
     }
     return ''
   }
+  Vue.prototype.$getyyyyMMdd = (date, offset = 0, type = false) => {
+    var tdate = new Date(date)
+    tdate.setDate(tdate.getDate() + offset)
+    var y = tdate.getFullYear()
+    var m = tdate.getMonth() + 1
+    m = m < 10 ? '0' + m : m
+    var d = tdate.getDate()
+    d = d < 10 ? ('0' + d) : d
+    if (type) {
+      var H = tdate.getHours()
+      H = H < 10 ? ('0' + H) : H
+      var M = tdate.getMinutes()
+      M = M < 10 ? ('0' + M) : M
+      var S = tdate.getSeconds()
+      S = S < 10 ? ('0' + S) : S
+      if (H === '00' && M === '00' && S === '00') {
+        return y + '-' + m + '-' + d + ' ' + '12:00:00'
+      } else {
+        return y + '-' + m + '-' + d + ' ' + H + ':' + M + ':' + S
+      }
+    } else {
+      return y + '-' + m + '-' + d
+    }
+  }
   Vue.prototype.$message = Message
 }
 export default myUtils
