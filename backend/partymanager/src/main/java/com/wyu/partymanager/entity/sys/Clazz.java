@@ -14,7 +14,7 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @ApiModel
-@TableName("sys_clazz")
+@TableName("pm_clazz")
 public class Clazz implements JsonEntity {
 
     @TableId(value = "id",type = IdType.AUTO)
