@@ -1,12 +1,11 @@
 package com.wyu.partymanager.controller.sys;
 
+import com.alibaba.druid.sql.visitor.functions.If;
 import com.baomidou.mybatisplus.extension.handlers.MybatisEnumTypeHandler;
 import com.wyu.partymanager.controller.BaseController;
 import com.wyu.partymanager.entity.dto.MenuDTO;
-import com.wyu.partymanager.entity.sys.Menu;
-import com.wyu.partymanager.entity.sys.Role;
-import com.wyu.partymanager.entity.sys.Type;
-import com.wyu.partymanager.entity.sys.User;
+import com.wyu.partymanager.entity.sys.*;
+import com.wyu.partymanager.service.pm.AdminService;
 import com.wyu.partymanager.service.sys.MenuService;
 import com.wyu.partymanager.service.sys.RoleService;
 import com.wyu.partymanager.service.sys.TypeService;
@@ -31,13 +30,15 @@ public class AdminController extends BaseController {
     private final MenuService menuService;
     private final RoleService roleService;
     private final TypeService typeService;
+    private final AdminService adminService;
 
     @Autowired
-    public AdminController(UserService userService, MenuService menuService, RoleService roleService, TypeService typeService) {
+    public AdminController(UserService userService, MenuService menuService, RoleService roleService, TypeService typeService, AdminService adminService) {
         this.userService = userService;
         this.menuService = menuService;
         this.roleService = roleService;
         this.typeService = typeService;
+        this.adminService = adminService;
     }
 
     @ApiOperation("登录")
@@ -123,5 +124,23 @@ public class AdminController extends BaseController {
     @GetMapping("/type_list")
     public Result<List<Type>> type_list(Type.Filter filter){
         return Result.ok(typeService.list(filter.apply()));
+    }
+
+    @ApiOperation("添加班级")
+    @PostMapping("/add_clazz")
+    public Result<Clazz> add_clazz(@RequestBody Clazz clazz){
+        return adminService.add_clazz(clazz);
+    }
+
+    @ApiOperation("获取班级列表")
+    @GetMapping("clazz_list")
+    public Result<List<Clazz>> clazz_list(Clazz.Filter filter){
+        return adminService.clazz_list(filter);
+    }
+
+    @ApiOperation("删除班级")
+    @PostMapping("/delete_clazz")
+    public Result<?> delete_clazz(long id){
+        return adminService.delete_clazz(id);
     }
 }

@@ -4,7 +4,7 @@
       <a-button><a-icon type="plus"/>添加班级</a-button>
     </div>
     <div class="bar">
-      <a-table :dataSource="dataSource" :columns="columns" style="width: 50%" size="small"></a-table>
+      <a-table :dataSource="dataSource" :columns="columns" style="width: 50%" size="small" :loading="loading"></a-table>
     </div>
   </div>
 </template>
@@ -22,8 +22,22 @@ export default {
         {title: '人数', dataIndex: 'total', key: 'total', width: '50px'},
         {title: '班导师', dataIndex: 'teacher', key: 'teacher', width: '80px'},
         {title: '操作', scopedSlots: {customRender: 'operation'}}
-      ]
+      ],
+      dataSource: [],
+      loading: false
     }
+  },
+  methods: {
+    getClazz () {
+      this.loading = true
+      this.$my_get('/sys/clazz_list').then(res => {
+        this.dataSource = res.data
+        this.loading = false
+      })
+    }
+  },
+  mounted () {
+    this.getClazz()
   }
 }
 </script>

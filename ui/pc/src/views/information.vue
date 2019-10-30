@@ -28,6 +28,9 @@
           <a-divider type="vertical"></a-divider>
           <a-switch defaultChecked size="small" />
         </template>
+        <template slot="class" slot-scope="text,record">
+          {{record.clazz ? record.clazz.code : ''}}
+        </template>
       </a-table>
     </div>
     <edit-table :data=data ref="edit"></edit-table>
@@ -71,7 +74,7 @@ export default {
         { title: '学号/教工号', dataIndex: 'userName', key: 'userName', width: '100px', align: 'center' },
         { title: '名字', dataIndex: 'trueName', width: '100px', align: 'center' },
         { title: '部门', dataIndex: 'dept', width: '100px', align: 'center' },
-        { title: '班级', dataIndex: 'class', width: '100px', align: 'center' },
+        { title: '班级', dataIndex: 'class', width: '100px', align: 'center', scopedSlots: {customRender: 'class'} },
         { title: '职位', dataIndex: 'currentPosition', width: '100px', align: 'center' },
         { title: '操作', dataIndex: 'other', scopedSlots: { customRender: 'other' } }
       ],

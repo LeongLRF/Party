@@ -2,11 +2,14 @@ package com.wyu.partymanager.service.sys;
 
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.wyu.partymanager.entity.sys.Clazz;
 import com.wyu.partymanager.entity.sys.Token;
 import com.wyu.partymanager.entity.sys.User;
 import com.wyu.partymanager.mapper.UserMapper;
+import com.wyu.partymanager.service.pm.ClazzService;
 import com.wyu.partymanager.servicedao.UserServiceDao;
 import com.wyu.partymanager.utils.Common;
+import com.wyu.partymanager.utils.Preloader;
 import com.wyu.partymanager.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -27,14 +30,18 @@ import java.util.function.Consumer;
  * @author Leong
  * @date 2019/9/21 13:15
  */
-@SuppressWarnings("ALL")
 @Service
 public class UserService extends ServiceImpl<UserMapper,User> implements UserServiceDao {
 
-    @Autowired
-    private RedisTemplate<String,Object> redisTemplate;
-    @Autowired
-    private TokenService tokenService;
+    private final RedisTemplate<String,Object> redisTemplate;
+    private final TokenService tokenService;
+    private final ClazzService clazzService;
+
+    public UserService(RedisTemplate<String, Object> redisTemplate, TokenService tokenService, ClazzService clazzService) {
+        this.redisTemplate = redisTemplate;
+        this.tokenService = tokenService;
+        this.clazzService = clazzService;
+    }
 
     @Override
     public Result<User> add_user(User user) {
@@ -81,7 +88,10 @@ public class UserService extends ServiceImpl<UserMapper,User> implements UserSer
 
     @Override
     public Result<List<User>> user_list(User.Filter filter) {
-        return Result.ok(this.getBaseMapper().selectList(filter.apply()));
+        List<User> users = this.getBaseMapper().selectList(filter.apply());
+        new Preloader<>(clazzService,users)
+                .preload_one(User::getClassId, Clazz::getId,"id",User::setClazz);
+        return Result.ok(users);
     }
 
     @Override

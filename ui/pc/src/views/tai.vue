@@ -62,7 +62,7 @@
         </template>
         <template slot="takePart" slot-scope="text,record">
           <span v-for="(item, index) in record.takeParts" :key="index">
-            {{item.users.trueName &nbsp;}}
+            {{item.users.trueName ? item.users.trueName &nbsp; : ''}}
           </span>
         </template>
         <template slot="start" slot-scope="text">

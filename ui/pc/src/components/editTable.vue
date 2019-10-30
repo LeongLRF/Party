@@ -96,7 +96,7 @@
             <td class="name">进入党支部日期</td>
             <td class="text" @click="edit">
               <a-input type=text class="input" v-if="isEdit" v-model="user.joinDeptTime"></a-input>
-              <div v-else>{{user.joinDeptTime}}</div>
+              <div v-else>{{$getyyyyMMdd(new Date(user.joinDeptTime))}}</div>
             </td>
             <td class="name">现任党内职务</td>
             <td class="text" colspan="2" @click="edit">

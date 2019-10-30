@@ -76,12 +76,11 @@
                     <a-input style="width: 100%" v-model="user.userName"/>
                   </a-col>
                 </a-col>
-                <a-col :span="8">
-                  <a-col :span="13">班级：</a-col>
+                <a-col :span="12">
+                  <a-col :span="9">班级：</a-col>
                   <a-col :span="11">
-                    <a-select style="width: 100%">
-                      <a-select-option value="1">160502</a-select-option>
-                      <a-select-option value="2">160503</a-select-option>
+                    <a-select style="width: 100%" v-model="user.classId">
+                      <a-select-option v-for="(item, index) in clazz" :value="item.id" :key="index">{{item.code}}</a-select-option>
                     </a-select>
                   </a-col>
                 </a-col>
@@ -210,7 +209,8 @@ export default {
         account: null,
         currentHome: null,
         idCard: null
-      }
+      },
+      calzz: []
     }
   },
   methods: {
@@ -244,7 +244,15 @@ export default {
         return e
       }
       return e && e.fileList
+    },
+    getClazz () {
+      this.$my_get('/sys/clazz_list').then(res => {
+        this.clazz = res.data
+      })
     }
+  },
+  mounted () {
+    this.getClazz()
   }
 }
 </script>

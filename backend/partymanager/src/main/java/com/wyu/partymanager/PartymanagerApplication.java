@@ -41,6 +41,7 @@ public class PartymanagerApplication {
         fastJsonConfig.setSerializerFeatures(SerializerFeature.PrettyFormat);
 //        fastJsonConfig.setCharset(Charset.forName("UTF-8"));
 //        fastJsonConfig.setDateFormat(JSON.DEFFAULT_DATE_FORMAT);
+        fastJsonConfig.setSerializerFeatures(SerializerFeature.DisableCircularReferenceDetect);
         fastConverter.setFastJsonConfig(fastJsonConfig);
         return new HttpMessageConverters((HttpMessageConverter) fastConverter);
     }
