@@ -103,7 +103,7 @@ public class UserService extends ServiceImpl<UserMapper,User> implements UserSer
     public Result<User> login(String userName, String password, HttpServletResponse response) {
         return Result.maybe(this.getBaseMapper().findUserByUserName(userName),"用户不存在")
                 .andThenCheck(user -> validPassword(password,user),"密码错误")
-                .andThenCheck(user -> user.isValid(),"对不起，该账号已被冻结")
+                .andThenCheck(User::isValid,"对不起，该账号已被冻结")
                 .andThen(user -> {
                     Token token = tokenService.lambdaQuery().eq(Token::getUserId,user.getId()).one();
                     if (token!=null) tokenService.removeById(token.getToken());
@@ -133,10 +133,10 @@ public class UserService extends ServiceImpl<UserMapper,User> implements UserSer
         return Base64.getEncoder().encodeToString(digest);
     }
 
-    boolean validSameUser(User user){
+    private boolean validSameUser(User user){
         return findByUserName(user.getUserName()) != null;
     }
-    boolean validPassword(String password,User user){
+    private boolean validPassword(String password, User user){
         return encryptPassword(user.getSalt(),password).equals(user.getPassword());
     }
 }

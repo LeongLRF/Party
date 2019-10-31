@@ -73,7 +73,7 @@ public class LoginFilter implements Filter
             Token userToken = tokenService.getById(token);
             if (userToken==null){
 //                chain.doFilter(request,response);
-                res.getWriter().print(JSON.toJSONString(Result.error("no login")));
+                res.getWriter().print(JSON.toJSONString(Result.error("未登录")));
             } else {
                 User user = userService.getById(userToken.getUserId());
                 req.getSession().setAttribute(Common.CURRENT_USER,user);
