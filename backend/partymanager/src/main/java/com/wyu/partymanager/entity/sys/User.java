@@ -133,7 +133,7 @@ public class User implements JsonEntity {
     @TableField("formalDept")
     String formalDept;
 
-    @ApiModelProperty("毕业院校系及专业")
+    @ApiModelProperty("毕业院校系及专")
     @TableField("schoolMajor")
     String schoolMajor;
 
