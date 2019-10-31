@@ -73,10 +73,17 @@ export default {
         { title: '序号', dataIndex: 'index', width: '50px', align: 'center' },
         { title: '学号/教工号', dataIndex: 'userName', key: 'userName', width: '100px', align: 'center' },
         { title: '名字', dataIndex: 'trueName', width: '100px', align: 'center' },
+        {title: '籍贯', dataIndex: 'homeTown', key: 'homeTown', width: '50px', align: 'center'},
+        {title: '民族', dataIndex: 'nation', key: 'nation', width: '50px', align: 'center'},
+        {title: '性别', dataIndex: 'sex', key: 'sex', width: '50px', align: 'center'},
         { title: '部门', dataIndex: 'dept', width: '100px', align: 'center' },
         { title: '班级', dataIndex: 'class', width: '100px', align: 'center', scopedSlots: {customRender: 'class'} },
         { title: '职位', dataIndex: 'currentPosition', width: '100px', align: 'center' },
-        { title: '操作', dataIndex: 'other', scopedSlots: { customRender: 'other' } }
+        {title: '联系电话', dataIndex: 'phone', key: 'phone', width: '120px', align: 'center'},
+        {title: 'QQ/微信号', dataIndex: 'account', key: 'account', width: '100px', align: 'center'},
+        {title: '冻结', dataIndex: 'valid', key: 'valid', width: '50px', align: 'center'},
+        { title: '操作', dataIndex: 'other', scopedSlots: { customRender: 'other' } },
+        {}
       ],
       page: {
       },

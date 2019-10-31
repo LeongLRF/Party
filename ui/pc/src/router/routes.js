@@ -110,6 +110,10 @@ export const allRouter = [{
     path: '/type',
     name: 'type',
     component: () => import('@/views/activityType')
+  }, {
+    path: '/role',
+    name: 'role',
+    component: () => import('@/views/role')
   }]
 }
 ]

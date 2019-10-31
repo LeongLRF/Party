@@ -100,7 +100,7 @@ export default {
         remark: null,
         deptId: null,
         hours: null,
-        ids: [1, 4]
+        ids: [1]
       },
       takePart: [],
       types: [],
