@@ -97,8 +97,8 @@ public class AdminController extends BaseController {
 
     @ApiOperation("登出")
     @PostMapping("/logout")
-    public Result<?> logout() {
-        getHttpSession().removeAttribute(Common.CURRENT_USER);
+    public Result<?> logout(HttpServletRequest request) {
+        request.getSession().removeAttribute(Common.CURRENT_USER);
         return Result.ok();
     }
 

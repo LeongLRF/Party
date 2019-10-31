@@ -86,19 +86,20 @@ export default {
 
       ],
       columns: [
-        { title: '序号', dataIndex: 'index', width: '20px', align: 'center' },
-        { title: '日期', dataIndex: 'start', width: '80px', align: 'center', scopedSlots: {customRender: 'start'} },
+        { title: '序号', dataIndex: 'index', width: '60px', align: 'center' },
+        { title: '日期', dataIndex: 'start', width: '100px', align: 'center', scopedSlots: {customRender: 'start'} },
         { title: '大类', dataIndex: 'type', width: '80px', align: 'center', scopedSlots: {customRender: 'type'} },
         { title: '方式', dataIndex: 'way', width: '50px', align: 'center' },
-        { title: '主题分类', dataIndex: 'theme', width: '60px', align: 'center', scopedSlots: {customRender: 'theme'} },
-        { title: '内容', dataIndex: 'content', width: '80px', align: 'center' },
-        { title: '地点', dataIndex: 'place', width: '40px', align: 'center' },
-        { title: '组织单位', dataIndex: 'dept', width: '60px', align: 'center' },
-        { title: '主持人', dataIndex: 'holder', width: '40px', align: 'center' },
-        { title: '讲课人', dataIndex: 'speaker', width: '40px', align: 'center' },
+        { title: '主题分类', dataIndex: 'theme', width: '120px', align: 'center', scopedSlots: {customRender: 'theme'} },
+        { title: '内容', dataIndex: 'content', width: '250px', align: 'center' },
+        { title: '地点', dataIndex: 'place', width: '80px', align: 'center' },
+        { title: '组织单位', dataIndex: 'dept', width: '80px', align: 'center' },
+        { title: '主持人', dataIndex: 'holder', width: '70px', align: 'center' },
+        { title: '讲课人', dataIndex: 'speaker', width: '70px', align: 'center' },
         { title: '参加人员', dataIndex: 'member', width: '80px', align: 'center', scopedSlots: {customRender: 'takePart'} },
-        { title: '参加人员备注', dataIndex: 'remark', width: '80px', align: 'center' },
-        { title: '操作', dataIndex: 'other', scopedSlots: { customRender: 'other' }, width: '80px', align: 'center' }
+        { title: '参加人员备注', dataIndex: 'remark', width: '120px', align: 'center' },
+        { title: '操作', dataIndex: 'other', scopedSlots: { customRender: 'other' }, width: '100px', align: 'left' },
+        {}
       ],
       page: {
       },

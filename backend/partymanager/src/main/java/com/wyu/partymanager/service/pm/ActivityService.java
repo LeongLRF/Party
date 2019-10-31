@@ -21,15 +21,11 @@ import java.util.stream.Collectors;
 
 @Service
 public class ActivityService extends ServiceImpl<ActivityMapper,Activity> implements ActivityServiceDao {
-    private final ActivityMapper activityMapper;
-    private final TakePartMapper takePartMapper;
     private final TypeService typeService;
     private final TakePartService takePartService;
     private final UserService userService;
 
-    public ActivityService(ActivityMapper activityMapper, TakePartMapper takePartMapper, TypeService typeService, TakePartService takePartService, UserService userService) {
-        this.activityMapper = activityMapper;
-        this.takePartMapper = takePartMapper;
+    public ActivityService( TypeService typeService, TakePartService takePartService, UserService userService) {
         this.typeService = typeService;
         this.takePartService = takePartService;
         this.userService = userService;
@@ -37,32 +33,38 @@ public class ActivityService extends ServiceImpl<ActivityMapper,Activity> implem
 
     @Override
     public Result<Activity> add_activity(AddActivityReq activity) {
-        activityMapper.insert(activity);
+        this.baseMapper.insert(activity);
         activity.getIds().forEach(id -> {
             TakePart takePart = new TakePart() {{
                 setActivityId(activity.getId());
                 setUserId(id);
             }};
-            takePartMapper.insert(takePart);
+            takePartService.save(takePart);
         });
         return Result.ok(activity);
     }
 
     @Override
     public Result<Activity> edit_activity(Activity activity) {
-        activityMapper.update(activity, null);
+        this.baseMapper.update(activity, null);
         return Result.ok(activity);
     }
 
     @Override
     public Result<?> delete_activity(long id) {
-        activityMapper.deleteById(id);
+        this.baseMapper.deleteById(id);
         return Result.ok();
     }
 
     @Override
-    public Result<List<Activity>> activity_list(Activity.Filter filter) {
-        List<Activity> list = activityMapper.selectList(filter.apply());
+    public Result<List<Activity>> activity_list(Activity.Filter filter,User user) {
+        List<Activity> list;
+        if (user.getRole().getName().equals("admin")){
+            list = this.baseMapper.selectList(filter.apply());
+        } else {
+            List<TakePart> takeParts = takePartService.lambdaQuery().eq(TakePart::getUserId,user.getId()).list();
+            list = this.lambdaQuery().in(Activity::getId,takeParts.stream().map(TakePart::getActivityId).collect(Collectors.toList())).list();
+        }
         new Preloader<>(typeService,list)
                 .preload_one(Activity::getTypeId, Type::getId,"id",Activity::setType);
         new Preloader<>(takePartService,list)

@@ -3,7 +3,7 @@ package com.wyu.partymanager.controller;
 import com.wyu.partymanager.entity.sys.Dept;
 import com.wyu.partymanager.entity.sys.Role;
 import com.wyu.partymanager.entity.sys.User;
-import com.wyu.partymanager.servicedao.RoleService;
+import com.wyu.partymanager.service.sys.RoleService;
 import com.wyu.partymanager.utils.Common;
 import com.wyu.partymanager.utils.Preloader;
 import com.wyu.partymanager.utils.Result;
@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import javax.servlet.http.HttpSession;
+import java.util.Arrays;
+import java.util.Collections;
 
 
 /**
@@ -23,24 +25,27 @@ import javax.servlet.http.HttpSession;
  * @date 2019/9/24 23:05
  */
 @RestController
+@SuppressWarnings("all")
 public class BaseController {
 
     private static Logger logger = LoggerFactory.getLogger(BaseController.class);
 
     @Autowired
-    @Getter
-    HttpSession httpSession;
+    private HttpSession httpSession;
 
-    protected User current_user(){
+    @Autowired
+    private RoleService roleService;
+
+    protected User current_user() {
         User user = (User) httpSession.getAttribute(Common.CURRENT_USER);
-        if (user == null){
-            logger.info("session超时");
-        }
+        if (user == null) logger.info("session超时");
+        new Preloader<>(roleService, Collections.singletonList(user))
+                .preload_one(User::getRoleId,Role::getId,"id",User::setRole);
         return user;
     }
 
 
-    public Dept current_dept(){
+    public Dept current_dept() {
         return (Dept) httpSession.getAttribute(Common.CURRENT_DEPT);
     }
 }

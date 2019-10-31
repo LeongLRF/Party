@@ -1,5 +1,6 @@
 package com.wyu.partymanager.controller.pm;
 
+import com.wyu.partymanager.controller.BaseController;
 import com.wyu.partymanager.entity.dto.AddActivityReq;
 import com.wyu.partymanager.entity.pm.Activity;
 import com.wyu.partymanager.service.pm.ActivityService;
@@ -12,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/activity")
-public class ActivityController {
+public class ActivityController extends BaseController {
 
     private final ActivityService activityService;
 
@@ -29,7 +30,7 @@ public class ActivityController {
     @ApiOperation("获取台账列表")
     @GetMapping("/activity_list")
     public Result<List<Activity>> activity_list(Activity.Filter filter){
-        return activityService.activity_list(filter);
+        return activityService.activity_list(filter,current_user());
     }
 
     @ApiOperation("删除活动")
