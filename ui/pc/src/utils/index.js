@@ -14,7 +14,7 @@ axios.interceptors.response.use(
     }
     if (response.data.success) {
       return Promise.resolve(response)
-    } else if (!response.data.success && response.data.message === 'no login') {
+    } else if (!response.data.success && response.data.message === '未登录') {
       Message.error(response.data.message)
       router.replace({
         path: '/login'

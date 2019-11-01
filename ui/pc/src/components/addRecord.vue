@@ -12,6 +12,7 @@
             <a-select v-model="activity.way" style="width:220px" @change="handleChange">
               <a-select-option value="上课" key="上课">上课</a-select-option>
               <a-select-option value="观看影片" key="观看影片">观看影片</a-select-option>
+              <a-select-option value="总支委扩大会" key="总支委扩大会">总支委扩大会</a-select-option>
             </a-select>
           </a-row>
         </div>

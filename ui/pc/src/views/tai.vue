@@ -89,7 +89,7 @@ export default {
         { title: '序号', dataIndex: 'index', width: '60px', align: 'center' },
         { title: '日期', dataIndex: 'start', width: '100px', align: 'center', scopedSlots: {customRender: 'start'} },
         { title: '大类', dataIndex: 'type', width: '80px', align: 'center', scopedSlots: {customRender: 'type'} },
-        { title: '方式', dataIndex: 'way', width: '50px', align: 'center' },
+        { title: '方式', dataIndex: 'way', width: '120px', align: 'center' },
         { title: '主题分类', dataIndex: 'theme', width: '120px', align: 'center', scopedSlots: {customRender: 'theme'} },
         { title: '内容', dataIndex: 'content', width: '250px', align: 'center' },
         { title: '地点', dataIndex: 'place', width: '80px', align: 'center' },

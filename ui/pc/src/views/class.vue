@@ -4,7 +4,10 @@
       <a-button><a-icon type="plus"/>添加班级</a-button>
     </div>
     <div class="bar">
-      <a-table :dataSource="dataSource" :columns="columns" style="width: 50%" size="small" :loading="loading"></a-table>
+      <a-table :dataSource="dataSource" :columns="columns" style="width: 50%" size="small" :loading="loading">
+        <template slot="operator" slot-scope="text,record">
+        </template>
+      </a-table>
     </div>
   </div>
 </template>
