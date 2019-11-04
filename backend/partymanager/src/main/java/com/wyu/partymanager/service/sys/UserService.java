@@ -48,6 +48,7 @@ public class UserService extends ServiceImpl<UserMapper,User> implements UserSer
         if (validSameUser(user)){
             return Result.error("用户已存在");
         }
+        user.setRoleId(2);
         user.setSalt(UUID.randomUUID().toString());
         user.setPassword(encryptPassword(user.getSalt(),user.getPassword()));
         this.getBaseMapper().insert(user);

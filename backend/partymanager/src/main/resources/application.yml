@@ -19,7 +19,7 @@ spring:
     port: 6379
     password:
 server:
-  port: 8080
+  port: 8089
 mybatis-plus:
   type-handlers-package: com.wyu.partymanager.utils.typeHandler
 debug: true

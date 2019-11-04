@@ -16,16 +16,18 @@ import com.wyu.partymanager.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class ActivityService extends ServiceImpl<ActivityMapper,Activity> implements ActivityServiceDao {
+public class ActivityService extends ServiceImpl<ActivityMapper, Activity> implements ActivityServiceDao {
     private final TypeService typeService;
     private final TakePartService takePartService;
     private final UserService userService;
 
-    public ActivityService( TypeService typeService, TakePartService takePartService, UserService userService) {
+    public ActivityService(TypeService typeService, TakePartService takePartService, UserService userService) {
         this.typeService = typeService;
         this.takePartService = takePartService;
         this.userService = userService;
@@ -57,20 +59,21 @@ public class ActivityService extends ServiceImpl<ActivityMapper,Activity> implem
     }
 
     @Override
-    public Result<List<Activity>> activity_list(Activity.Filter filter,User user) {
+    public Result<List<Activity>> activity_list(Activity.Filter filter, User user) {
         List<Activity> list;
-        if (user.getRole().getName().equals("admin")){
+        if (user.getRole().getName().equals("admin")) {
             list = this.baseMapper.selectList(filter.apply());
         } else {
-            List<TakePart> takeParts = takePartService.lambdaQuery().eq(TakePart::getUserId,user.getId()).list();
-            list = this.lambdaQuery().in(Activity::getId,takeParts.stream().map(TakePart::getActivityId).collect(Collectors.toList())).list();
+            List<TakePart> takeParts = takePartService.lambdaQuery().eq(TakePart::getUserId, user.getId()).list();
+            list = this.lambdaQuery().in(Activity::getId, takeParts.stream().map(TakePart::getActivityId).count() == 0 ?
+                    Collections.singletonList(0) : takeParts.stream().map(TakePart::getActivityId).collect(Collectors.toList())).list();
         }
-        new Preloader<>(typeService,list)
-                .preload_one(Activity::getTypeId, Type::getId,"id",Activity::setType);
-        new Preloader<>(takePartService,list)
-                .preload_many(Activity::getId,TakePart::getActivityId,"activityId",Activity::setTakeParts);
-        new Preloader<>(userService,list.stream().flatMap(it -> it.getTakeParts().stream()).collect(Collectors.toList()))
-                .preload_one(TakePart::getUserId, User::getId,"id",TakePart::setUsers);
+        new Preloader<>(typeService, list)
+                .preload_one(Activity::getTypeId, Type::getId, "id", Activity::setType);
+        new Preloader<>(takePartService, list)
+                .preload_many(Activity::getId, TakePart::getActivityId, "activityId", Activity::setTakeParts);
+        new Preloader<>(userService, list.stream().flatMap(it -> it.getTakeParts().stream()).collect(Collectors.toList()))
+                .preload_one(TakePart::getUserId, User::getId, "id", TakePart::setUsers);
         return Result.ok(list);
     }
 }
