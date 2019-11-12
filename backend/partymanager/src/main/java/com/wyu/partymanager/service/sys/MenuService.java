@@ -58,6 +58,9 @@ public class MenuService extends ServiceImpl<MenuMapper,Menu> implements MenuSer
                     if (menus.size() > 0) {
                         menus = menus.stream().filter(m -> m.permissions().contains(user.getRoleId()) && m.isValid()).collect(Collectors.toList());
                         Map<Long, List<Menu>> menuMap = menus.stream().collect(Collectors.groupingBy(Menu::getParentId));
+                        if (menuMap.isEmpty()){
+                            return Result.error("暂无菜单");
+                        }
                         List<MenuDTO> menuDTOS = menuMap.get(0L).stream().map(MenuDTO::new).collect(Collectors.toList());
                         menuDTOS.forEach(it -> it.setChildren(menuMap.get(it.getParent().getId())));
                         return Result.ok(menuDTOS);

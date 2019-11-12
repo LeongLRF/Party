@@ -6,11 +6,12 @@ import com.wyu.partymanager.entity.pm.Activity;
 import com.wyu.partymanager.service.pm.ActivityService;
 import com.wyu.partymanager.utils.Result;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+/**
+ * @author Leong
+ */
 @RestController
 @RequestMapping("/activity")
 public class ActivityController extends BaseController {
@@ -23,19 +24,19 @@ public class ActivityController extends BaseController {
 
     @ApiOperation("录入【活动】")
     @PostMapping("/add_activity")
-    public Result<Activity> add_activity(@RequestBody AddActivityReq req){
-        return activityService.add_activity(req);
+    public Result<Activity> addActivity(@RequestBody AddActivityReq req){
+        return activityService.addActivity(req);
     }
 
     @ApiOperation("获取台账列表")
     @GetMapping("/activity_list")
-    public Result<List<Activity>> activity_list(Activity.Filter filter){
+    public Result<List<Activity>> activityList(Activity.Filter filter){
         return activityService.activity_list(filter,current_user());
     }
 
     @ApiOperation("删除活动")
     @PostMapping("/delete_activity")
-    public Result<?> delete_activity(long activityId){
+    public Result<?> deleteActivity(long activityId){
         return activityService.delete_activity(activityId);
     }
 }

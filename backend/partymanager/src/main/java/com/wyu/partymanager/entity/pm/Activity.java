@@ -16,7 +16,9 @@ import org.hibernate.validator.constraints.URL;
 
 import java.sql.Timestamp;
 import java.util.List;
-
+/**
+ * @author Leong
+ */
 @Data
 @TableName("pm_activity")
 public class Activity implements JsonEntity {

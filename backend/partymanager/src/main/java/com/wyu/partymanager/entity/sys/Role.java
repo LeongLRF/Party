@@ -21,7 +21,7 @@ import java.sql.Timestamp;
  */
 @Data
 @TableName("sys_role")
-public class Role implements TimestampEntity, JsonEntity {
+public class Role implements JsonEntity {
 
     @TableId(value = "id",type = IdType.AUTO)
     long id;
@@ -29,10 +29,6 @@ public class Role implements TimestampEntity, JsonEntity {
     String name;
     @TableField("permission")
     String permission;
-    @TableField("insertedAt")
-    Timestamp insertedAt;
-    @TableField("updatedAt")
-    Timestamp updatedAt;
     @TableField("valid")
     boolean valid;
 

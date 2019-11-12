@@ -92,7 +92,7 @@ export default {
       visible: false,
       activity: {
         start: '2019-10-15 00:00:00',
-        typeId: '请选择活动类别',
+        typeId: '0',
         way: null,
         content: null,
         place: null,

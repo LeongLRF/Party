@@ -11,7 +11,9 @@ import com.wyu.partymanager.utils.IFilter;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-
+/**
+ * @author Leong
+ */
 @Data
 @TableName("pm_dept")
 public class Dept implements JsonEntity {

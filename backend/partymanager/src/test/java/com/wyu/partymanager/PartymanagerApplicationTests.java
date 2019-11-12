@@ -81,8 +81,6 @@ public class PartymanagerApplicationTests {
     public void preloadTest() {
         Role role = new Role() {{
             setName("maintenance");
-            setInsertedAt(new Timestamp(new Date().getTime()));
-            setUpdatedAt(new Timestamp(new Date().getTime()));
             setValid(true);
             setPermission("1,2");
         }};

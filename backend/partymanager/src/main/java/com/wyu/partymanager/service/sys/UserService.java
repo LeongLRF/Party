@@ -53,7 +53,7 @@ public class UserService extends ServiceImpl<UserMapper,User> implements UserSer
         user.setPassword(encryptPassword(user.getSalt(),user.getPassword()));
         this.getBaseMapper().insert(user);
         String key = User.class.getName() + user.getId();
-        redisTemplate.opsForValue().set(key, JSON.toJSONString(user));
+//        redisTemplate.opsForValue().set(key, JSON.toJSONString(user));
         return Result.ok(user);
     }
 

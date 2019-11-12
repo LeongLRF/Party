@@ -13,7 +13,9 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.util.List;
-
+/**
+ * @author Leong
+ */
 @Data
 @TableName("sys_type")
 public class Type implements JsonEntity {

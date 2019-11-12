@@ -11,7 +11,9 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-
+/**
+ * @author Leong
+ */
 @Data
 @ApiModel
 @TableName("pm_clazz")

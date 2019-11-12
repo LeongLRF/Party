@@ -14,9 +14,11 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.util.List;
-
+/**
+ * @author Leong
+ */
 @Data
-@TableName("pm_takepart")
+@TableName("pm_take_part")
 public class TakePart implements JsonEntity {
 
     @TableId(value = "id", type = IdType.AUTO)

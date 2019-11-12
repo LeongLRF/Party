@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface ActivityServiceDao extends IService<Activity> {
 
-    Result<Activity> add_activity(AddActivityReq activity);
+    Result<Activity> addActivity(AddActivityReq activity);
     Result<Activity> edit_activity(Activity activity);
     Result<?> delete_activity(long id);
     Result<List<Activity>> activity_list(Activity.Filter filter, User user);

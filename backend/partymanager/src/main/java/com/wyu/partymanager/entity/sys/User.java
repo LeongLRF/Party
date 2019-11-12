@@ -109,10 +109,6 @@ public class User implements JsonEntity {
     @ApiModelProperty("salt")
     String salt;
 
-    @ApiModelProperty("token")
-    @TableField("token")
-    String token;
-
     @ApiModelProperty("是否被冻结")
     @TableField("valid")
     boolean valid;

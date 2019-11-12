@@ -34,7 +34,7 @@ public class ActivityService extends ServiceImpl<ActivityMapper, Activity> imple
     }
 
     @Override
-    public Result<Activity> add_activity(AddActivityReq activity) {
+    public Result<Activity> addActivity(AddActivityReq activity) {
         this.baseMapper.insert(activity);
         activity.getIds().forEach(id -> {
             TakePart takePart = new TakePart() {{
@@ -48,7 +48,7 @@ public class ActivityService extends ServiceImpl<ActivityMapper, Activity> imple
 
     @Override
     public Result<Activity> edit_activity(Activity activity) {
-        this.baseMapper.update(activity, null);
+        this.baseMapper.updateById(activity);
         return Result.ok(activity);
     }
 
@@ -61,7 +61,7 @@ public class ActivityService extends ServiceImpl<ActivityMapper, Activity> imple
     @Override
     public Result<List<Activity>> activity_list(Activity.Filter filter, User user) {
         List<Activity> list;
-        if (user.getRole().getName().equals("admin")) {
+        if ("admin".equals(user.getRole().getName())) {
             list = this.baseMapper.selectList(filter.apply());
         } else {
             List<TakePart> takeParts = takePartService.lambdaQuery().eq(TakePart::getUserId, user.getId()).list();
