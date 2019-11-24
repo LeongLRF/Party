@@ -13,6 +13,7 @@ import com.wyu.partymanager.service.sys.UserService;
 import com.wyu.partymanager.servicedao.ActivityServiceDao;
 import com.wyu.partymanager.utils.Preloader;
 import com.wyu.partymanager.utils.Result;
+import core.DbConnection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,35 +27,37 @@ public class ActivityService extends ServiceImpl<ActivityMapper, Activity> imple
     private final TypeService typeService;
     private final TakePartService takePartService;
     private final UserService userService;
+    private final DbConnection db;
 
-    public ActivityService(TypeService typeService, TakePartService takePartService, UserService userService) {
+    public ActivityService(TypeService typeService, TakePartService takePartService, UserService userService, DbConnection db) {
         this.typeService = typeService;
         this.takePartService = takePartService;
         this.userService = userService;
+        this.db = db;
     }
 
     @Override
     public Result<Activity> addActivity(AddActivityReq activity) {
-        this.baseMapper.insert(activity);
+        this.db.insert(activity);
         activity.getIds().forEach(id -> {
             TakePart takePart = new TakePart() {{
                 setActivityId(activity.getId());
                 setUserId(id);
             }};
-            takePartService.save(takePart);
+            db.insert(takePart);
         });
         return Result.ok(activity);
     }
 
     @Override
     public Result<Activity> edit_activity(Activity activity) {
-        this.baseMapper.updateById(activity);
+        this.db.update(activity);
         return Result.ok(activity);
     }
 
     @Override
     public Result<?> delete_activity(long id) {
-        this.baseMapper.deleteById(id);
+        this.db.deleteById(Activity.class,id);
         return Result.ok();
     }
 
@@ -62,11 +65,11 @@ public class ActivityService extends ServiceImpl<ActivityMapper, Activity> imple
     public Result<List<Activity>> activity_list(Activity.Filter filter, User user) {
         List<Activity> list;
         if ("admin".equals(user.getRole().getName())) {
-            list = this.baseMapper.selectList(filter.apply());
+            list = db.form(Activity.class).apply(filter).toList();
         } else {
-            List<TakePart> takeParts = takePartService.lambdaQuery().eq(TakePart::getUserId, user.getId()).list();
-            list = this.lambdaQuery().in(Activity::getId, takeParts.stream().map(TakePart::getActivityId).count() == 0 ?
-                    Collections.singletonList(0) : takeParts.stream().map(TakePart::getActivityId).collect(Collectors.toList())).list();
+            List<TakePart> takeParts = db.form(TakePart.class).whereEq("userId",user.getId()).toList();
+            list = db.form(Activity.class).in("id", takeParts.stream().map(TakePart::getActivityId).count() == 0 ?
+                    Collections.singletonList(0) : takeParts.stream().map(TakePart::getActivityId).collect(Collectors.toList())).toList();
         }
         new Preloader<>(typeService, list)
                 .preload_one(Activity::getTypeId, Type::getId, "id", Activity::setType);

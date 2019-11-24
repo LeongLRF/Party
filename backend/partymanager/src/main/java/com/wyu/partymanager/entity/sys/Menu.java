@@ -1,5 +1,7 @@
 package com.wyu.partymanager.entity.sys;
 
+import annotation.Column;
+import annotation.Id;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -28,32 +30,40 @@ import java.util.stream.Collectors;
 @TableName("sys_menu")
 public class Menu implements JsonEntity {
 
-    @TableId(value = "id",type = IdType.AUTO)
+    @TableId(value = "id", type = IdType.AUTO)
+    @Id(value = "id", type = util.IdType.AUTO)
     long id;
     @ApiModelProperty("菜单名字")
     @TableField("name")
+    @Column("name")
     String name;
     @ApiModelProperty("请求路径")
     @TableField("url")
+    @Column("url")
     String url;
     @ApiModelProperty("访问权限")
     @TableField("permission")
+    @Column("permission")
     String permission;
 
     @ApiModelProperty("父菜单id,0为一级菜单")
     @TableField("parentId")
+    @Column("parentId")
     long parentId;
 
     @ApiModelProperty("icon")
     @TableField("icon")
+    @Column("icon")
     String icon;
 
     @ApiModelProperty("是否启用")
     @TableField("valid")
+    @Column("valid")
     boolean valid;
 
     @ApiModelProperty("编号")
     @TableField("code")
+    @Column("code")
     String code;
 
     @TableField(exist = false)
@@ -63,14 +73,15 @@ public class Menu implements JsonEntity {
     Menu parent;
 
     @ApiModelProperty("权限列表")
-    public Set<Long> permissions(){
-            return Arrays.stream(Optional.ofNullable(permission).orElse("0").split(",")).map(Long::valueOf).collect(Collectors.toSet());
+    public Set<Long> permissions() {
+        return Arrays.stream(Optional.ofNullable(permission).orElse("0").split(",")).map(Long::valueOf).collect(Collectors.toSet());
     }
 
     @EqualsAndHashCode(callSuper = true)
     @Data
     public static class Filter extends IFilter<Menu> {
         String name;
+
         @Override
         public Wrapper<Menu> apply() {
             return this.queryWrapper().orderByAsc("code");

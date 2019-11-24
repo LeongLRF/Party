@@ -56,4 +56,10 @@ public class UserController extends BaseController {
         return userService.delete_user(id);
 
     }
+
+    @ApiOperation("dbtest")
+    @GetMapping("/test")
+    public Result<List<User>> test(){
+        return userService.getUsers();
+    }
 }

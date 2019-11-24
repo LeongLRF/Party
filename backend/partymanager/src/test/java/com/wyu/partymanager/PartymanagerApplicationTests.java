@@ -11,14 +11,19 @@ import com.wyu.partymanager.service.pm.TakePartService;
 import com.wyu.partymanager.service.sys.RoleService;
 import com.wyu.partymanager.service.sys.UserService;
 import com.wyu.partymanager.utils.Preloader;
+import core.DbConnection;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -27,6 +32,7 @@ import java.util.List;
 @SpringBootTest
 public class PartymanagerApplicationTests {
 
+    Logger logger = LoggerFactory.getLogger(PartymanagerApplicationTests.class);
     @Autowired
     private RedisTemplate<String, Object> redisTemplate;
     @Autowired
@@ -41,6 +47,8 @@ public class PartymanagerApplicationTests {
     TypeMapper typeMapper;
     @Autowired
     TakePartService takePartService;
+    @Autowired
+    DbConnection dbConnection;
 
     @Test
     public void get() {
@@ -59,7 +67,7 @@ public class PartymanagerApplicationTests {
 
     @Test
     public void test2() {
-        System.out.println(userService.updateById(1,user -> user.setClassId(3)).data);
+        System.out.println(userService.updateById(1, user -> user.setClassId(3)).data);
     }
 
     @Test
@@ -87,8 +95,9 @@ public class PartymanagerApplicationTests {
         roleService.add_role(role);
         System.out.println(role.toJson());
     }
+
     @Test
-    public void handlerTest(){
+    public void handlerTest() {
         Type type = new Type();
         type.setName("主题班会");
         List<Type.Detail> details = Collections.singletonList(new Type.Detail() {{
@@ -99,17 +108,37 @@ public class PartymanagerApplicationTests {
     }
 
     @Test
-    public void g(){
+    public void g() {
         User user = userService.getById(1);
         new Preloader<>(takePartService, Collections.singletonList(user))
-                .preload_many(User::getId, TakePart::getUserId,"userId",User::setTakeParts);
+                .preload_many(User::getId, TakePart::getUserId, "userId", User::setTakeParts);
         System.out.println(user);
     }
+
     @Test
-    public void p(){
+    public void p() {
         User user = userService.getById(1);
         new Preloader<>(roleService, Collections.singletonList(user))
-                .preload_one(User::getRoleId, Role::getId,"id",User::setRole);
+                .preload_one(User::getRoleId, Role::getId, "id", User::setRole);
         System.out.println(user);
+    }
+
+    @Test
+    @Transactional
+    public void ger() {
+        long start = System.currentTimeMillis();
+        User user = new User();
+        user.setPassword("123");
+        user.setUserName("123");
+        user.setTrueName("123");
+        userService.saveBatch(Arrays.asList(user, user, user));
+        long end = System.currentTimeMillis();
+        logger.info("Cost : " + (end - start) + "ms");
+    }
+
+    @Test
+    public void dbtest() {
+       List<User> users = dbConnection.form(User.class).toList();
+        System.out.println(users);
     }
 }

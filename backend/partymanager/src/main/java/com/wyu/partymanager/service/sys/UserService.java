@@ -11,6 +11,7 @@ import com.wyu.partymanager.servicedao.UserServiceDao;
 import com.wyu.partymanager.utils.Common;
 import com.wyu.partymanager.utils.Preloader;
 import com.wyu.partymanager.utils.Result;
+import core.DbConnection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -36,11 +37,13 @@ public class UserService extends ServiceImpl<UserMapper,User> implements UserSer
     private final RedisTemplate<String,Object> redisTemplate;
     private final TokenService tokenService;
     private final ClazzService clazzService;
+    private final DbConnection dbConnection;
 
-    public UserService(RedisTemplate<String, Object> redisTemplate, TokenService tokenService, ClazzService clazzService) {
+    public UserService(RedisTemplate<String, Object> redisTemplate, TokenService tokenService, ClazzService clazzService, DbConnection dbConnection) {
         this.redisTemplate = redisTemplate;
         this.tokenService = tokenService;
         this.clazzService = clazzService;
+        this.dbConnection = dbConnection;
     }
 
     @Override
@@ -132,6 +135,10 @@ public class UserService extends ServiceImpl<UserMapper,User> implements UserSer
         byte[] b = str.getBytes();
         byte[] digest = md5.digest(b);
         return Base64.getEncoder().encodeToString(digest);
+    }
+
+    public Result<List<User>> getUsers(){
+        return Result.ok(dbConnection.form(User.class).whereEq("id",2).toList());
     }
 
     private boolean validSameUser(User user){

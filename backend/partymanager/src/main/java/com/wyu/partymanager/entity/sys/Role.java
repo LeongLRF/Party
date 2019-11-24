@@ -1,5 +1,7 @@
 package com.wyu.partymanager.entity.sys;
 
+import annotation.Column;
+import annotation.Id;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -23,13 +25,17 @@ import java.sql.Timestamp;
 @TableName("sys_role")
 public class Role implements JsonEntity {
 
-    @TableId(value = "id",type = IdType.AUTO)
+    @TableId(value = "id", type = IdType.AUTO)
+    @Id(value = "id", type = util.IdType.AUTO)
     long id;
     @TableField("name")
+    @Column("name")
     String name;
     @TableField("permission")
+    @Column("permission")
     String permission;
     @TableField("valid")
+    @Column("valid")
     boolean valid;
 
     @EqualsAndHashCode(callSuper = true)
