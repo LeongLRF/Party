@@ -31,12 +31,12 @@ public class ActivityController extends BaseController {
     @ApiOperation("获取台账列表")
     @GetMapping("/activity_list")
     public Result<List<Activity>> activityList(Activity.Filter filter){
-        return activityService.activity_list(filter,current_user());
+        return activityService.activityList(filter,current_user());
     }
 
     @ApiOperation("删除活动")
     @PostMapping("/delete_activity")
     public Result<?> deleteActivity(long activityId){
-        return activityService.delete_activity(activityId);
+        return activityService.deleteActivity(activityId);
     }
 }

@@ -11,8 +11,8 @@ import java.util.List;
 public interface ActivityServiceDao extends IService<Activity> {
 
     Result<Activity> addActivity(AddActivityReq activity);
-    Result<Activity> edit_activity(Activity activity);
-    Result<?> delete_activity(long id);
-    Result<List<Activity>> activity_list(Activity.Filter filter, User user);
+    Result<Activity> editActivity(Activity activity);
+    Result<?> deleteActivity(long id);
+    Result<List<Activity>> activityList(Activity.Filter filter, User user);
 
 }

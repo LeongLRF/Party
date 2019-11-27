@@ -38,6 +38,9 @@ public class ActivityService extends ServiceImpl<ActivityMapper, Activity> imple
 
     @Override
     public Result<Activity> addActivity(AddActivityReq activity) {
+        if (activity.getIds()==null) {
+            return Result.error("请输入参加人员");
+        }
         this.db.insert(activity);
         activity.getIds().forEach(id -> {
             TakePart takePart = new TakePart() {{
@@ -50,19 +53,19 @@ public class ActivityService extends ServiceImpl<ActivityMapper, Activity> imple
     }
 
     @Override
-    public Result<Activity> edit_activity(Activity activity) {
+    public Result<Activity> editActivity(Activity activity) {
         this.db.update(activity);
         return Result.ok(activity);
     }
 
     @Override
-    public Result<?> delete_activity(long id) {
+    public Result<?> deleteActivity(long id) {
         this.db.deleteById(Activity.class,id);
         return Result.ok();
     }
 
     @Override
-    public Result<List<Activity>> activity_list(Activity.Filter filter, User user) {
+    public Result<List<Activity>> activityList(Activity.Filter filter, User user) {
         List<Activity> list;
         if ("admin".equals(user.getRole().getName())) {
             list = db.form(Activity.class).apply(filter).toList();
@@ -71,12 +74,14 @@ public class ActivityService extends ServiceImpl<ActivityMapper, Activity> imple
             list = db.form(Activity.class).in("id", takeParts.stream().map(TakePart::getActivityId).count() == 0 ?
                     Collections.singletonList(0) : takeParts.stream().map(TakePart::getActivityId).collect(Collectors.toList())).toList();
         }
-        new Preloader<>(typeService, list)
-                .preload_one(Activity::getTypeId, Type::getId, "id", Activity::setType);
-        new Preloader<>(takePartService, list)
-                .preload_many(Activity::getId, TakePart::getActivityId, "activityId", Activity::setTakeParts);
-        new Preloader<>(userService, list.stream().flatMap(it -> it.getTakeParts().stream()).collect(Collectors.toList()))
-                .preload_one(TakePart::getUserId, User::getId, "id", TakePart::setUsers);
+        if (!list.isEmpty()){
+            new Preloader<>(typeService, list)
+                    .preload_one(Activity::getTypeId, Type::getId, "id", Activity::setType);
+            new Preloader<>(takePartService, list)
+                    .preload_many(Activity::getId, TakePart::getActivityId, "activityId", Activity::setTakeParts);
+            new Preloader<>(userService, list.stream().flatMap(it -> it.getTakeParts().stream()).collect(Collectors.toList()))
+                    .preload_one(TakePart::getUserId, User::getId, "id", TakePart::setUsers);
+        }
         return Result.ok(list);
     }
 }
