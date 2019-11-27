@@ -23,11 +23,9 @@ import java.util.List;
 public class UserController extends BaseController {
 
     private final UserService userService;
-    private final MenuService menuService;
 
     @Autowired
-    public UserController(MenuService menuService, UserService userService) {
-        this.menuService = menuService;
+    public UserController(UserService userService) {
         this.userService = userService;
     }
 
@@ -46,20 +44,20 @@ public class UserController extends BaseController {
 
     @ApiOperation("修改【用户】")
     @PostMapping("/edit_user")
-    public Result<User> edit_user(@RequestBody User user){
+    public Result<User> edit_user(@RequestBody User user) {
         return userService.edit_user(user);
     }
 
     @ApiOperation("删除【用户】")
     @PostMapping("/delete_user")
-    public Result<?> delete_user(long id){
+    public Result<?> delete_user(long id) {
         return userService.delete_user(id);
 
     }
 
     @ApiOperation("dbtest")
     @GetMapping("/test")
-    public Result<List<User>> test(){
+    public Result<List<User>> test() {
         return userService.getUsers();
     }
 }

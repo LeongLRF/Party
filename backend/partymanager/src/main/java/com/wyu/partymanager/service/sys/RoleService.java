@@ -1,8 +1,6 @@
 package com.wyu.partymanager.service.sys;
 
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wyu.partymanager.entity.sys.Role;
-import com.wyu.partymanager.mapper.RoleMapper;
 import com.wyu.partymanager.utils.Result;
 import core.inerface.IDbConnection;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class RoleService extends ServiceImpl<RoleMapper,Role> implements com.wyu.partymanager.servicedao.RoleService {
+public class RoleService  implements com.wyu.partymanager.servicedao.RoleService {
     private final IDbConnection db;
 
     @Autowired

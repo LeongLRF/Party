@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.wyu.partymanager.entity.IEntity;
 import core.inerface.IDbConnection;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
@@ -29,7 +30,7 @@ public class Preloader<T> {
         List<Object> ids = data.stream().map(getId).distinct().collect(Collectors.toList());
         if (ids.isEmpty()) ids.add(0);
         List<R> linkedEntity;
-        linkedEntity = db.form(cls).in(realKey,ids).toList();
+        linkedEntity = db.form(cls).in(realKey,(Collection<?>) ids).toList();
         Map<Object, List<R>> map = linkedEntity.stream().collect(Collectors.groupingBy(f));
         for (T entity : data) {
             List<R> r = map.get(getId.apply(entity));

@@ -8,9 +8,12 @@ import com.wyu.partymanager.service.sys.UserService;
 import com.wyu.partymanager.utils.Common;
 import com.wyu.partymanager.utils.Result;
 import com.wyu.partymanager.utils.StringUtil;
+import core.inerface.IDbConnection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.*;
@@ -24,19 +27,17 @@ import java.util.Optional;
  * @author Leong
  * @date 2019/9/23 0:17
  */
-public class LoginFilter implements Filter
-{
-    private UserService userService;
-    private TokenService tokenService;
-    Logger logger = LoggerFactory.getLogger(this.getClass());
+
+public class LoginFilter implements Filter {
+    private IDbConnection db;
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         // TODO Auto-generated method stub
     }
-
-    public LoginFilter(UserService userService,TokenService tokenService){
-        this.userService = userService;
-        this.tokenService = tokenService;
+    public LoginFilter(IDbConnection db){
+        this.db = db;
     }
 
     @Override
@@ -65,20 +66,18 @@ public class LoginFilter implements Filter
             res.setStatus(HttpStatus.OK.value());
             return;
         }
-        logger.info("请求API: "+req.getRequestURI());
-        if (req.getRequestURI().equals("/sys/login")){
+        logger.info("请求API: " + req.getRequestURI());
+        if ("/sys/login".equals(req.getRequestURI())) {
             chain.doFilter(request, response);
         } else {
-            String token = getCookie("token",req).orElse("");
-            Token userToken = tokenService.getById(token);
-            if (userToken==null){
-                chain.doFilter(request,response);
-//                res.setCharacterEncoding("UTF-8");
-//                res.getWriter().print(JSON.toJSONString(Result.error("未登录")));
+            String token = getCookie("token", req).orElse("");
+            Token userToken = db.getById(Token.class, token);
+            if (userToken == null) {
+                chain.doFilter(request, response);
             } else {
-                User user = userService.getById(userToken.getUserId());
-                req.getSession().setAttribute(Common.CURRENT_USER,user);
-                chain.doFilter(request,response);
+                User user = db.getById(User.class, userToken.getUserId());
+                req.getSession().setAttribute(Common.CURRENT_USER, user);
+                chain.doFilter(request, response);
             }
         }
     }
@@ -88,7 +87,7 @@ public class LoginFilter implements Filter
         // TODO Auto-generated method stub
     }
 
-    private Optional<String> getCookie(String name, HttpServletRequest request){
+    private Optional<String> getCookie(String name, HttpServletRequest request) {
         return Optional.ofNullable(request.getCookies())
                 .flatMap(p -> Arrays.stream(p).filter(it -> it.getName().equals(name)).findFirst())
                 .flatMap(p -> StringUtil.maybe(p.getValue()));

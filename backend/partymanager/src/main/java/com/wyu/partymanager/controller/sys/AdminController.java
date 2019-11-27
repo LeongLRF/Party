@@ -123,7 +123,7 @@ public class AdminController extends BaseController {
     @ApiOperation("类别列表")
     @GetMapping("/type_list")
     public Result<List<Type>> type_list(Type.Filter filter){
-        return Result.ok(typeService.list(filter.apply()));
+        return typeService.type_list(filter);
     }
 
     @ApiOperation("添加班级")

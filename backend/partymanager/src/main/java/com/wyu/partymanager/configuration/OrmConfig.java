@@ -1,7 +1,6 @@
 package com.wyu.partymanager.configuration;
 
 import core.CachedDbConnection;
-import core.DbConnection;
 import core.inerface.IDbConnection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -17,6 +16,7 @@ import java.sql.SQLException;
  * @date 2019/11/17 12:47
  */
 @Configuration
+@SuppressWarnings("all")
 public class OrmConfig {
 
     @Autowired
@@ -27,7 +27,7 @@ public class OrmConfig {
         config.Configuration configuration = new config.Configuration();
         configuration.setModel(Model.POOL_MODEL);
         configuration.setEnableCache(false);
-        JedisPool jedisPool = new JedisPool("local",6379);
+        JedisPool jedisPool = new JedisPool("localhost",6379);
          IDbConnection dbConnection = null;
         try {
              dbConnection = new CachedDbConnection(dataSource,configuration,jedisPool);

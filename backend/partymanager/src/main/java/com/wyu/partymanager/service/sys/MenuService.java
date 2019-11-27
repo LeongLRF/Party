@@ -1,14 +1,12 @@
 package com.wyu.partymanager.service.sys;
 
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wyu.partymanager.entity.dto.MenuDTO;
 import com.wyu.partymanager.entity.sys.Menu;
 import com.wyu.partymanager.entity.sys.Role;
 import com.wyu.partymanager.entity.sys.User;
-import com.wyu.partymanager.mapper.MenuMapper;
 import com.wyu.partymanager.servicedao.MenuServiceDao;
-import com.wyu.partymanager.servicedao.RoleService;
 import com.wyu.partymanager.utils.Result;
+import core.inerface.IDbConnection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,38 +19,36 @@ import java.util.stream.Collectors;
  * @date 2019/9/25 15:35
  */
 @Service
-public class MenuService extends ServiceImpl<MenuMapper,Menu> implements MenuServiceDao {
+public class MenuService implements MenuServiceDao {
 
-    private final MenuMapper menuMapper;
-    private final RoleService roleService;
+    private final IDbConnection db;
 
     @Autowired
-    public MenuService(MenuMapper menuMapper, RoleService roleService) {
-        this.menuMapper = menuMapper;
-        this.roleService = roleService;
+    public MenuService(IDbConnection db) {
+        this.db = db;
     }
 
     @Override
     public Result<?> delete_menu(long id) {
-        menuMapper.deleteById(id);
+        db.deleteById(Role.class,id);
         return Result.ok();
     }
 
     @Override
     public Result<Menu> add_menu(Menu menu) {
-        menuMapper.insert(menu);
+        db.insert(menu);
         return Result.ok(menu);
     }
 
     @Override
     public Result<Menu> edit_menu(Menu menu) {
-        menuMapper.updateById(menu);
+        db.update(menu);
         return Result.ok(menu);
     }
 
     @Override
     public Result<List<MenuDTO>> menu_list(Menu.Filter filter, User user) {
-        return Result.maybe(menuMapper.selectList(filter.apply()), "暂无菜单")
+        return Result.maybe(db.form(Menu.class).apply(filter).toList(), "暂无菜单")
                 .andThenCheck(user!=null,"请先登录")
                 .andThen(menus -> {
                     if (menus.size() > 0) {
@@ -72,10 +68,10 @@ public class MenuService extends ServiceImpl<MenuMapper,Menu> implements MenuSer
 
     @Override
     public Result<List<Menu>> menu_list(Menu.Filter filter) {
-        List<Menu> list = this.baseMapper.selectList(filter.apply());
+        List<Menu> list = db.form(Menu.class).apply(filter).toList();
         list.forEach(menu -> {
-            List<Role> roles = (List<Role>) roleService.listByIds(menu.permissions());
-            Menu parent = this.baseMapper.selectById(menu.getParentId());
+            List<Role> roles =  db.getByIds(Role.class,menu.permissions());
+            Menu parent = db.getById(Menu.class,menu.getParentId());
             menu.setRoles(roles);
             menu.setParent(parent);
         });

@@ -1,10 +1,8 @@
 package com.wyu.partymanager.service.pm;
 
-import com.alibaba.druid.sql.visitor.functions.If;
 import com.wyu.partymanager.entity.sys.Clazz;
 import com.wyu.partymanager.utils.Result;
-import org.apache.ibatis.annotations.Select;
-import org.springframework.beans.factory.annotation.Autowired;
+import core.inerface.IDbConnection;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,23 +14,23 @@ import java.util.List;
 @Service
 public class AdminService {
 
-    private final ClazzService clazzService;
+    private final IDbConnection db;
 
-    public AdminService(ClazzService clazzService) {
-        this.clazzService = clazzService;
+    public AdminService(IDbConnection db) {
+        this.db = db;
     }
 
-    public Result<Clazz> add_clazz(Clazz clazz){
-        clazzService.save(clazz);
+    public Result<Clazz> add_clazz(Clazz clazz) {
+        db.insert(clazz);
         return Result.ok(clazz);
     }
 
-    public Result<List<Clazz>> clazz_list(Clazz.Filter filter){
-        return Result.ok(clazzService.list(filter.apply()));
+    public Result<List<Clazz>> clazz_list(Clazz.Filter filter) {
+        return Result.ok(db.form(Clazz.class).apply(filter).toList());
     }
 
-    public Result<?> delete_clazz(long id){
-        clazzService.removeById(id);
+    public Result<?> delete_clazz(long id) {
+        db.deleteById(Clazz.class, id);
         return Result.ok();
     }
 }

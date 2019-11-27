@@ -1,18 +1,15 @@
 package com.wyu.partymanager.service.pm;
 
-import com.baomidou.mybatisplus.extension.service.IService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wyu.partymanager.entity.pm.TakePart;
 import com.wyu.partymanager.mapper.TakePartMapper;
 import com.wyu.partymanager.servicedao.TakePartServiceDao;
 import com.wyu.partymanager.utils.Result;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class TakePartService extends ServiceImpl<TakePartMapper,TakePart> implements TakePartServiceDao {
+public class TakePartService implements TakePartServiceDao {
     private final TakePartMapper takePartMapper;
 
     public TakePartService(TakePartMapper takePartMapper) {
