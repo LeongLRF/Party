@@ -1,5 +1,8 @@
 package com.wyu.partymanager.entity.pm;
 
+import annotation.Column;
+import annotation.Id;
+import annotation.Table;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -14,21 +17,26 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.util.List;
+
 /**
  * @author Leong
  */
 @Data
 @TableName("pm_take_part")
+@Table("pm_take_part")
 public class TakePart implements JsonEntity {
 
     @TableId(value = "id", type = IdType.AUTO)
+    @Id("id")
     long id;
 
     @ApiModelProperty("参与者Id")
     @TableField("userId")
+    @Column("userId")
     long userId;
     @ApiModelProperty("活动Id")
     @TableField("activityId")
+    @Column("activityId")
     long activityId;
 
     @ApiModelProperty("参加人员")

@@ -2,6 +2,7 @@ package com.wyu.partymanager.entity.sys;
 
 import annotation.Column;
 import annotation.Id;
+import annotation.Table;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -10,7 +11,8 @@ import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.wyu.partymanager.entity.IEntity;
 import com.wyu.partymanager.entity.JsonEntity;
 import com.wyu.partymanager.entity.TimestampEntity;
-import com.wyu.partymanager.utils.IFilter;
+import core.inerface.IFilter;
+import core.inerface.ISelectQuery;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -23,6 +25,7 @@ import java.sql.Timestamp;
  */
 @Data
 @TableName("sys_role")
+@Table(value = "sys_role",cache = true,expireTime = 60 * 60 * 24 * 365)
 public class Role implements JsonEntity {
 
     @TableId(value = "id", type = IdType.AUTO)
@@ -38,16 +41,12 @@ public class Role implements JsonEntity {
     @Column("valid")
     boolean valid;
 
-    @EqualsAndHashCode(callSuper = true)
     @Data
-    public static class Filter extends IFilter<Role> {
-
-        @ApiModelProperty("过滤名称")
-        String name;
+    public static class Filter implements IFilter<Role> {
 
         @Override
-        public Wrapper<Role> apply() {
-            return this.queryWrapper();
+        public ISelectQuery<Role> apply(ISelectQuery<Role> iSelectQuery) {
+            return iSelectQuery;
         }
     }
 

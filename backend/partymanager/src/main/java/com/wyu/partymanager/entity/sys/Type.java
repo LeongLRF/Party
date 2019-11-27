@@ -2,6 +2,7 @@ package com.wyu.partymanager.entity.sys;
 
 import annotation.Column;
 import annotation.Id;
+import annotation.Table;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -22,6 +23,7 @@ import java.util.List;
  */
 @Data
 @TableName("sys_type")
+@Table("sys_type")
 public class Type implements JsonEntity {
 
     @TableId(value = "id", type = IdType.AUTO)

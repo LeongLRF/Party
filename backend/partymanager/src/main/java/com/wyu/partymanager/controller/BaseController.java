@@ -7,6 +7,7 @@ import com.wyu.partymanager.service.sys.RoleService;
 import com.wyu.partymanager.utils.Common;
 import com.wyu.partymanager.utils.Preloader;
 import com.wyu.partymanager.utils.Result;
+import core.inerface.IDbConnection;
 import lombok.Getter;
 import lombok.Setter;
 import org.slf4j.Logger;
@@ -35,12 +36,14 @@ public class BaseController {
 
     @Autowired
     private RoleService roleService;
+    @Autowired
+    IDbConnection db;
 
     protected User current_user() {
         User user = (User) httpSession.getAttribute(Common.CURRENT_USER);
         if (user == null) logger.info("session超时");
-        new Preloader<>(roleService, Collections.singletonList(user))
-                .preload_one(User::getRoleId,Role::getId,"id",User::setRole);
+        new Preloader<>(db, Collections.singletonList(user))
+                .preload_one(Role.class,User::getRoleId,Role::getId,"id",User::setRole);
         return user;
     }
 

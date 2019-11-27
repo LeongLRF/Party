@@ -12,13 +12,13 @@ import com.wyu.partymanager.service.sys.RoleService;
 import com.wyu.partymanager.service.sys.UserService;
 import com.wyu.partymanager.utils.Preloader;
 import core.DbConnection;
+import core.inerface.IDbConnection;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,8 +34,6 @@ public class PartymanagerApplicationTests {
 
     Logger logger = LoggerFactory.getLogger(PartymanagerApplicationTests.class);
     @Autowired
-    private RedisTemplate<String, Object> redisTemplate;
-    @Autowired
     private UserMapper userMapper;
     @Autowired
     UserService userService;
@@ -48,7 +46,7 @@ public class PartymanagerApplicationTests {
     @Autowired
     TakePartService takePartService;
     @Autowired
-    DbConnection dbConnection;
+    IDbConnection dbConnection;
 
     @Test
     public void get() {
@@ -110,16 +108,16 @@ public class PartymanagerApplicationTests {
     @Test
     public void g() {
         User user = userService.getById(1);
-        new Preloader<>(takePartService, Collections.singletonList(user))
-                .preload_many(User::getId, TakePart::getUserId, "userId", User::setTakeParts);
+        new Preloader<>(dbConnection, Collections.singletonList(user))
+                .preload_many(TakePart.class,User::getId, TakePart::getUserId, "userId", User::setTakeParts);
         System.out.println(user);
     }
 
     @Test
     public void p() {
         User user = userService.getById(1);
-        new Preloader<>(roleService, Collections.singletonList(user))
-                .preload_one(User::getRoleId, Role::getId, "id", User::setRole);
+        new Preloader<>(dbConnection, Collections.singletonList(user))
+                .preload_one(Role.class,User::getRoleId, Role::getId, "id", User::setRole);
         System.out.println(user);
     }
 

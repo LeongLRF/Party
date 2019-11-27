@@ -12,8 +12,8 @@ import com.wyu.partymanager.utils.Common;
 import com.wyu.partymanager.utils.Preloader;
 import com.wyu.partymanager.utils.Result;
 import core.DbConnection;
+import core.inerface.IDbConnection;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.Cookie;
@@ -34,13 +34,11 @@ import java.util.function.Consumer;
 @Service
 public class UserService extends ServiceImpl<UserMapper,User> implements UserServiceDao {
 
-    private final RedisTemplate<String,Object> redisTemplate;
     private final TokenService tokenService;
     private final ClazzService clazzService;
-    private final DbConnection dbConnection;
+    private final IDbConnection dbConnection;
 
-    public UserService(RedisTemplate<String, Object> redisTemplate, TokenService tokenService, ClazzService clazzService, DbConnection dbConnection) {
-        this.redisTemplate = redisTemplate;
+    public UserService(TokenService tokenService, ClazzService clazzService, IDbConnection dbConnection) {
         this.tokenService = tokenService;
         this.clazzService = clazzService;
         this.dbConnection = dbConnection;
@@ -93,8 +91,8 @@ public class UserService extends ServiceImpl<UserMapper,User> implements UserSer
     @Override
     public Result<List<User>> user_list(User.Filter filter) {
         List<User> users = this.getBaseMapper().selectList(filter.apply());
-        new Preloader<>(clazzService,users)
-                .preload_one(User::getClassId, Clazz::getId,"id",User::setClazz);
+        new Preloader<>(dbConnection,users)
+                .preload_one(Clazz.class,User::getClassId, Clazz::getId,"id",User::setClazz);
         return Result.ok(users);
     }
 

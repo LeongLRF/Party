@@ -34,13 +34,12 @@ public class PartymanagerApplication {
         SpringApplication.run(PartymanagerApplication.class, args);
     }
 
-    @Bean//使用@Bean注入fastJsonHttpMessageConvert
+    @Bean
     public HttpMessageConverters fastJsonHttpMessageConverters(){
         FastJsonHttpMessageConverter fastConverter=new FastJsonHttpMessageConverter();
         FastJsonConfig fastJsonConfig=new FastJsonConfig();
         fastJsonConfig.setSerializerFeatures(SerializerFeature.PrettyFormat);
-//        fastJsonConfig.setCharset(Charset.forName("UTF-8"));
-//        fastJsonConfig.setDateFormat(JSON.DEFFAULT_DATE_FORMAT);
+
         fastJsonConfig.setSerializerFeatures(SerializerFeature.DisableCircularReferenceDetect);
         fastConverter.setFastJsonConfig(fastJsonConfig);
         return new HttpMessageConverters((HttpMessageConverter) fastConverter);

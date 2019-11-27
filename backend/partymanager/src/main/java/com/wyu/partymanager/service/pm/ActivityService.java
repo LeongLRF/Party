@@ -14,6 +14,7 @@ import com.wyu.partymanager.servicedao.ActivityServiceDao;
 import com.wyu.partymanager.utils.Preloader;
 import com.wyu.partymanager.utils.Result;
 import core.DbConnection;
+import core.inerface.IDbConnection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,13 +27,11 @@ import java.util.stream.Collectors;
 public class ActivityService extends ServiceImpl<ActivityMapper, Activity> implements ActivityServiceDao {
     private final TypeService typeService;
     private final TakePartService takePartService;
-    private final UserService userService;
-    private final DbConnection db;
+    private final IDbConnection db;
 
-    public ActivityService(TypeService typeService, TakePartService takePartService, UserService userService, DbConnection db) {
+    public ActivityService(TypeService typeService, TakePartService takePartService,IDbConnection db) {
         this.typeService = typeService;
         this.takePartService = takePartService;
-        this.userService = userService;
         this.db = db;
     }
 
@@ -75,12 +74,12 @@ public class ActivityService extends ServiceImpl<ActivityMapper, Activity> imple
                     Collections.singletonList(0) : takeParts.stream().map(TakePart::getActivityId).collect(Collectors.toList())).toList();
         }
         if (!list.isEmpty()){
-            new Preloader<>(typeService, list)
-                    .preload_one(Activity::getTypeId, Type::getId, "id", Activity::setType);
-            new Preloader<>(takePartService, list)
-                    .preload_many(Activity::getId, TakePart::getActivityId, "activityId", Activity::setTakeParts);
-            new Preloader<>(userService, list.stream().flatMap(it -> it.getTakeParts().stream()).collect(Collectors.toList()))
-                    .preload_one(TakePart::getUserId, User::getId, "id", TakePart::setUsers);
+            new Preloader<>(db, list)
+                    .preload_one(Type.class,Activity::getTypeId, Type::getId, "id", Activity::setType);
+            new Preloader<>(db, list)
+                    .preload_many(TakePart.class,Activity::getId, TakePart::getActivityId, "activityId", Activity::setTakeParts);
+//            new Preloader<>(userService, list.stream().flatMap(it -> it.getTakeParts().stream()).collect(Collectors.toList()))
+//                    .preload_one(TakePart::getUserId, User::getId, "id", TakePart::setUsers);
         }
         return Result.ok(list);
     }
