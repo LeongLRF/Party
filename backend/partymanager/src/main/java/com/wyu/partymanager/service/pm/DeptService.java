@@ -1,7 +1,6 @@
 package com.wyu.partymanager.service.pm;
 
 import com.wyu.partymanager.entity.sys.Dept;
-import com.wyu.partymanager.mapper.DeptMapper;
 import com.wyu.partymanager.servicedao.DeptServiceDao;
 import com.wyu.partymanager.utils.Result;
 import org.springframework.stereotype.Service;

@@ -5,6 +5,7 @@ import core.inerface.IDbConnection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 import redis.clients.jedis.JedisPool;
 import util.Model;
 
@@ -15,7 +16,7 @@ import java.sql.SQLException;
  * @author Leong
  * @date 2019/11/17 12:47
  */
-@Configuration
+@Component
 @SuppressWarnings("all")
 public class OrmConfig {
 

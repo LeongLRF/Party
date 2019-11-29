@@ -85,7 +85,7 @@ public class User implements JsonEntity {
     @ApiModelProperty("学院Id")
     long academicId;
 
-    @Column("JoinDeptTime")
+    @Column("joinDeptTime")
     @ApiModelProperty("进入党支部时间")
     Timestamp joinDeptTime;
 

@@ -3,10 +3,10 @@ package com.wyu.partymanager.entity.pm;
 import annotation.Column;
 import annotation.Id;
 import annotation.Table;
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.wyu.partymanager.entity.JsonEntity;
 import com.wyu.partymanager.entity.sys.User;
-import com.wyu.partymanager.utils.IFilter;
+import core.inerface.IFilter;
+import core.inerface.ISelectQuery;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -32,13 +32,12 @@ public class TakePart implements JsonEntity {
     @ApiModelProperty("参加人员")
     User users;
 
-    @EqualsAndHashCode(callSuper = true)
     @Data
-    public static class Filter extends IFilter<TakePart> {
+    public static class Filter implements IFilter<TakePart> {
 
         @Override
-        public Wrapper<TakePart> apply() {
-            return this.queryWrapper();
+        public ISelectQuery<TakePart> apply(ISelectQuery<TakePart> iSelectQuery) {
+            return iSelectQuery;
         }
     }
 }
