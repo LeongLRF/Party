@@ -92,16 +92,16 @@ export default {
       visible: false,
       activity: {
         start: '2019-10-15 00:00:00',
-        typeId: '0',
-        way: null,
+        typeId: '请选择活动类别',
+        way: '请选择方式',
         content: null,
         place: null,
         holder: null,
         speaker: null,
         remark: null,
-        deptId: null,
+        deptId: '请选择组织单位',
         hours: null,
-        ids: [1, 2]
+        ids: []
       },
       takePart: [],
       types: [],
@@ -112,8 +112,23 @@ export default {
   methods: {
     handelOk () {
       console.log('参加人员', this.name)
+      this.name.forEach(it => {
+        this.activity.ids.push(this.takePart.filter(item => item.trueName === it)[0].id)
+      })
       this.addRecord()
-      this.activity = {}
+      this.activity = {
+        start: '2019-10-15 00:00:00',
+        typeId: '请选择活动类别',
+        way: '请选择方式',
+        content: null,
+        place: null,
+        holder: null,
+        speaker: null,
+        remark: null,
+        deptId: '请选择组织单位',
+        hours: null,
+        ids: []
+      }
       this.name = []
       this.theme = []
       this.visible = false
@@ -153,7 +168,6 @@ export default {
       this.$my_get('/user/user_list').then(res => {
         console.log('before', this.takePart)
         this.takePart = res.data
-        console.log('after', this.takePart)
       })
     }
   },
