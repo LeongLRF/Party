@@ -1,8 +1,8 @@
 package com.wyu.partymanager;
 
-import com.wyu.partymanager.entity.dto.AddActivityReq;
-import com.wyu.partymanager.entity.pm.TakePart;
+import com.wyu.partymanager.entity.sys.User;
 import core.inerface.IDbConnection;
+import core.support.Page;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +18,7 @@ public class PartymanagerApplicationTests {
     IDbConnection db;
     @Test
     public void insert(){
-        AddActivityReq req = new AddActivityReq();
-        db.insert(req);
-        System.out.println(req.getId());
+        Page<User> page = db.form(User.class).page(0,1);
+        System.out.println(page);
     }
 }
