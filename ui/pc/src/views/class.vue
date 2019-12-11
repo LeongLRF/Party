@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="nav">
-      <a-button><a-icon type="plus"/>添加班级</a-button>
+      <a-button @click="open"><a-icon type="plus"/>添加班级</a-button>
     </div>
     <div class="bar">
       <a-table :dataSource="dataSource" :columns="columns" style="width: 50%" size="small" :loading="loading">
@@ -9,12 +9,16 @@
         </template>
       </a-table>
     </div>
+    <add-class ref="addClass"></add-class>
   </div>
 </template>
 
 <script>
 export default {
   name: 'class',
+  components: {
+    addClass: () => import('@/components/addClass')
+  },
   data () {
     return {
       columns: [
@@ -37,6 +41,9 @@ export default {
         this.dataSource = res.data
         this.loading = false
       })
+    },
+    open () {
+      this.$refs.addClass.open()
     }
   },
   mounted () {
