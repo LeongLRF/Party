@@ -27,7 +27,7 @@ public class OrmConfig {
         configuration.setModel(Model.POOL_MODEL);
         configuration.setEnableCache(false);
         configuration.setDataSource(dataSource);
-        configuration.setJedisPool(new JedisPool("localhost",6379));
+        configuration.setJedisPool(new JedisPool("59.110.171.118",6379));
         return DefaultDbFactory.getDb(configuration);
     }
 }

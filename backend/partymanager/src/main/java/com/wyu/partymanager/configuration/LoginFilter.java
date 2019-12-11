@@ -49,19 +49,15 @@ public class LoginFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         String origin = req.getHeader("Origin");
         if (!org.springframework.util.StringUtils.isEmpty(origin)) {
-            //带cookie的时候，origin必须是全匹配，不能使用*
             res.addHeader("Access-Control-Allow-Origin", origin);
         }
         res.addHeader("Access-Control-Allow-Methods", "*");
         String headers = req.getHeader("Access-Control-Request-Headers");
-        // 支持所有自定义头
         if (!org.springframework.util.StringUtils.isEmpty(headers)) {
             res.addHeader("Access-Control-Allow-Headers", headers);
         }
-        // enable cookie
         res.addHeader("Access-Control-Allow-Credentials", "true");
         if (req.getMethod().equals(RequestMethod.OPTIONS.name())) {
-            //防止乱码，适用于传输JSON数据
             res.setHeader("Content-Type", "application/json;charset=UTF-8");
             res.setStatus(HttpStatus.OK.value());
             return;
