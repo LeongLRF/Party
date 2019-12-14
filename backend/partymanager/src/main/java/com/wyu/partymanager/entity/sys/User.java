@@ -8,6 +8,7 @@ import com.wyu.partymanager.entity.JsonEntity;
 import com.wyu.partymanager.entity.pm.TakePart;
 import core.inerface.IFilter;
 import core.inerface.ISelectQuery;
+import core.support.IdType;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -22,10 +23,10 @@ import java.util.List;
 
 @Data
 @ApiModel
-@Table("sys_user")
+@Table(value = "sys_user", cache = true, expireTime = 60 * 60 * 24 * 3)
 public class User implements JsonEntity {
 
-    @Id(value = "id", idType = util.IdType.AUTO)
+    @Id(value = "id", idType = IdType.AUTO)
     long id;
 
     @Column("userName")

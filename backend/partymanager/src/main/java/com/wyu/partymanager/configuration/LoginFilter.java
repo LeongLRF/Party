@@ -73,7 +73,8 @@ public class LoginFilter implements Filter {
             String token = getCookie("token", req).orElse("");
             Token userToken = db.getById(Token.class, token);
             if (userToken == null) {
-                chain.doFilter(request, response);
+                response.setCharacterEncoding("UTF-8");
+                response.getWriter().println(JSON.toJSONString(Result.error("未登录")));
             } else {
                 User user = db.getById(User.class, userToken.getUserId());
                 req.getSession().setAttribute(Common.CURRENT_USER, user);

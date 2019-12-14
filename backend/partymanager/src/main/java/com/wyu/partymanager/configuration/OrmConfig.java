@@ -27,7 +27,7 @@ public class OrmConfig {
         config.Configuration configuration = new config.Configuration();
         configuration.setModel(Model.POOL_MODEL);
         configuration.setEnableCache(false);
-        JedisPool jedisPool = new JedisPool("localhost",6379);
+        JedisPool jedisPool = new JedisPool("59.110.171.118",6379);
          IDbConnection dbConnection = null;
         try {
              dbConnection = new CachedDbConnection(dataSource,configuration,jedisPool);
