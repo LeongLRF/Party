@@ -20,7 +20,7 @@ import java.util.List;
  */
 @Data
 @Table("sys_type")
-public class Type implements JsonEntity {
+public class Type {
 
     @Id(value = "id", type = util.IdType.AUTO)
     long id;

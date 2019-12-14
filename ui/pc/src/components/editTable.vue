@@ -18,7 +18,7 @@
             <td class="text" @click="edit">
               <a-input type=text class="input" v-if="isEdit" @blur="save" v-model="user.birthday">
               </a-input>
-              <div v-else>{{user.birthday}}</div>
+              <div v-else>{{$getyyyyMMdd(new Date(user.birthday))}}</div>
             </td>
             <td style="width:120px" rowspan="4">
               <div style="height:160px">
@@ -57,17 +57,17 @@
             <td class="name">入党时间</td>
             <td class="text" @click="edit">
               <a-input type=text class="input" v-if="isEdit" @blur="save" v-model="user.joinTime"></a-input>
-              <div v-else>{{user.joinTime}}</div>
+              <div v-else>{{$getyyyyMMdd(new Date(user.joinTime))}}</div>
             </td>
             <td class="name">转正时间</td>
             <td class="text" @click="edit">
               <a-input type=text class="input" v-if="isEdit" @blur="save" v-model="user.formalTime"></a-input>
-              <div v-else></div>
+              <div v-else>{{$getyyyyMMdd(new Date(user.formalTime))}}</div>
             </td>
             <td class="name">参加工作时间</td>
             <td class="text" @click="edit">
               <a-input type=text class="input" v-if="isEdit" @blur="save" v-model="user.workTime"></a-input>
-              <div v-else></div>
+              <div v-else>{{$getyyyyMMdd(new Date(user.workTime))}}</div>
             </td>
           </tr>
           <tr>

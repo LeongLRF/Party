@@ -1,7 +1,5 @@
 package com.wyu.partymanager.controller.sys;
 
-import com.alibaba.druid.sql.visitor.functions.If;
-import com.baomidou.mybatisplus.extension.handlers.MybatisEnumTypeHandler;
 import com.wyu.partymanager.controller.BaseController;
 import com.wyu.partymanager.entity.dto.MenuDTO;
 import com.wyu.partymanager.entity.sys.*;
@@ -12,14 +10,12 @@ import com.wyu.partymanager.service.sys.TypeService;
 import com.wyu.partymanager.service.sys.UserService;
 import com.wyu.partymanager.utils.Common;
 import com.wyu.partymanager.utils.Result;
-import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RestController

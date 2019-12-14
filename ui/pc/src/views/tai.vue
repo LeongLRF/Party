@@ -96,7 +96,7 @@ export default {
         { title: '组织单位', dataIndex: 'dept', width: '80px', align: 'center' },
         { title: '主持人', dataIndex: 'holder', width: '70px', align: 'center' },
         { title: '讲课人', dataIndex: 'speaker', width: '70px', align: 'center' },
-        { title: '参加人员', dataIndex: 'member', width: '80px', align: 'center', scopedSlots: {customRender: 'takePart'} },
+        { title: '参加人员', dataIndex: 'member', width: '200px', align: 'center', scopedSlots: {customRender: 'takePart'} },
         { title: '参加人员备注', dataIndex: 'remark', width: '120px', align: 'center' },
         { title: '操作', dataIndex: 'other', scopedSlots: { customRender: 'other' }, width: '100px', align: 'left' },
         {}

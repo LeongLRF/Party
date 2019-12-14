@@ -81,7 +81,9 @@ public class UserService implements UserServiceDao {
                 .andThenCheck(User::isValid, "对不起，该账号已被冻结")
                 .andThen(user -> {
                     Token token = dbConnection.form(Token.class).whereEq("userId", user.getId()).one();
-                    if (token != null) dbConnection.deleteById(Token.class, token.getToken());
+                    if (token != null) {
+                        dbConnection.deleteById(Token.class, token.getToken());
+                    }
                     String newToken = UUID.randomUUID().toString().replace("-", "");
                     Token token1 = new Token();
                     token1.setToken(newToken);
@@ -95,8 +97,7 @@ public class UserService implements UserServiceDao {
                 });
     }
 
-    // 加密用户密码
-    public String encryptPassword(String salt, String password) {
+    private String encryptPassword(String salt, String password) {
         String str = salt + "---" + password;
         MessageDigest md5;
         try {

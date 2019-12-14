@@ -5,13 +5,13 @@
         style="background-color:#fff;margin-right: 35px;padding-left: 20px;padding-right: 20px;box-shadow: 3px 3px 3px #ccc;">
         <div class="header">
           <a-avatar :size="100" icon="user" />
-          <p class="position" style="font-weight: bold;margin-top: 20px;">PROFESSOR</p>
-          <p class="name">Mr`Leong</p>
+          <p class="position" style="font-weight: bold;margin-top: 20px;">{{user.role.name}}</p>
+          <p class="name">{{user.trueName}}</p>
         </div>
         <a-divider type="horizontal" :dashed="true" style="margin-bottom: 20px; "></a-divider>
         <div class="info">
           <p>
-            <a-icon type="user" />&nbsp;123456</p>
+            <a-icon type="user" />&nbsp;{{user.userName}}</p>
           <p>
             <a-icon type="key" />&nbsp; ******* <a href="">
               <a-icon type="edit" /></a></p>
@@ -33,10 +33,19 @@ export default {
   name: 'info',
   data () {
     return {
+      user: []
     }
   },
   methods: {
-    callback () { }
+    callback () { },
+    getUser () {
+      this.$my_get('sys/current_user').then(res => {
+        this.user = res.data
+      })
+    }
+  },
+  mounted () {
+    this.getUser()
   }
 }
 </script>
