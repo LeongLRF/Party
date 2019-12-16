@@ -8,10 +8,11 @@ import com.wyu.partymanager.entity.JsonEntity;
 
 import core.inerface.IFilter;
 import core.inerface.ISelectQuery;
+import core.support.IdType;
+import core.support.JdbcType;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import util.JdbcType;
 
 import java.util.List;
 
@@ -22,7 +23,7 @@ import java.util.List;
 @Table("sys_type")
 public class Type {
 
-    @Id(value = "id", type = util.IdType.AUTO)
+    @Id(value = "id", type = IdType.AUTO)
     long id;
 
     @ApiModelProperty("类型名字")

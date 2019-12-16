@@ -6,6 +6,7 @@ import annotation.Table;
 import com.wyu.partymanager.entity.JsonEntity;
 import core.inerface.IFilter;
 import core.inerface.ISelectQuery;
+import core.support.IdType;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
@@ -17,7 +18,7 @@ import lombok.Data;
 @Table("pm_clazz")
 public class Clazz implements JsonEntity {
 
-    @Id(value = "id", type = util.IdType.AUTO)
+    @Id(value = "id", type = IdType.AUTO)
     long id;
 
     @Column("code")

@@ -38,7 +38,6 @@ public class UserController extends BaseController {
     @ApiOperation("获取用户列表")
     @GetMapping("/user_list")
     public Result<List<User>> user_list(User.Filter filter) {
-        System.out.println(current_user());
         return userService.user_list(filter);
     }
 

@@ -6,6 +6,7 @@ import annotation.Table;
 import com.wyu.partymanager.entity.JsonEntity;
 import core.inerface.IFilter;
 import core.inerface.ISelectQuery;
+import core.support.IdType;
 import lombok.Data;
 
 /**
@@ -16,7 +17,7 @@ import lombok.Data;
 @Table(value = "sys_role", cache = true, expireTime = 60 * 60 * 24 * 365)
 public class Role implements JsonEntity {
 
-    @Id(value = "id", type = util.IdType.AUTO)
+    @Id(value = "id", type = IdType.AUTO)
     long id;
     @Column("name")
     String name;
