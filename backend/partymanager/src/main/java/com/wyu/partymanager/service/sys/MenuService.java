@@ -48,7 +48,7 @@ public class MenuService implements MenuServiceDao {
 
     @Override
     public Result<List<MenuDTO>> menu_list(Menu.Filter filter, User user) {
-        return Result.maybe(db.form(Menu.class).apply(filter).toList(), "暂无菜单")
+        return Result.maybe(db.form(Menu.class).apply(filter).orderBy("code asc").toList(), "暂无菜单")
                 .andThenCheck(user!=null,"请先登录")
                 .andThen(menus -> {
                     if (menus.size() > 0) {

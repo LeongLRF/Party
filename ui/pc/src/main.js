@@ -14,7 +14,7 @@ Vue.config.productionTip = false
 Vue.use(Antd)
 Vue.use(myUtils, {
   // domaintest: 'http://59.110.171.118:8080'
-  domaintest: 'http://127.0.0.1:8089'
+  domaintest: 'http://localhost:8089'
 })
 /* eslint-disable no-new */
 new Vue({

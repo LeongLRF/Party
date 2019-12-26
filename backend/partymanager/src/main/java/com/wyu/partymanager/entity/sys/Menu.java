@@ -6,6 +6,7 @@ import annotation.Table;
 import com.wyu.partymanager.entity.JsonEntity;
 import core.inerface.IFilter;
 import core.inerface.ISelectQuery;
+import core.support.IdType;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -20,7 +21,7 @@ import java.util.stream.Collectors;
 @Table(value = "sys_menu", cache = true, expireTime = 60 * 60 * 24 * 365)
 public class Menu implements JsonEntity {
 
-    @Id(value = "id", type = util.IdType.AUTO)
+    @Id(value = "id", type = IdType.AUTO)
     long id;
     @ApiModelProperty("菜单名字")
     @Column("name")

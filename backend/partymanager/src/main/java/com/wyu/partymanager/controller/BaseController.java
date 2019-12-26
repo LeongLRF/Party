@@ -41,9 +41,8 @@ public class BaseController {
 
     protected User current_user() {
         User user = (User) httpSession.getAttribute(Common.CURRENT_USER);
-        if (user == null) logger.info("session超时");
         new Preloader<>(db, Collections.singletonList(user))
-                .preload_one(Role.class,User::getRoleId,Role::getId,"id",User::setRole);
+                .preload_one(Role.class, User::getRoleId, Role::getId, "id", User::setRole);
         return user;
     }
 
