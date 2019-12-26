@@ -17,6 +17,7 @@ export default {
   data () {
     return {
       myH: window.innerHeight,
+      myW: window.innerWidth,
       user: {}
     }
   },
@@ -52,9 +53,11 @@ export default {
   margin: 16px;
 }
 .view {
-  margin: 0 0 0 257px;
-  padding: 10px;
+  width: 85%;
+  margin: 0 15%;
+  padding:0;
   background: #f0efef;
+  overflow: hidden;
 }
 .ant-table {
   clear: none;

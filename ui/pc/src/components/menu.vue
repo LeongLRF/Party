@@ -35,7 +35,7 @@
           </a-menu>
         </a-collapse-panel>
       </a-collapse>
-      <a-menu mode="inline" v-model="selectMenu" v-for="(item) in menus" :key="item.id" style="width: 256px"
+      <a-menu mode="inline" v-model="selectMenu" v-for="(item) in menus" :key="item.id" style="width: 15%"
         @openChange="onOpenChange" :openKeys="openKeys">
         <a-sub-menu :key="item.parent.name">
           <span slot="title">
@@ -159,7 +159,8 @@ export default {
 }
 .menu {
   float: left;
-  width: 257px;
+  width: 15%;
+  /*min-width: 160px;*/
   border-right: 1px solid #ccc;
 }
 </style>
