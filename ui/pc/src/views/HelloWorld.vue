@@ -28,7 +28,7 @@
       </div>
     </div>
     <div class="myContent">
-      <div class="Message">
+      <div class="Message2">
         <div class="title">
           <div>学院动态</div>
           <div>更多...</div>
@@ -43,7 +43,7 @@
           </div>
         </div>
       </div>
-      <div class="Message">
+      <div class="Message2">
         <div class="title">
           <div>学院动态</div>
           <div>更多...</div>
@@ -58,7 +58,7 @@
           </div>
         </div>
       </div>
-      <div class="Message">
+      <div class="Message2">
         <div class="title">
           <div>学院动态</div>
           <div>更多...</div>
@@ -73,6 +73,14 @@
           </div>
         </div>
       </div>
+    </div>
+    <div class="bot">
+      <div>
+        联系地址:广东省江门市蓬江区迎宾大道中99号  邮编:529020  办公室电话:07503296590|07503296591  联系邮箱:math@mail.wyu.com
+      </div>
+      <div>版权所有 © 五邑大学 数学与计算科学学院  粤ICP备15096031号</div>
+      <div>登录管理</div>
+      <div>访问次数：0000290938</div>
     </div>
   </div>
 </template>
@@ -105,7 +113,7 @@ export default {
 <style scoped>
 .myindex{
   height:100%;
-  padding-bottom:50px ;
+  /*padding-bottom:50px ;*/
   background:#fff;
   width: 100% ;
   overflow: hidden;
@@ -114,7 +122,7 @@ export default {
 .mytop {
   display: flex;
   width: 100%;
-  position: relative;
+  /*position: relative;*/
   height: 400px;
 }
 .LBT{
@@ -126,7 +134,8 @@ export default {
   padding:0 10px;
 }
 .Message2{
-  padding:0 5px;
+  width: 33.33%;
+  padding: 0 1%;
 }
 .title{
   display: flex;
@@ -155,8 +164,8 @@ export default {
   overflow: hidden;
 }
 .myContent{
-  width: 850px;
   display: flex;
+  width: 100%;
   margin-top: 10px;
 }
 .mlist{
@@ -170,5 +179,11 @@ export default {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+.bot{
+  text-align: center;
+}
+.bot div{
+  line-height: 30px;
 }
 </style>
