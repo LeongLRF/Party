@@ -3,11 +3,11 @@
     <div class="mytop">
       <div class="LBT">
         <div style="width:100%;">
-          <a-carousel autoplay  style="width:100%;height: 500px;">
-            <div><h3 >1</h3></div>
-            <div><h3>2</h3></div>
-            <div><h3>3</h3></div>
-            <div><h3>4</h3></div>
+          <a-carousel autoplay  style="width:100%;height: 400px;">
+            <div><img src="@/assets/2.jpg" alt="" width="100%" height="100%"></div>
+            <div><img src="@/assets/1.jpg" alt="" width="100%" height="100%"></div>
+            <div><img src="@/assets/5.jpg" alt="" width="100%" height="100%"></div>
+            <div><img src="@/assets/4.jpg" alt="" width="100%" height="100%"></div>
           </a-carousel>
         </div>
       </div>
@@ -58,21 +58,7 @@
           </div>
         </div>
       </div>
-      <div class="Message2">
-        <div class="title">
-          <div>学院动态</div>
-          <div>更多...</div>
-        </div>
-        <div class="MesList">
-          <div v-for="(res,index) in 7" :key="index" class="mlist">
-            <div class="listText">
-              <span><a-icon type="forward" width="4em" /></span>
-              <span>数学与计算科学学院开展“不忘初心、牢记使命”主题教育系列党课</span>
-            </div>
-            <div >[2019-12-26]</div>
-          </div>
-        </div>
-      </div>
+      <div class="img"></div>
     </div>
     <div class="bot">
       <div>
@@ -114,10 +100,17 @@ export default {
 .myindex{
   height:100%;
   /*padding-bottom:50px ;*/
-  background:#fff;
+  /* background:#fff; */
   width: 100% ;
   overflow: hidden;
   overflow-y: scroll;
+  background:-moz-linear-gradient(top, #ea4d4f,#5c2929);
+}
+.img{
+  float:right;
+  width: 33.33%;
+  background-image: url('../assets/bgc.jpg');
+  background-size: 100% 100%;
 }
 .mytop {
   display: flex;
@@ -126,11 +119,10 @@ export default {
   height: 400px;
 }
 .LBT{
-  padding-left: 10px;
-  width: 50%;
+  width: 33.33%;
 }
 .Message{
-  width: 50%;
+  width: 33.33%;
   padding:0 10px;
 }
 .Message2{
@@ -139,7 +131,7 @@ export default {
 }
 .title{
   display: flex;
-  padding: 0 5px;
+  padding: 0 15px;
   justify-content: space-between;
   line-height: 40px;
   background-color: #f2f2f2f2;
@@ -157,7 +149,7 @@ export default {
 /*}*/
 .ant-carousel >>> .slick-slide {
   text-align: center;
-  height: 400px;
+  height: 350px;
   line-height: 160px;
   background: #364d79;
   width: 500px;

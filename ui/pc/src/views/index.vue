@@ -55,7 +55,7 @@ export default {
 .view {
   width: 85%;
   margin: 0 15%;
-  padding:0;
+  padding:10px 0 0 10px;
   background: #f0efef;
   overflow: hidden;
 }

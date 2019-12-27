@@ -35,7 +35,7 @@
           </a-menu>
         </a-collapse-panel>
       </a-collapse>
-      <a-menu mode="inline" v-model="selectMenu" v-for="(item) in menus" :key="item.id" style="width: 15%"
+      <a-menu mode="inline" v-model="selectMenu" v-for="(item) in menus" :key="item.id" style="width: 100%"
         @openChange="onOpenChange" :openKeys="openKeys">
         <a-sub-menu :key="item.parent.name">
           <span slot="title">
