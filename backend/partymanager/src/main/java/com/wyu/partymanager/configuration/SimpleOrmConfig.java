@@ -16,7 +16,7 @@ import javax.sql.DataSource;
  */
 @Component
 @SuppressWarnings("all")
-public class OrmConfig {
+public class SimpleOrmConfig {
 
     @Autowired
     private DataSource dataSource;

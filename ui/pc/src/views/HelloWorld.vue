@@ -1,38 +1,38 @@
 <template>
-  <div style="height:100%;background:#fff">
-    <div>
+  <div style="background:#fff">
       <a-row>
-        <a-col :span="12">
-          <a-carousel :afterChange="onChange" style="width: 90%;margin: 20px;height: 350px">
-            <div><h3>1</h3></div>
-            <div><h3>2</h3></div>
-            <div><h3>3</h3></div>
-            <div><h3>4</h3></div>
-          </a-carousel>
-        </a-col>
-        <a-col :span="12">
-          <a-list :dataSource="data" style="margin: 20px 20px 10px 30px; width: 80%">
-            <a-list-item slot="renderItem" slot-scope="item, index"><a href="">{{item}}</a></a-list-item>
-            <div slot="header" style="font-size: 20px; font-weight: bold">校内资讯&nbsp;<a-icon type="bars" /></div>
-          </a-list>
-        </a-col>
-      </a-row>
-      <a-row>
-        <a-col :span="12">
-          <a-list :dataSource="data" style="margin: 30px 20px 70px 10px; width: 80%">
-            <a-list-item slot="renderItem" slot-scope="item, index">{{item}}</a-list-item>
-            <div slot="header" style="font-size: 20px; font-weight: bold">学校通知&nbsp;<a-icon type="bars" /></div>
-          </a-list>
-        </a-col>
-        <a-col :span="12">
-          <a-list :dataSource="data" style="margin: 30px 20px 10px 10px; width: 80%" >
-            <a-list-item slot="renderItem" slot-scope="item, index">{{item}}</a-list-item>
-            <div slot="header" style="font-size: 20px; font-weight: bold">学院通知&nbsp;<a-icon type="bars" /></div>
-          </a-list>
-        </a-col>
+        <a-row>
+          <a-col :span="11">
+            <a-carousel :afterChange="onChange" style="width: 90%;margin: 20px;height: 350px">
+              <div><h3>1</h3></div>
+              <div><h3>2</h3></div>
+              <div><h3>3</h3></div>
+              <div><h3>4</h3></div>
+            </a-carousel>
+          </a-col>
+          <a-col :span="11">
+            <a-list :dataSource="data" style="margin: 20px 20px 10px 30px; width: 80%">
+              <a-list-item slot="renderItem" slot-scope="item, index"><a href="">{{item}}</a></a-list-item>
+              <div slot="header" style="font-size: 20px; font-weight: bold">校内资讯&nbsp;<a-icon type="bars" /></div>
+            </a-list>
+          </a-col>
+        </a-row>
+        <a-row>
+          <a-col :span="12">
+            <a-list :dataSource="data" style="margin: 30px 20px 70px 10px; width: 80%">
+              <a-list-item slot="renderItem" slot-scope="item, index">{{item}}</a-list-item>
+              <div slot="header" style="font-size: 20px; font-weight: bold">学校通知&nbsp;<a-icon type="bars" /></div>
+            </a-list>
+          </a-col>
+          <a-col :span="12">
+            <a-list :dataSource="data" style="margin: 30px 20px 10px 10px; width: 80%" >
+              <a-list-item slot="renderItem" slot-scope="item, index">{{item}}</a-list-item>
+              <div slot="header" style="font-size: 20px; font-weight: bold">学院通知&nbsp;<a-icon type="bars" /></div>
+            </a-list>
+          </a-col>
+        </a-row>
       </a-row>
     </div>
-  </div>
 </template>
 
 <script>

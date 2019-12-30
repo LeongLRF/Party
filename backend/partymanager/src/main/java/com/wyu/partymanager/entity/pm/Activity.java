@@ -7,6 +7,7 @@ import com.wyu.partymanager.entity.JsonEntity;
 import com.wyu.partymanager.entity.sys.Type;
 import core.inerface.IFilter;
 import core.inerface.ISelectQuery;
+import core.support.IdType;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -20,7 +21,7 @@ import java.util.List;
 @Table("pm_activity")
 public class Activity implements JsonEntity {
 
-    @Id(value = "id", type = util.IdType.AUTO)
+    @Id(value = "id", type = IdType.AUTO)
     long id;
 
     @ApiModelProperty("日期")
