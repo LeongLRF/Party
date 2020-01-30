@@ -6,6 +6,6 @@ package com.wyu.partymanager.utils;
  */
 public interface Common {
 
-    public static final String CURRENT_USER = "user";
-    public static final String CURRENT_DEPT = "dept";
+    String CURRENT_USER = "user";
+    String CURRENT_DEPT = "dept";
 }
