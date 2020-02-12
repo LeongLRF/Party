@@ -17,5 +17,5 @@ public class Message {
 
     @Column("senderId")
     long senderId;
-    
+
 }
